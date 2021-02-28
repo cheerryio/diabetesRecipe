@@ -292,25 +292,25 @@ export default {
             babyNumberList,
             laborIntensityList: [
                 {
-                    value: "1",
+                    value: 1,
                     label: "轻",
                 },
                 {
-                    value: "2",
+                    value: 2,
                     label: "中",
                 },
                 {
-                    value: "3",
+                    value: 3,
                     label: "高",
                 },
             ],
             bodyShapeList: [
                 {
-                    value: "1",
+                    value: 1,
                     label: "消瘦",
                 },
                 {
-                    value: "2",
+                    value: 2,
                     label: "超重",
                 },
             ],

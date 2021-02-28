@@ -91,7 +91,7 @@ export default {
     },
 
     mounted: function (option) {
-        console.log("aaa");
+				console.log(this.diabetesType,this.information);
         this.showPie("nutrientsPie", this.nutrients);
         this.showPie("foodsPie", this.foods);
     },
