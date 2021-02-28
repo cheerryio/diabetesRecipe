@@ -36,7 +36,7 @@
                     </u-radio>
                 </u-radio-group>
             </u-form-item>
-            <u-form-item label="身高">
+            <u-form-item label="身高" prop="height">
                 <u-input
                     type="text"
                     :border="border"
@@ -45,24 +45,20 @@
                 />
                 <text slot="right" class="unit">cm</text>
             </u-form-item>
-            <u-form-item label="体重">
-                <u-input
-                    type="number"
-                    :border="border"
-                    v-model="form1.weight"
-                />
+            <u-form-item label="体重" prop="weight">
+                <u-input :border="border" v-model="form1.weight" />
                 <text slot="right" class="unit">kg</text>
             </u-form-item>
-            <u-form-item label="劳动强度">
+            <u-form-item label="劳动强度" prop="laborIntensity">
                 <u-input
                     :border="border"
                     type="select"
                     :select-open="actionSheet"
-                    v-model="laborIndensityText"
+                    v-model="laborIntensityText"
                     placeholder="请选择劳动强度"
                     @click="
                         actionSheet = true;
-                        actionSheetType = 4;
+                        selectType = 4;
                     "
                 ></u-input>
             </u-form-item>
@@ -76,11 +72,11 @@
             :label-position="labelPosition"
             :label-style="{}"
         >
-            <u-form-item label="身高">
+            <u-form-item label="身高" prop="height">
                 <u-input type="text" :border="border" v-model="form2.height" />
                 <text slot="right" class="unit">cm</text>
             </u-form-item>
-            <u-form-item label="孕前体重">
+            <u-form-item label="孕前体重" prop="weightBeforePragnant">
                 <u-input
                     type="text"
                     :border="border"
@@ -88,7 +84,7 @@
                 />
                 <text slot="right" class="unit">kg</text>
             </u-form-item>
-            <u-form-item label="孕期">
+            <u-form-item label="孕期" prop="pregnantWeek">
                 <u-input
                     :border="border"
                     type="select"
@@ -97,9 +93,11 @@
                     placeholder="请选择星期"
                     @click="
                         actionSheet = true;
-                        actionSheetType = 1;
+                        selectType = 1;
                     "
-                ></u-input>
+                ></u-input
+            ></u-form-item>
+            <u-form-item label="  " prop="pregnantDay">
                 <u-input
                     :border="border"
                     type="select"
@@ -108,15 +106,15 @@
                     placeholder="请选择天数"
                     @click="
                         actionSheet = true;
-                        actionSheetType = 2;
+                        selectType = 2;
                     "
                 ></u-input>
             </u-form-item>
-            <u-form-item label="体重">
+            <u-form-item label="体重" prop="weight">
                 <u-input type="text" :border="border" v-model="form2.weight" />
                 <text slot="right" class="unit">kg</text>
             </u-form-item>
-            <u-form-item label="胎儿个数">
+            <u-form-item label="胎儿个数" prop="babyNumber">
                 <u-input
                     :border="border"
                     type="select"
@@ -125,20 +123,20 @@
                     placeholder="请选择胎儿个数"
                     @click="
                         actionSheet = true;
-                        actionSheetType = 3;
+                        selectType = 3;
                     "
                 ></u-input>
             </u-form-item>
-            <u-form-item label="劳动强度">
+            <u-form-item label="劳动强度" prop="laborIntensity">
                 <u-input
                     :border="border"
                     type="select"
                     :select-open="actionSheet"
-                    v-model="laborIndensityText"
+                    v-model="laborIntensityText"
                     placeholder="请选择劳动强度"
                     @click="
                         actionSheet = true;
-                        actionSheetType = 4;
+                        selectType = 4;
                     "
                 ></u-input>
             </u-form-item>
@@ -152,7 +150,7 @@
             :label-position="labelPosition"
             :label-style="{}"
         >
-            <u-form-item label="身高">
+            <u-form-item label="身高" prop="height">
                 <u-input
                     type="text"
                     :border="border"
@@ -161,18 +159,14 @@
                 />
                 <text slot="right" class="unit">cm</text>
             </u-form-item>
-            <u-form-item label="体重">
-                <u-input
-                    type="number"
-                    :border="border"
-                    v-model="form3.weight"
-                />
+            <u-form-item label="体重" prop="weight">
+                <u-input :border="border" v-model="form3.weight" />
                 <text slot="right" class="unit">kg</text>
             </u-form-item>
-            <u-form-item label="年龄">
-                <u-input type="number" :border="border" v-model="form3.age" />
+            <u-form-item label="年龄" prop="age">
+                <u-input :border="border" v-model="form3.age" />
             </u-form-item>
-            <u-form-item label="体型">
+            <u-form-item label="体型" prop="bodyShape">
                 <u-input
                     :border="border"
                     type="select"
@@ -181,39 +175,41 @@
                     placeholder="请选择体型"
                     @click="
                         actionSheet = true;
-                        actionSheetType = 5;
+                        selectType = 5;
                     "
                 ></u-input>
             </u-form-item>
         </u-form>
-        <u-action-sheet
+        <u-select
             :list="
-                actionSheetType == 1
+                selectType == 1
                     ? pregnantWeekList
-                    : actionSheetType == 2
+                    : selectType == 2
                     ? pregnantDayList
-                    : actionSheetType == 3
+                    : selectType == 3
                     ? babyNumberList
-                    : actionSheetType == 4
-                    ? laborIndensityList
-                    : actionSheetType == 5
+                    : selectType == 4
+                    ? laborIntensityList
+                    : selectType == 5
                     ? bodyShapeList
                     : []
             "
             v-model="actionSheet"
-            @click="actionSheetCallback"
+            @confirm="selectCallback"
         >
-        </u-action-sheet>
+        </u-select>
         <button type="primary" @tap="submit">提交</button>
     </view>
 </template>
 
 <script>
+import uSelect from "../../../uview-ui/components/u-select/u-select.vue";
 /**
  * @description 根据用户属于三种糖尿病的类型，呈现不同的表单，让用户填写相应数据
  *
  */
 export default {
+    components: { uSelect },
     props: {
         diabetesType: {
             type: Number,
@@ -229,8 +225,8 @@ export default {
             .slice(1)
             .forEach((value, index) => {
                 pregnantWeekList.push({
-                    value: parseInt(value),
-                    text: value,
+                    value: String(value),
+                    label: String(value),
                 });
             });
 
@@ -238,8 +234,8 @@ export default {
             .slice(1)
             .forEach((value, index) => {
                 pregnantDayList.push({
-                    value: parseInt(value),
-                    text: value,
+                    value: String(value),
+                    label: String(value),
                 });
             });
 
@@ -247,8 +243,8 @@ export default {
             .slice(1)
             .forEach((value, index) => {
                 babyNumberList.push({
-                    value: parseInt(value),
-                    text: value,
+                    value: String(value),
+                    label: String(value),
                 });
             });
 
@@ -260,7 +256,7 @@ export default {
             labelPosition: "left",
             radioCheckWidth: "auto",
             radioCheckWrap: false,
-            laborIndensityText: "",
+            laborIntensityText: "",
             bodyShapeText: "",
             genders: [
                 {
@@ -286,32 +282,32 @@ export default {
                 },
             ],
             actionSheet: false,
-            actionSheetType: 1,
+            selectType: 1,
             pregnantWeekList,
             pregnantDayList,
             babyNumberList,
-            laborIndensityList: [
+            laborIntensityList: [
                 {
-                    value: 1,
-                    text: "轻",
+                    value: "1",
+                    label: "轻",
                 },
                 {
-                    value: 2,
-                    text: "中",
+                    value: "2",
+                    label: "中",
                 },
                 {
-                    value: 3,
-                    text: "高",
+                    value: "3",
+                    label: "高",
                 },
             ],
             bodyShapeList: [
                 {
-                    value: 1,
-                    text: "消瘦",
+                    value: "1",
+                    label: "消瘦",
                 },
                 {
-                    value: 2,
-                    text: "超重",
+                    value: "2",
+                    label: "超重",
                 },
             ],
             form1: {
@@ -340,7 +336,8 @@ export default {
                     {
                         required: true,
                         message: "请填写性别",
-                        trigger: ["change"],
+                        trigger: ["change", "blur"],
+                        type: "number",
                     },
                 ],
                 height: [
@@ -348,7 +345,19 @@ export default {
                         required: true,
                         message: "请填写身高",
                         trigger: ["change", "blur"],
+                    },
+                    {
+                        message: "请使用数字",
                         type: "number",
+                        trigger: ["change", "blur"],
+                    },
+                    {
+                        validator: (_, value, callback) => {
+                            let n = Number(value);
+                            return !(isNaN(n) || n <= 0 || n >= 300);
+                        },
+                        message: "请输入正确的身高",
+                        trigger: ["change", "blur"],
                     },
                 ],
                 weight: [
@@ -356,19 +365,89 @@ export default {
                         required: true,
                         message: "请填写体重",
                         trigger: ["change", "blur"],
+                    },
+                    {
+                        message: "请使用数字",
                         type: "number",
+                        trigger: ["change", "blur"],
+                    },
+                    {
+                        validator: (_, value, callback) => {
+                            let n = Number(value);
+                            return !(isNaN(n) || n <= 0 || n >= 300);
+                        },
+                        message: "请输入正确的体重",
+                        trigger: ["change", "blur"],
                     },
                 ],
                 laborIntensity: [
                     {
                         required: true,
                         message: "请填写劳动强度",
+                        trigger: ["change", "blur"],
+                        type: "number",
                     },
                 ],
                 weightBeforePragnant: [
                     {
                         required: true,
                         message: "请填写妊娠前体重",
+                        trigger: ["change", "blur"],
+                    },
+                    {
+                        message: "请使用数字",
+                        type: "number",
+                        trigger: ["change", "blur"],
+                    },
+                ],
+                pregnantWeek: [
+                    {
+                        required: true,
+                        message: "请填写孕期",
+                        trigger: ["change", "blur"],
+                        type: "number",
+                    },
+                ],
+                pregnantDay: [
+                    {
+                        required: true,
+                        message: "请填写孕期",
+                        trigger: ["change", "blur"],
+                        type: "number",
+                    },
+                ],
+                babyNumber: [
+                    {
+                        required: true,
+                        message: "请填写胎儿个数",
+                        trigger: ["change", "blur"],
+                        type: "number",
+                    },
+                ],
+                age: [
+                    {
+                        required: true,
+                        message: "请填写年龄",
+                        trigger: ["change", "blur"],
+                    },
+                    {
+                        message: "请使用数字",
+                        type: "number",
+                        trigger: ["change", "blur"],
+                    },
+                    {
+                        validator: (_, value, callback) => {
+                            let n = Number(value);
+                            return !(isNaN(n) || n <= 0 || n >= 18);
+                        },
+                        message: "请输入正确的年龄",
+                        trigger: ["change", "blur"],
+                    },
+                ],
+                bodyShape: [
+                    {
+                        required: true,
+                        message: "请填写体型",
                         trigger: ["change", "blur"],
                         type: "number",
                     },
@@ -381,30 +460,26 @@ export default {
             console.log(e);
             this.form1.gender = e;
         },
-        actionSheetCallback(index) {
-            switch (this.actionSheetType) {
+        selectCallback(e) {
+            e = e[0];
+            switch (this.selectType) {
                 case 1:
-                    this.form2.pregnantWeek = this.pregnantWeekList[
-                        index
-                    ].value;
+                    this.form2.pregnantWeek = e.value;
                     break;
                 case 2:
-                    this.form2.pregnantDay = this.pregnantWeekList[index].value;
+                    this.form2.pregnantDay = e.value;
                     break;
                 case 3:
-                    this.form2.babyNumber = this.babyNumberList[index].value;
+                    this.form2.babyNumber = e.value;
                     break;
                 case 4:
-                    this.laborIndensityText = this.laborIndensityList[
-                        index
-                    ].text;
-                    this.form2.laborIntensity = this.laborIndensityList[
-                        index
-                    ].value;
+                    this.laborIntensityText = e.label;
+                    this.form2.laborIntensity = e.value;
+                    this.form1.laborIntensity = e.value;
                     break;
                 case 5:
-                    this.bodyShapeText = this.bodyShapeList[index].text;
-                    this.form3.bodyShape = this.bodyShapeList[index].value;
+                    this.bodyShapeText = e.label;
+                    this.form3.bodyShape = e.value;
                     break;
                 default:
                     break;
@@ -412,28 +487,36 @@ export default {
         },
         submit() {
             // 提交数据到数据库逻辑(或者提交逻辑写在组件里面好还是page里面好？)
-
             // 在上面提交数据成功的回调函数中调用以下代码
-            let diabetesType = this.diabetesType;
-            let information = {};
-            switch (this.diabetesType) {
-                case 1:
-                    information = this.form1;
-                    break;
-                case 2:
-                    information = this.form2;
-                    break;
-                case 3:
-                    information = this.form3;
-                    break;
-                default:
-                    break;
-            }
-            uni.$emit("information-form-finish", { information });
+            this.$refs[`uForm${this.diabetesType}`].validate((valid) => {
+                if (valid) {
+                    console.log("验证通过");
+
+                    let diabetesType = this.diabetesType;
+                    let information = {};
+                    switch (this.diabetesType) {
+                        case 1:
+                            information = this.form1;
+                            break;
+                        case 2:
+                            information = this.form2;
+                            break;
+                        case 3:
+                            information = this.form3;
+                            break;
+                        default:
+                            break;
+                    }
+                    uni.$emit("information-form-finish", { information });
+                } else {
+                    console.log("验证失败");
+                }
+            });
         },
-        onReady() {
-            this.$refs.uForm.setRules(this.rules);
-        },
+    },
+    mounted: function () {
+        //  debugger;
+        this.$refs[`uForm${this.diabetesType}`].setRules(this.rules);
     },
 };
 </script>
