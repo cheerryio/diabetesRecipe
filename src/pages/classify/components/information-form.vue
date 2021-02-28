@@ -511,6 +511,7 @@ export default {
 											username,
 											diabetesType,
 											information,
+											submitDate:new Date().getTime(),
 										}).then((res)=>{
 											that.$refs.uToast.show({
 												title:"上传成功",
