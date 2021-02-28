@@ -3,7 +3,7 @@
  */
 <template>
 	<view>
-		
+		<button type="primary" @tap="test">提交</button>
 	</view>
 </template>
 
@@ -11,8 +11,15 @@
 	export default {
 		data() {
 			return {
-				
+
 			};
+		},
+
+		methods:{
+			test(){
+				const db = uniCloud.database();
+				db.collection("table1").add({name:"Ben"});
+			}
 		}
 	}
 </script>
