@@ -1,0 +1,132 @@
+// 文档教程: https://uniapp.dcloud.net.cn/uniCloud/schema
+{
+	"bsonType": "object",
+	"required": ["username"],
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"username": {
+			"bsonType":"string",
+			"title":"用户名",
+			"description": "用户名，不允许重复",
+			"trim": "both"
+		},
+		"diabetesType":{
+			"bsonType":"int",
+			"title":"糖尿病类型",
+			"description":"1-成人糖尿病 2-妊娠糖尿病 3-儿童糖尿病",
+			"enum":[
+				{
+					"text":"成人糖尿病",
+					"value":1
+				},
+				{
+					"text":"妊娠糖尿病",
+					"value":2
+				},
+				{
+					"text":"儿童糖尿病",
+					"value":3
+				}
+			]
+		},
+		"submitDate":{
+			"bsonType":"timestamp",
+			"description":"表单数据提交时间"
+		},
+		"information": {
+			"bsonType":"object",
+			"title":"糖尿病表单数据",
+			"description":"糖尿病表单数据",
+			"properties":{
+				"height":{
+					"bsonType":"int",
+					"minimum":0,
+					"maximum":300,
+					"title":"身高",
+					"description":"身高，以厘米(cm)为单位"
+				},
+				"weight":{
+					"bsonType":"int",
+					"minimum":0,
+					"maximum":300,
+					"title":"体重",
+					"description":"体重，以千克(kg)为单位"
+				},
+				"gender":{
+					"bsonType":"int",
+					"title":"性别",
+					"description":"1 for male, 2 for femail, 3 for transgender",
+					"enum":[
+						{
+							"text":"男",
+							"value":1
+						},
+						{
+							"text":"女",
+							"value":2
+						},
+						{
+							"text":"跨性别",
+							"value":3
+						}
+					]
+				},
+				"age":{
+					"bsonType":"int",
+					"minimum":0,
+					"maximum":200,
+					"title":"年龄"
+				},
+				"laborIntensity":{
+					"bsonType":"int",
+					"title":"劳动强度",
+					"description":"1 for 轻, 2 for 中, 3 for 高",
+					"enum":[
+						{
+							"text":"轻",
+							"value":1
+						},
+						{
+							"text":"中",
+							"value":2
+						},
+						{
+							"text":"高",
+							"value":3
+						}
+					]
+				},
+				"bodyShape":{
+					"bsonType":"int",
+					"title":"体型",
+					"enum":[
+						{
+							"text":"消瘦",
+							"value":1
+						},
+						{
+							"text":"超重",
+							"value":2
+						}
+					]
+				},
+				"weightBeforePregnant":{
+					"bsonType":"int",
+					"minimum":0,
+					"maximum":300,
+					"title":"孕前体重",
+					"description":"体重，以千克(kg)为单位"
+				},
+				"babyNumber":{
+					"bsonType":"int",
+					"minimum":1,
+					"maximum":4,
+					"title":"怀孕个数",
+					"description":""
+				}
+			}
+		}
+	}
+}

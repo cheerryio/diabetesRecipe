@@ -65,7 +65,7 @@
         </u-form>
         <!-- 妊娠糖尿病信息表单 -->
         <u-form
-            v-if="diabetesType == 2"
+            v-else-if="diabetesType == 2"
             :model="form2"
             ref="uForm2"
             label-width="120"
@@ -143,7 +143,7 @@
         </u-form>
         <!-- 儿童糖尿病信息表单 -->
         <u-form
-            v-if="diabetesType == 3"
+            v-else-if="diabetesType == 3"
             :model="form3"
             ref="uForm3"
             label-width="120"
@@ -180,6 +180,8 @@
                 ></u-input>
             </u-form-item>
         </u-form>
+				<view v-else><text>diabetesType数据无效</text></view>
+				<button type="primary" @tap="submit">提交</button>
         <u-select
             :list="
                 selectType == 1
@@ -198,18 +200,19 @@
             @confirm="selectCallback"
         >
         </u-select>
-        <button type="primary" @tap="submit">提交</button>
+				<u-toast ref="uToast"></u-toast>
     </view>
 </template>
 
 <script>
 import uSelect from "../../../uview-ui/components/u-select/u-select.vue";
+import { mapState, mapMutations, mapActions, mapGetters } from "vuex";
+
 /**
  * @description 根据用户属于三种糖尿病的类型，呈现不同的表单，让用户填写相应数据
  *
  */
 export default {
-    components: { uSelect },
     props: {
         diabetesType: {
             type: Number,
@@ -225,7 +228,7 @@ export default {
             .slice(1)
             .forEach((value, index) => {
                 pregnantWeekList.push({
-                    value: String(value),
+                    value: value,
                     label: String(value),
                 });
             });
@@ -234,7 +237,7 @@ export default {
             .slice(1)
             .forEach((value, index) => {
                 pregnantDayList.push({
-                    value: String(value),
+                    value:value,
                     label: String(value),
                 });
             });
@@ -243,12 +246,13 @@ export default {
             .slice(1)
             .forEach((value, index) => {
                 babyNumberList.push({
-                    value: String(value),
+                    value: value,
                     label: String(value),
                 });
             });
 
         return {
+						isMounted:false,
             labelStyle: {
                 fontSize: "20rpx",
             },
@@ -455,67 +459,80 @@ export default {
             },
         };
     },
+
+		computed:{
+			...mapState(["user"]),
+			form(){
+				if(!this.isMounted)
+					return;
+				// this.$refs is available now
+				return this.$refs[`uForm${this.diabetesType}`].model;
+			}
+		},
+
     methods: {
         radioGroupChange1(e) {
-            console.log(e);
-            this.form1.gender = e;
+            this.form.gender=e;
         },
         selectCallback(e) {
             e = e[0];
             switch (this.selectType) {
                 case 1:
-                    this.form2.pregnantWeek = e.value;
+                    this.form.pregnantWeek = e.value;
                     break;
                 case 2:
-                    this.form2.pregnantDay = e.value;
+                    this.form.pregnantDay = e.value;
                     break;
                 case 3:
-                    this.form2.babyNumber = e.value;
+                    this.form.babyNumber = e.value;
                     break;
                 case 4:
                     this.laborIntensityText = e.label;
-                    this.form2.laborIntensity = e.value;
-                    this.form1.laborIntensity = e.value;
+                    this.form.laborIntensity = e.value;
                     break;
                 case 5:
                     this.bodyShapeText = e.label;
-                    this.form3.bodyShape = e.value;
+                    this.form.bodyShape = e.value;
                     break;
                 default:
                     break;
             }
         },
         submit() {
-            // 提交数据到数据库逻辑(或者提交逻辑写在组件里面好还是page里面好？)
-            // 在上面提交数据成功的回调函数中调用以下代码
+						const that=this;
             this.$refs[`uForm${this.diabetesType}`].validate((valid) => {
                 if (valid) {
-                    console.log("验证通过");
-
+										// 验证通过
                     let diabetesType = this.diabetesType;
-                    let information = {};
-                    switch (this.diabetesType) {
-                        case 1:
-                            information = this.form1;
-                            break;
-                        case 2:
-                            information = this.form2;
-                            break;
-                        case 3:
-                            information = this.form3;
-                            break;
-                        default:
-                            break;
-                    }
-                    uni.$emit("information-form-finish", { information });
+                    let information = this.form;
+										let {username} = this.user;
+										// 提交form表单到数据库 是不是要做token有效性验证？
+										this.$db.collection("user-diabetes-info").add({
+											username,
+											diabetesType,
+											information,
+											submitDate:new Date().getTime(),
+										}).then((res)=>{
+											that.$refs.uToast.show({
+												title:"上传成功",
+												type:"success"
+											})
+											uni.$emit("information-form-finish", { information });
+										}).catch((err)=>{
+											that.$refs.uToast.show({
+												title:res.result.message,
+												type:"error"
+											})
+										})
                 } else {
-                    console.log("验证失败");
+                    // 验证失败
                 }
             });
         },
     },
     mounted: function () {
         //  debugger;
+				this.isMounted=true;
         this.$refs[`uForm${this.diabetesType}`].setRules(this.rules);
     },
 };
