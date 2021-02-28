@@ -4,69 +4,6 @@
 <template>
     <view class="container" v-if="!loading">
         <view class="main" v-if="goods.length">
-            <view class="nav">
-                <view class="header">
-                    <view class="left" v-if="orderType == 'takein'">
-                        <view class="store-name">
-                            <text>storeName</text>
-                            <view class="iconfont iconarrow-right"></view>
-                        </view>
-                        <view class="store-location">
-                            <image
-                                src="/static/images/order/location.png"
-                                style="width: 30rpx; height: 30rpx"
-                                class="mr-10"
-                            ></image>
-                            <text>距离您 </text>
-                        </view>
-                    </view>
-                    <view class="left overflow-hidden" v-else>
-                        <view class="d-flex align-items-center overflow-hidden">
-                            <image
-                                src="/static/images/order/location.png"
-                                style="width: 30rpx; height: 30rpx"
-                                class="mr-10"
-                            ></image>
-                            <view
-                                class="font-size-extra-lg text-color-base font-weight-bold text-truncate"
-                            >
-                                aaa
-                            </view>
-                        </view>
-                        <view
-                            class="font-size-sm text-color-assist overflow-hidden text-truncate"
-                        >
-                            由<text
-                                class="text-color-base"
-                                style="margin: 0 10rpx"
-                                >storeName</text
-                            >配送
-                        </view>
-                    </view>
-                    <view class="right">
-                        <view
-                            class="dinein"
-                            :class="{ active: orderType == 'takein' }"
-                            @tap="SET_ORDER_TYPE('takein')"
-                        >
-                            <text>自取</text>
-                        </view>
-                        <view
-                            class="takeout"
-                            :class="{ active: orderType == 'takeout' }"
-                            @tap="takout"
-                        >
-                            <text>外卖</text>
-                        </view>
-                    </view>
-                </view>
-                <view class="coupon">
-                    <text class="title"
-                        >"霸气mini卡"超级购券活动，赶紧去购买</text
-                    >
-                    <view class="iconfont iconarrow-right"></view>
-                </view>
-            </view>
             <view class="content">
                 <scroll-view
                     class="menus"
@@ -96,23 +33,8 @@
                     scroll-with-animation
                     scroll-y
                     :scroll-top="cateScrollTop"
-                    @scroll="handleGoodsScroll"
                 >
                     <view class="wrapper">
-                        <swiper
-                            class="ads"
-                            id="ads"
-                            autoplay
-                            :interval="3000"
-                            indicator-dots
-                        >
-                            <swiper-item
-                                v-for="(item, index) in ads"
-                                :key="index"
-                            >
-                                <image :src="item.image"></image>
-                            </swiper-item>
-                        </swiper>
                         <view class="list">
                             <!-- category begin -->
                             <view
@@ -121,26 +43,30 @@
                                 :key="index"
                                 :id="`cate-${item.id}`"
                             >
-                                <view class="title">
+                                <view
+                                    class="title"
+                                    v-if="item.id == currentCateId"
+                                >
                                     <text>{{ item.name }}</text>
                                     <image
                                         :src="item.icon"
                                         class="icon"
                                     ></image>
                                 </view>
-                                <view class="items">
+                                <view
+                                    class="items"
+                                    v-if="item.id == currentCateId"
+                                >
                                     <!-- 商品 begin -->
                                     <view
                                         class="good"
                                         v-for="(good, key) in item.goods_list"
                                         :key="key"
+                                        @tap="showGoodDetailModal(item, good)"
                                     >
                                         <image
                                             :src="good.images"
                                             class="image"
-                                            @tap="
-                                                showGoodDetailModal(item, good)
-                                            "
                                         ></image>
                                         <view class="right">
                                             <text class="name">{{
@@ -150,40 +76,13 @@
                                                 good.content
                                             }}</text>
                                             <view class="price_and_action">
-                                                <text class="price"
-                                                    >￥{{ good.price }}</text
-                                                >
+                                                <text class="price">{{
+                                                    good.price + good.unit
+                                                }}</text>
                                                 <!-- 呈现选规则按钮 -->
-                                                <view
-                                                    class="btn-group"
-                                                    v-if="good.use_property"
-                                                >
-                                                    <button
-                                                        type="primary"
-                                                        class="btn property_btn"
-                                                        hover-class="none"
-                                                        size="mini"
-                                                        @tap="
-                                                            showGoodDetailModal(
-                                                                item,
-                                                                good
-                                                            )
-                                                        "
-                                                    >
-                                                        选规格
-                                                    </button>
-                                                    <view
-                                                        class="dot"
-                                                        v-show="
-                                                            goodCartNum(good.id)
-                                                        "
-                                                        >{{
-                                                            goodCartNum(good.id)
-                                                        }}</view
-                                                    >
-                                                </view>
+
                                                 <!-- 呈现加号，加一份到购物车按钮 -->
-                                                <view class="btn-group" v-else>
+                                                <view class="btn-group">
                                                     <button
                                                         type="default"
                                                         v-show="
@@ -193,10 +92,11 @@
                                                         class="btn reduce_btn"
                                                         size="mini"
                                                         hover-class="none"
-                                                        @tap="
+                                                        @tap.stop="
                                                             handleReduceFromCart(
                                                                 item,
-                                                                good
+                                                                good,
+                                                                0.5
                                                             )
                                                         "
                                                     >
@@ -209,6 +109,7 @@
                                                         v-show="
                                                             goodCartNum(good.id)
                                                         "
+                                                        @tap.stop=""
                                                         >{{
                                                             goodCartNum(good.id)
                                                         }}</view
@@ -218,11 +119,11 @@
                                                         class="btn add_btn"
                                                         size="min"
                                                         hover-class="none"
-                                                        @tap="
+                                                        @tap.stop="
                                                             handleAddToCart(
                                                                 item,
                                                                 good,
-                                                                1
+                                                                0.5
                                                             )
                                                         "
                                                     >
@@ -275,21 +176,8 @@
             custom
             padding="0rpx"
             radius="12rpx"
+            maskClosable
         >
-            <view class="cover">
-                <image
-                    v-if="good.images"
-                    :src="good.images"
-                    class="image"
-                ></image>
-                <view class="btn-group">
-                    <image src="/static/images/menu/share-good.png"></image>
-                    <image
-                        src="/static/images/menu/close.png"
-                        @tap="closeGoodDetailModal"
-                    ></image>
-                </view>
-            </view>
             <scroll-view class="detail" scroll-y>
                 <view class="wrapper">
                     <view class="basic">
@@ -325,10 +213,7 @@
             </scroll-view>
             <view class="action">
                 <view class="left">
-                    <view class="price">￥{{ good.price }}</view>
-                    <view class="props" v-if="getGoodSelectedProps(good)">
-                        {{ getGoodSelectedProps(good) }}
-                    </view>
+                    <view class="price">{{ good.price + good.unit }}</view>
                 </view>
                 <view class="btn-group">
                     <button
@@ -462,6 +347,7 @@ import modal from "@/components/modal/modal";
 import popupLayer from "@/components/popup-layer/popup-layer";
 import goods from "./goods";
 import store from "./store";
+import recipes from "./recipes";
 import { mapState, mapMutations, mapActions, mapGetters } from "vuex";
 
 export default {
@@ -472,30 +358,8 @@ export default {
     data() {
         return {
             goods: [], //所有商品
-            ads: [
-                {
-                    image:
-                        "https://img-shop.qmimg.cn/s23107/2020/04/27/4ebdb582a5185358c4.jpg?imageView2/2/w/600/h/600",
-                },
-                {
-                    image:
-                        "https://images.qmai.cn/s23107/2020/05/08/c25de6ef72d2890630.png?imageView2/2/w/600/h/600",
-                },
-                {
-                    image:
-                        "https://img-shop.qmimg.cn/s23107/2020/04/10/add546c1b1561f880d.jpg?imageView2/2/w/600/h/600",
-                },
-                {
-                    image:
-                        "https://images.qmai.cn/s23107/2020/04/30/b3af19e0de8ed42f61.jpg?imageView2/2/w/600/h/600",
-                },
-                {
-                    image:
-                        "https://img-shop.qmimg.cn/s23107/2020/04/17/8aeb78516d63864420.jpg?imageView2/2/w/600/h/600",
-                },
-            ],
             loading: true,
-            currentCateId: 6905, //默认分类
+            currentCateId: 1, //默认分类
             cateScrollTop: 0,
             menuScrollIntoView: "",
             cart: [], //购物车
@@ -567,7 +431,7 @@ export default {
             //页面初始化
             this.loading = true;
             // await this.getStore()
-            this.goods = goods;
+            this.goods = recipes;
             this.loading = false;
             this.cart = uni.getStorageSync("cart") || [];
         },
@@ -588,40 +452,12 @@ export default {
             if (!this.sizeCalcState) {
                 this.calcSize();
             }
-            console.log(this.goods.find((item) => item.id == id).top);
+            //console.log(this.goods.find((item) => item.id == id).top);
             this.currentCateId = id;
-            this.$nextTick(
-                () =>
-                    (this.cateScrollTop = this.goods.find(
-                        (item) => item.id == id
-                    ).top)
-            );
-        },
-        handleGoodsScroll({ detail }) {
-            //商品列表滚动事件
-            if (!this.sizeCalcState) {
-                this.calcSize();
-            }
-            const { scrollTop } = detail;
-            let tabs = this.goods
-                .filter((item) => item.top <= scrollTop)
-                .reverse();
-            if (tabs.length > 0) {
-                this.currentCateId = tabs[0].id;
-            }
+            this.$nextTick(() => (this.cateScrollTop = 0));
         },
         calcSize() {
             let h = 10;
-
-            let view = uni.createSelectorQuery().select("#ads");
-            view.fields(
-                {
-                    size: true,
-                },
-                (data) => {
-                    h += Math.floor(data.height);
-                }
-            ).exec();
 
             this.goods.forEach((item) => {
                 let view = uni.createSelectorQuery().select(`#cate-${item.id}`);
@@ -666,15 +502,17 @@ export default {
                 });
             }
         },
-        handleReduceFromCart(item, good) {
+        handleReduceFromCart(item, good, num) {
             const index = this.cart.findIndex((item) => item.id === good.id);
-            this.cart[index].number -= 1;
+            this.cart[index].number -= num;
             if (this.cart[index].number <= 0) {
                 this.cart.splice(index, 1);
             }
         },
         showGoodDetailModal(item, good) {
-            this.good = JSON.parse(JSON.stringify({ ...good, number: 1 }));
+            this.good = JSON.parse(
+                JSON.stringify({ ...good, number: good.number || 0 })
+            );
             this.category = JSON.parse(JSON.stringify(item));
             this.goodDetailModalVisible = true;
         },
@@ -684,43 +522,15 @@ export default {
             this.category = {};
             this.good = {};
         },
-        changePropertyDefault(index, key) {
-            //改变默认属性值
-            this.good.property[index].values.forEach((value) =>
-                this.$set(value, "is_default", 0)
-            );
-            this.good.property[index].values[key].is_default = 1;
-            this.good.number = 1;
-        },
-        getGoodSelectedProps(good, type = "text") {
-            //计算当前饮品所选属性
-            if (good.use_property) {
-                let props = [];
-                good.property.forEach(({ values }) => {
-                    values.forEach((value) => {
-                        if (value.is_default) {
-                            props.push(
-                                type === "text" ? value.value : value.id
-                            );
-                        }
-                    });
-                });
-                return type === "text" ? props.join("，") : props;
-            }
-            return "";
-        },
         handlePropertyAdd() {
-            this.good.number += 1;
+            this.good.number += 0.5;
         },
         handlePropertyReduce() {
-            if (this.good.number === 1) return;
-            this.good.number -= 1;
+            if (this.good.number <= 0) return;
+            this.good.number -= 0.5;
         },
         handleAddToCartInModal() {
-            const product = Object.assign({}, this.good, {
-                props_text: this.getGoodSelectedProps(this.good),
-                props: this.getGoodSelectedProps(this.good, "id"),
-            });
+            const product = Object.assign({}, this.good, {});
             this.handleAddToCart(this.category, product, this.good.number);
             this.closeGoodDetailModal();
         },
@@ -768,6 +578,12 @@ export default {
             });
             uni.hideLoading();
         },
+    },
+    onReady() {
+        this.$on("modalCancel", () => {
+            console.log("qwe");
+            this.showGoodDetailModal = false;
+        });
     },
 };
 </script>
