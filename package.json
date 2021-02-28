@@ -1,5 +1,5 @@
 {
-  "name": "TinyShop-UniApp",
+  "name": "Diabetes-Recipe",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -91,14 +91,14 @@
     "ios >= 8"
   ],
   "bugs": {
-    "url": "https://github.com/stavyan/TinyShop-UniApp/issues"
+    "url": "https://github.com/cheerryio/diabetesRecipe/issues"
   },
   "config": {
     "commitizen": {
       "path": "cz-conventional-changelog"
     }
   },
-  "homepage": "https://github.com/stavyan/TinyShop-UniApp#readme",
+  "homepage": "https://github.com/cheerryio/diabetesRecipe#readme",
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
@@ -109,7 +109,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stavyan/TinyShop-UniApp.git"
+    "url": "git+https://github.com/cheerryio/diabetesRecipe.git"
   },
   "uni-app": {
     "scripts": {}
