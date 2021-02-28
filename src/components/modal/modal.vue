@@ -152,7 +152,7 @@ export default {
         },
         handleClickCancel() {
             if (!this.maskClosable) return;
-            this.$emit("modalCancel");
+            this.$emit("cancel");
         },
     },
 };

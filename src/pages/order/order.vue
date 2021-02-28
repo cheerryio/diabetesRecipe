@@ -176,7 +176,7 @@
             custom
             padding="0rpx"
             radius="12rpx"
-            maskClosable
+						@cancel="goodDetailModalVisible=false"
         >
             <scroll-view class="detail" scroll-y>
                 <view class="wrapper">
@@ -579,16 +579,9 @@ export default {
             uni.hideLoading();
         },
     },
-    onReady() {
-        this.$on("modalCancel", () => {
-            console.log("qwe");
-            this.showGoodDetailModal = false;
-        });
-    },
 };
 </script>
 
 <style lang="scss" scoped>
 @import "~@/pages/order/order.scss";
 </style>
-
