@@ -45,7 +45,7 @@ jobs:
       - name: upload ftp
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
-          server: ftp.sinacloud.com:10121
+          server: ftp.sinacloud.com
           username: chee
           password: ${{ secrets.ftp_password }}
           port: 10121
