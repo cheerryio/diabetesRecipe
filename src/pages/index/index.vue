@@ -1,48 +1,85 @@
+/**
+ * @description 界面四 分餐
+ */
 <template>
-    <view class="content">
-        <image class="logo" src="/static/logo.png"></image>
-        <view class="text-area">
-            <text class="title">{{ title }}</text>
-        </view>
-    </view>
+	<view>
+		<button type="primary" @tap="login">登录</button>
+		<button type="primary" @tap="register">注册</button>
+		<u-toast ref="uToast" />
+	</view>
 </template>
 
 <script>
-export default {
-    data() {
-        return {
-            title: "Hello",
-        };
-    },
-    onLoad() {},
-    methods: {},
-};
+	import { mapState, mapMutations, mapActions, mapGetters } from "vuex";
+
+	export default {
+		data() {
+			return {
+				username:"admin",
+				password:"admin"
+			};
+		},
+
+		computed:{
+			...mapState(["user"])
+		},
+
+		methods:{
+			...mapMutations(["SET_USER"]),
+			login(){
+				const that=this;
+				uniCloud.callFunction({
+					name: "login",
+					data:{
+						username:this.username,
+						password:this.password,
+					},
+					success(res){
+						if(res.result.code === 0){
+							// 成功提示
+							that.$refs.uToast.show({
+								title:"登录成功",
+								type:"success",
+								url:"pages/classify/classify",
+								isTab:true
+							})
+
+							const {username,token,uid}=res.result;
+							uni.setStorageSync('uni_id_token',token);
+							that.SET_USER({
+								username,
+								token,
+								uid,
+							})
+						}else{
+							that.$refs.uToast.show({
+								title:res.result.message,
+								type:"error",
+							})
+						}
+					},
+					fail(){
+						that.$refs.uToast.show({
+								title: '注册失败，请稍后再试',
+								type:"error",
+						})
+					}
+				})
+			},
+			register(){
+				uniCloud.callFunction({
+					name: "register",
+					data:{
+						username:this.username,
+						password:this.password,
+						needPermission: true,
+						role: ["admin"]
+					}
+				})
+			},
+		}
+	}
 </script>
 
-<style>
-.content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.logo {
-    height: 200rpx;
-    width: 200rpx;
-    margin-top: 200rpx;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 50rpx;
-}
-
-.text-area {
-    display: flex;
-    justify-content: center;
-}
-
-.title {
-    font-size: 36rpx;
-    color: #8f8f94;
-}
+<style lang="scss">
 </style>
