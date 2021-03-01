@@ -74,6 +74,7 @@
         },
         "devServer" : {
             "https" : false
-        }
+        },
+        "domain" : "chee.sc2yun.com"
     }
 }

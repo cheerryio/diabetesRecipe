@@ -159,5 +159,157 @@
 				"MgoIsUnique": true
 			}
 		}]
+	},
+	"user-diabetes-information":{
+		"index":[{
+			"IndexName": "uid",
+			"MgoKeySchema": {
+				"MgoIndexKeys": [{
+					"Name": "uid",
+					"Direction": "1"
+				}],
+				"MgoIsUnique": true
+			}
+		},
+		{
+			"IndexName": "diabetesType",
+			"MgoKeySchema": {
+				"MgoIndexKeys": [{
+					"Name": "diabetesType",
+					"Direction": "1"
+				}],
+				"MgoIsUnique": false
+			}
+		}]
+	},
+	"food-category":{
+		"data":[
+			{
+				"priority":1,
+				"name":"奶类",
+				"description":"奶类目录"
+			},
+			{
+				"priority":2,
+				"name":"肉蛋类及大豆类",
+				"description":"肉蛋类及大豆类目录"
+			},
+			{
+				"priority":3,
+				"name":"谷薯类",
+				"description":"谷薯类目录"
+			},
+			{
+				"priority":4,
+				"name":"蔬菜类",
+				"description":"蔬菜类目录"
+			},
+			{
+				"priority":5,
+				"name":"油脂类及硬果类",
+				"description":"油脂类及硬果类目录"
+			},
+			{
+				"priority":6,
+				"name":"水果类",
+				"description":"水果类目录"
+			}
+		],
+		"index":[
+			{
+				"IndexName":"priority",
+				"MgoKeySchema": {
+					"MgoIndexKeys":[
+						{
+							"Name":"priority",
+							"Direction":"1"
+						}
+					],
+					"MgoIsUnique":false
+				}
+			}
+		]
+	},
+	"food":{
+		"data":[
+			{
+				"categoryID":1,
+				"foodID":10000,
+				"name":"牛奶",
+				"price":25,
+				"isOnSale":true
+			},
+			{
+				"categoryID":2,
+				"foodID":20000,
+				"name":"猪肉",
+				"price":35,
+				"isOnSale":true
+			},
+			{
+				"categoryID":3,
+				"foodID":30000,
+				"name":"红薯",
+				"price":25,
+				"isOnSale":true
+			},
+			{
+				"categoryID":4,
+				"foodID":40000,
+				"name":"白菜",
+				"price":25,
+				"isOnSale":true
+			},
+			{
+				"categoryID":5,
+				"foodID":50000,
+				"name":"花生",
+				"price":25,
+				"isOnSale":true
+			},
+			{
+				"categoryID":6,
+				"foodID":60000,
+				"name":"苹果",
+				"price":25,
+				"isOnSale":true
+			},
+			{
+				"categoryID":6,
+				"foodID":60001,
+				"name":"梨子",
+				"price":2,
+				"isOnSale":true
+			},
+			{
+				"categoryID":6,
+				"foodID":60002,
+				"name":"香蕉",
+				"price":75,
+				"isOnSale":true
+			}
+		],
+		"index":[
+			{
+				"IndexName": "categoryID",
+				"MgoKeySchema": {
+					"MgoIndexKeys": [{
+						"Name": "categoryID",
+						"Direction": "1"
+					}],
+					"MgoIsUnique": false
+				}
+			},
+			{
+				"IndexName": "foodID",
+				"MgoKeySchema": {
+					"MgoIndexKeys": [{
+						"Name": "foodID",
+						"Direction": "1"
+					}],
+					"MgoIsUnique": true
+				}
+			}
+		]
 	}
 }

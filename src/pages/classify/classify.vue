@@ -63,7 +63,6 @@ export default {
         });
         // 接受用户填好的表单数据
         uni.$on("information-form-finish", function ({ information }) {
-            // 跳转到页面二（能量页面）
             that.step += 1;
             this.$store.commit("SET_INFORMATION", information);
         });

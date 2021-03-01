@@ -520,7 +520,7 @@ export default {
 											uni.$emit("information-form-finish", { information });
 										}).catch((err)=>{
 											that.$refs.uToast.show({
-												title:res.result.message,
+												title:err,
 												type:"error"
 											})
 										})
