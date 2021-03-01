@@ -10,11 +10,5 @@ exports.main = async function(event,context) {
         username,
         password
     })
-		console.log(res)
-		const res2=await uniID.bindRole({
-			uid:res.uid,
-			roleList:["admin"],
-			reset:true,
-		})
-    return res2
+    return res
 }
