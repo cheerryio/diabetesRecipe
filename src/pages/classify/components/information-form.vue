@@ -502,27 +502,32 @@ export default {
             this.$refs[`uForm${this.diabetesType}`].validate((valid) => {
                 if (valid) {
                     // 验证通过
-                    let diabetesType = this.diabetesType;
+                    let diabetesType = that.diabetesType;
                     let information = {};
-                    let { username } = this.user;
+                    let { username } = that.user;
 
-                    this.form.keys().forEach((key) => {
-                        let num = Number(this.form[key]);
+                    that.form.keys().forEach((key) => {
+                        let num = Number(that.form[key]);
                         if (isNaN(num)) {
-                            information[key] = this.form[key];
+                            information[key] = that.form[key];
                         } else {
                             information[key] = num;
                         }
                     });
 
+										if(diabetesType == 2){
+											information.pregnantTime=pregnantDayToTime(information.pregnantWeek,information.pregnantDay);
+											delete information.pregnantWeek;
+											delete information.pregnantDay;
+										}
                     // 提交form表单到数据库 是不是要做token有效性验证？
-                    this.$db
+										console.log(information)
+                    that.$db
                         .collection("user-diabetes-info")
                         .add({
                             username,
                             diabetesType,
                             information,
-                            submitDate: new Date().getTime(),
                         })
                         .then((res) => {
                             that.$refs.uToast.show({
@@ -535,7 +540,7 @@ export default {
                         })
                         .catch((err) => {
                             that.$refs.uToast.show({
-                                title: res.result.message,
+                                title: err,
                                 type: "error",
                             });
                         });
