@@ -35,7 +35,6 @@
 <script>
 import uCharts from "@/js_sdk/u-charts/u-charts/u-charts.js";
 import { mapState, mapMutations, mapActions, mapGetters } from "vuex";
-import func from "../../../vue-temp/vue-editor-bridge";
 
 export default {
     data() {

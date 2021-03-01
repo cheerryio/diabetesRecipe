@@ -207,7 +207,7 @@
 <script>
 import uSelect from "../../../uview-ui/components/u-select/u-select.vue";
 import { mapState, mapMutations, mapActions, mapGetters } from "vuex";
-import pregnantDayToTime from "@/utils/pragnant-time-convert";
+import { pregnantDayToTime } from "@/utils/pragnant-time-convert";
 /**
  * @description 根据用户属于三种糖尿病的类型，呈现不同的表单，让用户填写相应数据
  *
