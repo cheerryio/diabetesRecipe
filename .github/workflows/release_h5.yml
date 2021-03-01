@@ -43,10 +43,10 @@ jobs:
           npm install
           npm run build:h5
       - name: upload ftp
-        uses: SamKirkland/FTP-Deploy-Action@4.0.0
+        uses: sebastianpopp/ftp-action@releases/v2
         with:
-          server: ftp.sinacloud.com
+          server: ftp.sinacloud.com:10121
           username: chee
           password: ${{ secrets.ftp_password }}
-          port: 10121
           local-dir: dist/build/h5/
+          options: "--delete"
