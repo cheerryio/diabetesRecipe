@@ -384,7 +384,7 @@ export default {
             //计算单个饮品添加到购物车的数量
             return (id) =>
                 this.cart.reduce((acc, cur) => {
-                    if (cur.id === id) {
+                    if (cur.foodID === id) {
                         return (acc += cur.number);
                     }
                     return acc;
@@ -393,7 +393,7 @@ export default {
         menuCartNum() {
             return (id) =>
                 this.cart.reduce((acc, cur) => {
-                    if (cur.cate_id === id) {
+                    if (cur.categoryID === id) {
                         return (acc += cur.number);
                     }
                     return acc;
@@ -448,7 +448,6 @@ export default {
 							})
 							.end()
 						this.goods=res.result.data;
-						console.log(res.result.data)
             this.loading = false;
             this.cart = uni.getStorageSync("cart") || [];
         },
@@ -496,23 +495,23 @@ export default {
             const index = this.cart.findIndex((item) => {
                 if (good.use_property) {
                     return (
-                        item.id === good.id &&
+                        item.foodID === good.foodID &&
                         item.props_text === good.props_text
                     );
                 } else {
-                    return item.id === good.id;
+                    return item.foodID === good.foodID;
                 }
             });
             if (index > -1) {
                 this.cart[index].number += num;
             } else {
                 this.cart.push({
-                    id: good.id,
-                    cate_id: cate.id,
+                    foodID: good.foodID,
+                    categoryID: cate.categoryID,
                     name: good.name,
                     price: good.price,
                     number: num,
-                    image: good.images,
+                    image: good.thumbImg,
                     use_property: good.use_property,
                     props_text: good.props_text,
                     props: good.props,
