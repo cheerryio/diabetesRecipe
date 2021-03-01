@@ -292,6 +292,8 @@ page {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+
+	animation:.2s ease-in-out 0s 1 scroll-down;
 }
 
 .text-box {
@@ -310,13 +312,17 @@ page {
     margin-left: 10rpx;
 }
 
-@keyframes scale-in-small {
+@keyframes scroll-down {
     0% {
-        transform: scale(0) rotate(-180deg);
+        transform: rotate(-10deg);
     }
 
+		50% {
+			transform: rotate(5deg);
+		}
+
     100% {
-        transform: scale(1) rotate(0);
+        transform: rotate(0);
     }
 }
 </style>
