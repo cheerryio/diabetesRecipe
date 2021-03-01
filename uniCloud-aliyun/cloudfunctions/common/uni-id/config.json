@@ -12,8 +12,8 @@
 		"tokenExpiresIn": 2592000,
 		"oauth" : {
 			"weixin" : {
-				"appid" : "weixin appid",
-				"appsecret" : "weixin appsecret"
+				"appid" : "wx92b9a85a6c9e94e9",
+				"appsecret" : "f6165b5dd51741ece4a31b3314a5ecf9"
 			},
 			"apple":	{
 				"bundleId": "your APP bundleId"
@@ -23,8 +23,8 @@
 	"mp-weixin": {
 		"oauth" : {
 			"weixin" : {
-				"appid" : "weixin appid",
-				"appsecret" : "weixin appsecret"
+				"appid" : "wx92b9a85a6c9e94e9",
+				"appsecret" : "f6165b5dd51741ece4a31b3314a5ecf9"
 			}
 		}
 	},

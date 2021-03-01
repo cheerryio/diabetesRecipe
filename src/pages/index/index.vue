@@ -3,9 +3,11 @@
  */
 <template>
 	<view>
-		<button type="primary" @tap="login">登录admin</button>
-		<button type="primary" @tap="username='user';password='user';login()">登录user</button>
-		<button type="primary" @tap="register">注册</button>
+		<button type="primary" @tap="loginh5">登录admin(h5)</button>
+		<button type="primary" @tap="registerh5">注册(h5)</button>
+		<button type="primary" @tap="username='user';password='user';loginh5()">登录user(h5)</button>
+		<button type="primary" @tap="loginByWeixin">微信登录</button>
+		<button type="primary" @tap="code2SessionWeixin">获取微信openid</button>
 		<u-toast ref="uToast" />
 	</view>
 </template>
@@ -27,7 +29,8 @@
 
 		methods:{
 			...mapMutations(["SET_USER"]),
-			login(){
+			// #ifdef H5
+			loginh5(){
 				const that=this;
 				uniCloud.callFunction({
 					name: "login",
@@ -67,7 +70,7 @@
 					}
 				})
 			},
-			register(){
+			registerh5(){
 				const that=this;
 				uniCloud.callFunction({
 					name: "register",
@@ -115,6 +118,128 @@
 					}
 				})
 			},
+			// #endif
+			getWeixinCode() {
+				return new Promise((resolve, reject) => {
+					// #ifdef APP-PLUS
+					weixinAuthService.authorize(function(res) {
+						resolve(res.code)
+					}, function(err) {
+						console.log(err)
+						reject(new Error('微信登录失败'))
+					});
+					// #endif
+					// #ifdef MP-WEIXIN
+					uni.login({
+						provider: 'weixin',
+						success(res) {
+							resolve(res.code)
+						},
+						fail(err) {
+							reject(new Error('微信登录失败'))
+						}
+					})
+					// #endif
+				})
+			},
+			code2SessionWeixin() {
+				this.getWeixinCode().then((code) => {
+					return uniCloud.callFunction({
+						name: 'user-center',
+						data: {
+							action: 'code2SessionWeixin',
+							params: {
+								code,
+							}
+						}
+					})
+				}).then((res) => {
+					uni.showModal({
+						showCancel: false,
+						content: JSON.stringify(res.result)
+					})
+				}).catch((e) => {
+					console.error(e)
+					uni.showModal({
+						showCancel: false,
+						content: '微信登录失败，请稍后再试'
+					})
+				})
+			},
+			unbindWeixin() {
+				uniCloud.callFunction({
+					name: 'user-center',
+					data: {
+						action: 'unbindWeixin'
+					},
+					success(res) {
+						uni.showModal({
+							showCancel: false,
+							content: JSON.stringify(res.result)
+						})
+					},
+					fail(e) {
+						console.error(e)
+						uni.showModal({
+							showCancel: false,
+							content: '微信解绑失败，请稍后再试'
+						})
+					}
+				})
+			},
+			bindWeixin() {
+				this.getWeixinCode().then((code) => {
+					return uniCloud.callFunction({
+						name: 'user-center',
+						data: {
+							action: 'bindWeixin',
+							params: {
+								code: code,
+							}
+						}
+					})
+				}).then((res) => {
+					uni.showModal({
+						showCancel: false,
+						content: JSON.stringify(res.result)
+					})
+				}).catch(() => {
+					uni.showModal({
+						showCancel: false,
+						content: '微信绑定失败，请稍后再试'
+					})
+				})
+			},
+			loginByWeixin() {
+				this.getWeixinCode().then((code) => {
+					return uniCloud.callFunction({
+						name: 'user-center',
+						data: {
+							action: 'loginByWeixin',
+							params: {
+								code,
+							}
+						}
+					})
+				}).then((res) => {
+					uni.showModal({
+						showCancel: false,
+						content: JSON.stringify(res.result)
+					})
+					if (res.result.code === 0) {
+						uni.setStorageSync('uni_id_token', res.result.token)
+						uni.setStorageSync('uni_id_token_expired', res.result.tokenExpired)
+						uni.setStorageSync("uid",res.result.uid)
+					}
+				}).catch((e) => {
+					console.error(e)
+					uni.showModal({
+						showCancel: false,
+						content: '微信登录失败，请稍后再试'
+					})
+				})
+			},
+
 		}
 	}
 </script>

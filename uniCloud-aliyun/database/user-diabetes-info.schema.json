@@ -1,7 +1,7 @@
 // 文档教程: https://uniapp.dcloud.net.cn/uniCloud/schema
 {
 	"bsonType": "object",
-	"required": ["username"],
+	"required": ["uid"],
 	"permission":{
 		"read":"doc.uid == auth.uid",
 		"create":true,
