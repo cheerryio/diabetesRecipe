@@ -3,31 +3,25 @@
  */
 <template>
     <view class="main-container">
-        <uni-group class="title">
-            <text
-                >您一天所需总能量为:
-                <text class="energe-highlight">{{ Z }}</text></text
-            >
+        <uni-group class="group">
+            <text class="normal-font">您一天所需总能量为:</text>
+						<text class="energe-highlight">{{ Z }}</text>
         </uni-group>
-        <uni-group>
-            <view class="qiun-charts">
-                <canvas
-                    canvas-id="nutrientsPie"
-                    id="nutrientsPie"
-                    class="charts"
-                    @touchstart="touchPie"
-                ></canvas>
-            </view>
+        <uni-group class="group">
+					<template v-for="(item,index) in nutrients">
+						<view :key="index" class="text-box">
+							<text class="normal-font">{{item.name}}</text>
+							<text class="energe-highlight">{{item.data}}</text>
+						</view>
+					</template>
         </uni-group>
-        <uni-group>
-            <view class="qiun-charts">
-                <canvas
-                    canvas-id="foodsPie"
-                    id="foodsPie"
-                    class="charts"
-                    @touchstart="touchPie"
-                ></canvas>
-            </view>
+        <uni-group class="group">
+					<template v-for="(item,index) in foods">
+						<view :key="index" class="text-box">
+							<text class="normal-font">{{item.name}}</text>
+							<text class="energe-highlight">{{item.data}}</text>
+						</view>
+					</template>
         </uni-group>
     </view>
 </template>
@@ -49,7 +43,7 @@ export default {
         };
     },
     computed: {
-        ...mapState(["diabetesType", "information","recipeLimit"]),
+        ...mapState(["diabetesType", "information","recipeLimit","user"]),
         BMI: function () {
             // BMI
             switch (this.diabetesType) {
@@ -262,73 +256,23 @@ export default {
     },
 
     mounted: function (option) {
-        this.showPie("nutrientsPie", this.nutrients);
-        this.showPie("foodsPie", this.foods);
-
 				this.$nextTick((function(){
-					this.SET_RECIPELIMIT({
+					const recipeLimit={
 						energe:this.Z,
 						nutrients:this.nutrients,
 						foods:this.foods
+					}
+					this.SET_RECIPELIMIT(recipeLimit)
+					this.$db.collection("recipe-limit").add({
+						username:this.user.username,
+						uid:this.user.uid,
+						...recipeLimit
 					})
-					console.log(this.recipeLimit);
 				}).bind(this))
     },
 
     methods: {
 				...mapMutations(["SET_RECIPELIMIT"]),
-        showPie(canvasId, series) {
-            const pie = new uCharts({
-                $this: this,
-                canvasId: canvasId,
-                type: "pie",
-                fontSize: 11,
-                legend: { show: true },
-                background: "#FFFFFF",
-                pixelRatio: this.pixelRatio,
-                series: series,
-                animation: true,
-                width: uni.upx2px(750) * this.pixelRatio,
-                height: uni.upx2px(500) * this.pixelRatio,
-                dataLabel: true,
-                extra: {
-                    pie: {
-                        lableWidth: 15,
-                    },
-                },
-            });
-
-            switch (canvasId) {
-                case "nutrientsPie":
-                    this.nutrientsPie = pie;
-                    break;
-                case "foodsPie":
-                    this.foodsPie = pie;
-                    break;
-                default:
-                    break;
-            }
-        },
-        touchPie(e) {
-            switch (e.currentTarget.id) {
-                case "nutrientsPie":
-                    this.nutrientsPie.showToolTip(e, {
-                        format: function (item) {
-                            return item.name + ":" + item.data;
-                        },
-                    });
-                    break;
-                case "foodsPie":
-                    this.foodsPie.showToolTip(e, {
-                        format: function (item) {
-                            return item.name + ":" + item.data;
-                        },
-                    });
-                    break;
-                default:
-                    break;
-            }
-        },
     },
 };
 </script>
@@ -340,22 +284,24 @@ page {
     width: 750upx;
     overflow-x: hidden;
 }
-.qiun-charts {
-    width: 750upx;
-    height: 500upx;
-    background-color: #ffffff;
-}
-.charts {
-    width: 750upx;
-    height: 500upx;
-    background-color: #ffffff;
-}
 
 .main-container {
-    animation: $show-duration linear 0s 1 scale-in-small;
 }
 
-.title {
+.group {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.text-box {
+	margin:20rpx;
+}
+
+.normal-font {
+	font:{
+		size: 30rpx;
+	}
 }
 
 .energe-highlight {

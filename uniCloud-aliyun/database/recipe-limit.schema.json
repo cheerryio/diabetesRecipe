@@ -1,0 +1,50 @@
+// 文档教程: https://uniapp.dcloud.net.cn/uniCloud/schema
+{
+	"bsonType": "object",
+	"required": [],
+	"permission": {
+		"read": "doc.uid == auth.id",
+		"create": true,
+		"update": "doc.uid == auth.id",
+		"delete": false
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"uid":{
+			"description":"用户唯一标识ID",
+			"forceDefaultValue":{
+				"$env":"uid"
+			}
+		},
+		"username": {
+			"bsonType":"string",
+			"title":"用户名",
+			"description": "用户名，不允许重复",
+			"trim": "both"
+		},
+		"submitDate":{
+			"bsonType":"timestamp",
+			"description":"表单数据提交时间",
+			"forceDefaultValue":{
+				"$env":"now"
+			}
+		},
+		"energe": {
+			"bsonType":"double",
+			"title":"能量",
+			"description":"一天需要的总能量Z"
+		},
+		"nutrients": {
+			"bsonType":"array",
+			"title":"三大营养物质比例",
+			"description":""
+		},
+		"foods": {
+			"bsonType":"array",
+			"title":"六大食物比例",
+			"description":""
+		}
+	}
+}

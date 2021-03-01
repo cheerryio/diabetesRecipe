@@ -353,5 +353,39 @@
 				}
 			}
 		]
+	},
+	"recipe-limit":{
+		"data":[],
+		"index":[
+			{
+				"IndexName":"uid",
+				"MgoKeySchema": {
+					"MgoIndexKeys":[
+						{
+							"Name":"uid",
+							"Direction":"1"
+						}
+					],
+					"MgoIsUnique":true
+				}
+			}
+		]
+	},
+	"recipe":{
+		"data":[],
+		"index":[
+			{
+				"IndexName":"uid",
+				"MgoKeySchema": {
+					"MgoIndexKeys":[
+						{
+							"Name":"uid",
+							"Direction":"1"
+						}
+					],
+					"MgoIsUnique":true
+				}
+			}
+		]
 	}
 }
