@@ -35,12 +35,13 @@
 <script>
 import uCharts from "@/js_sdk/u-charts/u-charts/u-charts.js";
 import { mapState, mapMutations, mapActions, mapGetters } from "vuex";
+import func from "../../../vue-temp/vue-editor-bridge";
 
 export default {
     data() {
         return {
             data: "", // 页面一中 information form的数据
-            energe: 45,
+
             nutrients: [
                 {
                     name: "糖类",
@@ -88,15 +89,84 @@ export default {
     },
     computed: {
         ...mapState(["diabetesType", "information"]),
+        BMI: function () {
+            //BMI
+            switch (this.diabetesType) {
+                case 1:
+                case 3:
+                    return (
+                        Number(this.information["weight"]) /
+                        Math.pow(Number(this.information["height"]) / 100, 2)
+                    );
+                case 2:
+                    return (
+                        Number(this.information["weightBeforePragnant"]) /
+                        Math.pow(Number(this.information["height"]) / 100, 2)
+                    );
+                default:
+                    return NaN;
+            }
+        },
+        idealWeight: function () {
+            //理想体重
+            switch (this.diabetesType) {
+                case 1:
+                    return (
+                        (Number(this.information["height"]) - 100) * 0.9 -
+                        Number(this.information["gender"] == 2 ? 2.5 : 0)
+                    );
+                case 2:
+                    let h = Number(this.information["height"]);
+                    return h <= 150 ? h - 100 : h < 175 ? h - 105 : h - 110;
+                case 3:
+                    break;
+                default:
+                    return NaN;
+            }
+        },
+        energyCoefficient: function () {
+            //能量系数
+            switch (this.diabetesType) {
+                case 1:
+                    return (
+                        (this.BMI <= 18.5 ? 30 : this.BMI < 24 ? 25 : 20) +
+                        Number(this.information.laborIntensity * 5)
+                    );
+                case 2:
+                    return (
+                        (this.BMI < 18.5 ? 30 : this.BMI < 25 ? 25 : 20) +
+                        Number(this.information.laborIntensity * 5)
+                    );
+                case 3:
+                    break;
+                default:
+                    return NaN;
+            }
+        },
+        Z: function () {
+            switch (this.diabetesType) {
+                case 1:
+                    return this.energyCoefficient * this.idealWeight;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                default:
+                    return NaN;
+            }
+        },
     },
 
     mounted: function (option) {
-				console.log(this.diabetesType,this.information);
+        console.log(this.diabetesType, this.information);
         this.showPie("nutrientsPie", this.nutrients);
         this.showPie("foodsPie", this.foods);
     },
 
     methods: {
+        calcNutrients() {
+            let Z = 0;
+        },
         showPie(canvasId, series) {
             let pie = new uCharts({
                 $this: this,

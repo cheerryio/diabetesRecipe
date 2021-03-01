@@ -180,8 +180,8 @@
                 ></u-input>
             </u-form-item>
         </u-form>
-				<view v-else><text>diabetesType数据无效</text></view>
-				<button type="primary" @tap="submit">提交</button>
+        <view v-else><text>diabetesType数据无效</text></view>
+        <button type="primary" @tap="submit">提交</button>
         <u-select
             :list="
                 selectType == 1
@@ -200,14 +200,14 @@
             @confirm="selectCallback"
         >
         </u-select>
-				<u-toast ref="uToast"></u-toast>
+        <u-toast ref="uToast"></u-toast>
     </view>
 </template>
 
 <script>
 import uSelect from "../../../uview-ui/components/u-select/u-select.vue";
 import { mapState, mapMutations, mapActions, mapGetters } from "vuex";
-
+import pregnantDayToTime from "@/utils/pragnant-time-convert";
 /**
  * @description 根据用户属于三种糖尿病的类型，呈现不同的表单，让用户填写相应数据
  *
@@ -237,7 +237,7 @@ export default {
             .slice(1)
             .forEach((value, index) => {
                 pregnantDayList.push({
-                    value:value,
+                    value: value,
                     label: String(value),
                 });
             });
@@ -252,7 +252,7 @@ export default {
             });
 
         return {
-						isMounted:false,
+            isMounted: false,
             labelStyle: {
                 fontSize: "20rpx",
             },
@@ -460,31 +460,30 @@ export default {
         };
     },
 
-		computed:{
-			...mapState(["user"]),
-			form(){
-				if(!this.isMounted)
-					return;
-				// this.$refs is available now
-				return this.$refs[`uForm${this.diabetesType}`].model;
-			}
-		},
+    computed: {
+        ...mapState(["user"]),
+        form() {
+            if (!this.isMounted) return;
+            // this.$refs is available now
+            return this.$refs[`uForm${this.diabetesType}`].model;
+        },
+    },
 
     methods: {
         radioGroupChange1(e) {
-            this.form.gender=e;
+            this.form.gender = e;
         },
         selectCallback(e) {
             e = e[0];
             switch (this.selectType) {
                 case 1:
-                    this.form.pregnantWeek = e.value;
+                    this.form.pregnantWeek = e.label;
                     break;
                 case 2:
-                    this.form.pregnantDay = e.value;
+                    this.form.pregnantDay = e.label;
                     break;
                 case 3:
-                    this.form.babyNumber = e.value;
+                    this.form.babyNumber = e.label;
                     break;
                 case 4:
                     this.laborIntensityText = e.label;
@@ -499,31 +498,47 @@ export default {
             }
         },
         submit() {
-						const that=this;
+            const that = this;
             this.$refs[`uForm${this.diabetesType}`].validate((valid) => {
                 if (valid) {
-										// 验证通过
+                    // 验证通过
                     let diabetesType = this.diabetesType;
-                    let information = this.form;
-										let {username} = this.user;
-										// 提交form表单到数据库 是不是要做token有效性验证？
-										this.$db.collection("user-diabetes-info").add({
-											username,
-											diabetesType,
-											information,
-											submitDate:new Date().getTime(),
-										}).then((res)=>{
-											that.$refs.uToast.show({
-												title:"上传成功",
-												type:"success"
-											})
-											uni.$emit("information-form-finish", { information });
-										}).catch((err)=>{
-											that.$refs.uToast.show({
-												title:res.result.message,
-												type:"error"
-											})
-										})
+                    let information = {};
+                    let { username } = this.user;
+
+                    this.form.keys().forEach((key) => {
+                        let num = Number(this.form[key]);
+                        if (isNaN(num)) {
+                            information[key] = this.form[key];
+                        } else {
+                            information[key] = num;
+                        }
+                    });
+
+                    // 提交form表单到数据库 是不是要做token有效性验证？
+                    this.$db
+                        .collection("user-diabetes-info")
+                        .add({
+                            username,
+                            diabetesType,
+                            information,
+                            submitDate: new Date().getTime(),
+                        })
+                        .then((res) => {
+                            that.$refs.uToast.show({
+                                title: "上传成功",
+                                type: "success",
+                            });
+                            uni.$emit("information-form-finish", {
+                                information,
+                            });
+                        })
+                        .catch((err) => {
+                            that.$refs.uToast.show({
+                                title: res.result.message,
+                                type: "error",
+                            });
+                        });
                 } else {
                     // 验证失败
                 }
@@ -532,7 +547,7 @@ export default {
     },
     mounted: function () {
         //  debugger;
-				this.isMounted=true;
+        this.isMounted = true;
         this.$refs[`uForm${this.diabetesType}`].setRules(this.rules);
     },
 };

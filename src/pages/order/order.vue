@@ -176,7 +176,7 @@
             custom
             padding="0rpx"
             radius="12rpx"
-						@cancel="goodDetailModalVisible=false"
+            @cancel="goodDetailModalVisible = false"
         >
             <scroll-view class="detail" scroll-y>
                 <view class="wrapper">
