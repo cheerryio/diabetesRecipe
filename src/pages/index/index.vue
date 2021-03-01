@@ -46,7 +46,7 @@
 							})
 
 							const {username,token,uid}=res.result;
-							uni.setStorageSync('uni_id_token',token);
+
 							that.SET_USER({
 								username,
 								token,

@@ -49,7 +49,7 @@ export default {
         };
     },
     computed: {
-        ...mapState(["diabetesType", "information"]),
+        ...mapState(["diabetesType", "information","recipeLimit"]),
         BMI: function () {
             // BMI
             switch (this.diabetesType) {
@@ -124,6 +124,9 @@ export default {
             }
         },
         Z: function () {
+						if(this.recipeLimit.energe){
+							return this.recipeLimit.energe;
+						}
             let X, Y, Z;
             switch (this.diabetesType) {
                 case 1:
@@ -166,6 +169,10 @@ export default {
             }
         },
         nutrients: function () {
+						if(this.recipeLimit.nutrients){
+							console.log("aaaa")
+							return this.recipeLimit.nutrients;
+						}
             let A = this.Z * 0.55;
             if (this.diabetesType == 2) {
                 if (this.pregnancy == 1 && A < 150) {
@@ -191,6 +198,9 @@ export default {
         },
 
         foods: function () {
+						if(this.recipeLimit.foods){
+							return this.recipeLimit.foods;
+						}
             if (
                 this.diabetesType == 1 ||
                 (this.diabetesType == 3 && this.information.age >= 6)
@@ -254,9 +264,19 @@ export default {
     mounted: function (option) {
         this.showPie("nutrientsPie", this.nutrients);
         this.showPie("foodsPie", this.foods);
+
+				this.$nextTick((function(){
+					this.SET_RECIPELIMIT({
+						energe:this.Z,
+						nutrients:this.nutrients,
+						foods:this.foods
+					})
+					console.log(this.recipeLimit);
+				}).bind(this))
     },
 
     methods: {
+				...mapMutations(["SET_RECIPELIMIT"]),
         showPie(canvasId, series) {
             const pie = new uCharts({
                 $this: this,
