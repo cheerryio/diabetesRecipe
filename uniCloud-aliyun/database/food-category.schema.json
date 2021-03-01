@@ -17,6 +17,12 @@
 			"title":"目录ID",
 			"description":"唯一"
 		},
+		"goodsList":{
+			"bsonType":"int",
+			"title":"目录ID",
+			"description":"唯一",
+			"foreignKey":"food.categoryID"
+		},
 		"priority":{
 			"bsonType":"int",
 			"title":"目录优先级",

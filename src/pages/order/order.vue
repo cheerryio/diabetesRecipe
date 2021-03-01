@@ -436,6 +436,7 @@ export default {
 						const db = uniCloud.database()
 						const dbCmd = db.command
 						const $ = dbCmd.aggregate
+						/*
 						const res=await this.$db.collection("food-category").aggregate()
 							.lookup({
 								from:'food',
@@ -448,6 +449,9 @@ export default {
 								as:"goodsList"
 							})
 							.end()
+							*/
+						const res=await this.$db.collection("food-category,food")
+							.field("goodsList{foodID,name,description,price,unit,thumbImg},categoryID,name,priority").get();
 						this.goods=res.result.data;
             this.loading = false;
             this.cart = uni.getStorageSync("cart") || [];

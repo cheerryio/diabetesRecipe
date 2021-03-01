@@ -186,36 +186,42 @@
 		"data":[
 			{
 				"categoryID":1,
+				"goodsList":1,
 				"priority":1,
 				"name":"奶类",
 				"description":"奶类目录"
 			},
 			{
 				"categoryID":2,
+				"goodsList":2,
 				"priority":2,
 				"name":"肉蛋类及大豆类",
 				"description":"肉蛋类及大豆类目录"
 			},
 			{
 				"categoryID":3,
+				"goodsList":3,
 				"priority":3,
 				"name":"谷薯类",
 				"description":"谷薯类目录"
 			},
 			{
 				"categoryID":4,
+				"goodsList":4,
 				"priority":4,
 				"name":"蔬菜类",
 				"description":"蔬菜类目录"
 			},
 			{
 				"categoryID":5,
+				"goodsList":5,
 				"priority":5,
 				"name":"油脂类及硬果类",
 				"description":"油脂类及硬果类目录"
 			},
 			{
 				"categoryID":6,
+				"goodsList":6,
 				"priority":6,
 				"name":"水果类",
 				"description":"水果类目录"
