@@ -15,7 +15,7 @@
 		"categoryID":{
       "bsonType": "int",
       "description": "分类 id，参考`food-category`表",
-      "foreignKey": "food-category._id"
+      "foreignKey": "food-category.categoryID"
     },
 		"foodID":{
       "bsonType": "int",

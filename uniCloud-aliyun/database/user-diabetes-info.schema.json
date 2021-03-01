@@ -127,6 +127,10 @@
 						}
 					]
 				},
+				"pregnantTime":{
+					"bsonType":"timestamp",
+					"title":"孕期"
+				},
 				"weightBeforePregnant":{
 					"bsonType":"int",
 					"minimum":0,

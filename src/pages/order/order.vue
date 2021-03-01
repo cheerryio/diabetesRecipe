@@ -5,6 +5,7 @@
     <view class="container" v-if="!loading">
         <view class="main" v-if="goods.length">
             <view class="content">
+							<!-- 左侧食品大类目录 -->
                 <scroll-view
                     class="menus"
                     :scroll-into-view="menuScrollIntoView"
@@ -14,15 +15,15 @@
                     <view class="wrapper">
                         <view
                             class="menu"
-                            :id="`menu-${item.id}`"
-                            :class="{ current: item.id === currentCateId }"
+                            :id="`menu-${item.categoryID}`"
+                            :class="{ current: item.categoryID === currentCateId }"
                             v-for="(item, index) in goods"
                             :key="index"
-                            @tap="handleMenuTap(item.id)"
+                            @tap="handleMenuTap(item.categoryID)"
                         >
                             <text>{{ item.name }}</text>
-                            <view class="dot" v-show="menuCartNum(item.id)">{{
-                                menuCartNum(item.id)
+                            <view class="dot" v-show="menuCartNum(item.categoryID)">{{
+                                menuCartNum(item.categoryID)
                             }}</view>
                         </view>
                     </view>
@@ -41,11 +42,11 @@
                                 class="category"
                                 v-for="(item, index) in goods"
                                 :key="index"
-                                :id="`cate-${item.id}`"
+                                :id="`cate-${item.categoryID}`"
                             >
                                 <view
                                     class="title"
-                                    v-if="item.id == currentCateId"
+                                    v-if="item.categoryID == currentCateId"
                                 >
                                     <text>{{ item.name }}</text>
                                     <image
@@ -55,17 +56,17 @@
                                 </view>
                                 <view
                                     class="items"
-                                    v-if="item.id == currentCateId"
+                                    v-if="item.categoryID == currentCateId"
                                 >
                                     <!-- 商品 begin -->
                                     <view
                                         class="good"
-                                        v-for="(good, key) in item.goods_list"
+                                        v-for="(good, key) in item.goodsList"
                                         :key="key"
                                         @tap="showGoodDetailModal(item, good)"
                                     >
                                         <image
-                                            :src="good.images"
+                                            :src="good.thumbImg"
                                             class="image"
                                         ></image>
                                         <view class="right">
@@ -73,11 +74,11 @@
                                                 good.name
                                             }}</text>
                                             <text class="tips">{{
-                                                good.content
+                                                good.description
                                             }}</text>
                                             <view class="price_and_action">
                                                 <text class="price">{{
-                                                    good.price + good.unit
+                                                    String(good.price) + good.unit
                                                 }}</text>
                                                 <!-- 呈现选规则按钮 -->
 
@@ -86,7 +87,7 @@
                                                     <button
                                                         type="default"
                                                         v-show="
-                                                            goodCartNum(good.id)
+                                                            goodCartNum(good.foodID)
                                                         "
                                                         plain
                                                         class="btn reduce_btn"
@@ -107,11 +108,11 @@
                                                     <view
                                                         class="number"
                                                         v-show="
-                                                            goodCartNum(good.id)
+                                                            goodCartNum(good.foodID)
                                                         "
                                                         @tap.stop=""
                                                         >{{
-                                                            goodCartNum(good.id)
+                                                            goodCartNum(good.foodID)
                                                         }}</view
                                                     >
                                                     <button
@@ -430,8 +431,24 @@ export default {
         async init() {
             //页面初始化
             this.loading = true;
-            // await this.getStore()
-            this.goods = recipes;
+						// 获取商品信息
+						const db = uniCloud.database()
+						const dbCmd = db.command
+						const $ = dbCmd.aggregate
+						const res=await this.$db.collection("food-category").aggregate()
+							.lookup({
+								from:'food',
+								let:{
+									cid:'$categoryID'
+								},
+								pipeline: $.pipeline()
+									.match(dbCmd.expr($.eq(['$categoryID','$$cid'])))
+									.done(),
+								as:"goodsList"
+							})
+							.end()
+						this.goods=res.result.data;
+						console.log(res.result.data)
             this.loading = false;
             this.cart = uni.getStorageSync("cart") || [];
         },
@@ -460,7 +477,7 @@ export default {
             let h = 10;
 
             this.goods.forEach((item) => {
-                let view = uni.createSelectorQuery().select(`#cate-${item.id}`);
+                let view = uni.createSelectorQuery().select(`#cate-${item.categoryID}`);
                 view.fields(
                     {
                         size: true,

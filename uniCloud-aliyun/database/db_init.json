@@ -185,37 +185,55 @@
 	"food-category":{
 		"data":[
 			{
+				"categoryID":1,
 				"priority":1,
 				"name":"奶类",
 				"description":"奶类目录"
 			},
 			{
+				"categoryID":2,
 				"priority":2,
 				"name":"肉蛋类及大豆类",
 				"description":"肉蛋类及大豆类目录"
 			},
 			{
+				"categoryID":3,
 				"priority":3,
 				"name":"谷薯类",
 				"description":"谷薯类目录"
 			},
 			{
+				"categoryID":4,
 				"priority":4,
 				"name":"蔬菜类",
 				"description":"蔬菜类目录"
 			},
 			{
+				"categoryID":5,
 				"priority":5,
 				"name":"油脂类及硬果类",
 				"description":"油脂类及硬果类目录"
 			},
 			{
+				"categoryID":6,
 				"priority":6,
 				"name":"水果类",
 				"description":"水果类目录"
 			}
 		],
 		"index":[
+			{
+				"IndexName":"categoryID",
+				"MgoKeySchema": {
+					"MgoIndexKeys":[
+						{
+							"Name":"categoryID",
+							"Direction":"1"
+						}
+					],
+					"MgoIsUnique":true
+				}
+			},
 			{
 				"IndexName":"priority",
 				"MgoKeySchema": {
@@ -237,6 +255,9 @@
 				"foodID":10000,
 				"name":"牛奶",
 				"price":25,
+				"unit":"g/份",
+				"description":"这是一份食物哦",
+				"thumbImg":"https://img-shop.qmimg.cn/s23107/2020/04/19/fda6dd99c83af02353.jpg?imageView2/2/w/400/h/400",
 				"isOnSale":true
 			},
 			{
@@ -244,6 +265,9 @@
 				"foodID":20000,
 				"name":"猪肉",
 				"price":35,
+				"unit":"g/份",
+				"description":"这是一份食物哦",
+				"thumbImg":"https://img-shop.qmimg.cn/s23107/2020/04/19/fda6dd99c83af02353.jpg?imageView2/2/w/400/h/400",
 				"isOnSale":true
 			},
 			{
@@ -251,6 +275,9 @@
 				"foodID":30000,
 				"name":"红薯",
 				"price":25,
+				"unit":"g/份",
+				"description":"这是一份食物哦",
+				"thumbImg":"https://img-shop.qmimg.cn/s23107/2020/04/19/fda6dd99c83af02353.jpg?imageView2/2/w/400/h/400",
 				"isOnSale":true
 			},
 			{
@@ -258,6 +285,9 @@
 				"foodID":40000,
 				"name":"白菜",
 				"price":25,
+				"unit":"g/份",
+				"description":"这是一份食物哦",
+				"thumbImg":"https://img-shop.qmimg.cn/s23107/2020/04/19/fda6dd99c83af02353.jpg?imageView2/2/w/400/h/400",
 				"isOnSale":true
 			},
 			{
@@ -265,6 +295,9 @@
 				"foodID":50000,
 				"name":"花生",
 				"price":25,
+				"unit":"g/份",
+				"description":"这是一份食物哦",
+				"thumbImg":"https://img-shop.qmimg.cn/s23107/2020/04/19/fda6dd99c83af02353.jpg?imageView2/2/w/400/h/400",
 				"isOnSale":true
 			},
 			{
@@ -272,6 +305,9 @@
 				"foodID":60000,
 				"name":"苹果",
 				"price":25,
+				"unit":"g/份",
+				"description":"这是一份食物哦",
+				"thumbImg":"https://img-shop.qmimg.cn/s23107/2020/04/19/fda6dd99c83af02353.jpg?imageView2/2/w/400/h/400",
 				"isOnSale":true
 			},
 			{
@@ -279,6 +315,9 @@
 				"foodID":60001,
 				"name":"梨子",
 				"price":2,
+				"unit":"g/份",
+				"description":"这是一份食物哦",
+				"thumbImg":"https://img-shop.qmimg.cn/s23107/2020/04/19/fda6dd99c83af02353.jpg?imageView2/2/w/400/h/400",
 				"isOnSale":true
 			},
 			{
@@ -286,6 +325,9 @@
 				"foodID":60002,
 				"name":"香蕉",
 				"price":75,
+				"unit":"g/份",
+				"description":"这是一份食物哦",
+				"thumbImg":"https://img-shop.qmimg.cn/s23107/2020/04/19/fda6dd99c83af02353.jpg?imageView2/2/w/400/h/400",
 				"isOnSale":true
 			}
 		],
