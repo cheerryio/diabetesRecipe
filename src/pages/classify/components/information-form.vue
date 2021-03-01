@@ -150,6 +150,33 @@
             :label-position="labelPosition"
             :label-style="{}"
         >
+            <u-form-item
+                :label-position="labelPosition"
+                label="性别"
+                label-width="150"
+                prop="gender"
+            >
+                <u-radio-group
+                    @change="radioGroupChange1"
+                    :width="radioCheckWidth"
+                    :wrap="radioCheckWrap"
+                >
+                    <u-radio
+                        v-model="form3.gender"
+                        shape="circle"
+                        v-for="(sItem, sIndex) in genders"
+                        :key="sIndex"
+                        :name="sItem.id"
+                    >
+                        <image
+                            :src="sItem.icon"
+                            mode="aspectFit"
+                            class="image-icon"
+                        ></image>
+                        <text>{{ sItem.name }}</text>
+                    </u-radio>
+                </u-radio-group>
+            </u-form-item>
             <u-form-item label="身高" prop="height">
                 <u-input
                     type="text"
@@ -164,7 +191,17 @@
                 <text slot="right" class="unit">kg</text>
             </u-form-item>
             <u-form-item label="年龄" prop="age">
-                <u-input :border="border" v-model="form3.age" />
+                <u-input
+                    :border="border"
+                    type="select"
+                    :select-open="actionSheet"
+                    v-model="form3.age"
+                    placeholder="请选择年龄"
+                    @click="
+                        actionSheet = true;
+                        selectType = 6;
+                    "
+                ></u-input>
             </u-form-item>
             <u-form-item label="体型" prop="bodyShape">
                 <u-input
@@ -194,6 +231,8 @@
                     ? laborIntensityList
                     : selectType == 5
                     ? bodyShapeList
+                    : selectType == 6
+                    ? childAgeList
                     : []
             "
             v-model="actionSheet"
@@ -224,23 +263,34 @@ export default {
         let pregnantWeekList = [];
         let pregnantDayList = [];
         let babyNumberList = [];
-        Array.from(new Array(40 + 1).keys())
+        let childAgeList = [];
+
+        Array.from(new Array(18 + 1).keys())
             .slice(1)
-            .forEach((value, index) => {
-                pregnantWeekList.push({
+            .forEach((value) => {
+                childAgeList.push({
                     value: value,
                     label: String(value),
+                });
+                childAgeList.push({
+                    value: value + 0.5,
+                    label: String(value + 0.5),
                 });
             });
 
-        Array.from(new Array(7 + 1).keys())
-            .slice(1)
-            .forEach((value, index) => {
-                pregnantDayList.push({
-                    value: value,
-                    label: String(value),
-                });
+        Array.from(new Array(40 + 1).keys()).forEach((value, index) => {
+            pregnantWeekList.push({
+                value: value,
+                label: String(value),
             });
+        });
+
+        Array.from(new Array(7).keys()).forEach((value, index) => {
+            pregnantDayList.push({
+                value: value,
+                label: String(value),
+            });
+        });
 
         Array.from(new Array(3 + 1).keys())
             .slice(1)
@@ -290,6 +340,7 @@ export default {
             pregnantWeekList,
             pregnantDayList,
             babyNumberList,
+            childAgeList,
             laborIntensityList: [
                 {
                     value: 1,
@@ -334,6 +385,7 @@ export default {
                 weight: "",
                 age: "",
                 bodyShape: "", // 1 for 消瘦 and 2 for 超重
+                gender: "", // 1 for male, 2 for femail
             },
             rules: {
                 gender: [
@@ -493,6 +545,8 @@ export default {
                     this.bodyShapeText = e.label;
                     this.form.bodyShape = e.value;
                     break;
+                case 6:
+                    this.form.age = e.label;
                 default:
                     break;
             }
@@ -506,7 +560,7 @@ export default {
                     let information = {};
                     let { username } = that.user;
 
-                    that.form.keys().forEach((key) => {
+                    Object.keys(that.form).forEach((key) => {
                         let num = Number(that.form[key]);
                         if (isNaN(num)) {
                             information[key] = that.form[key];
@@ -515,13 +569,15 @@ export default {
                         }
                     });
 
-										if(diabetesType == 2){
-											information.pregnantTime=pregnantDayToTime(information.pregnantWeek,information.pregnantDay);
-											delete information.pregnantWeek;
-											delete information.pregnantDay;
-										}
+                    if (diabetesType == 2) {
+                        information.pregnantTime = pregnantDayToTime(
+                            information.pregnantWeek,
+                            information.pregnantDay
+                        );
+                        delete information.pregnantWeek;
+                        delete information.pregnantDay;
+                    }
                     // 提交form表单到数据库 是不是要做token有效性验证？
-										console.log(information)
                     that.$db
                         .collection("user-diabetes-info")
                         .add({

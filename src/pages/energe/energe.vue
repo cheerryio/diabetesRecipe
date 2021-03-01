@@ -6,7 +6,7 @@
         <uni-group class="title">
             <text
                 >您一天所需总能量为:
-                <text class="energe-highlight">{{ energe }}</text></text
+                <text class="energe-highlight">{{ Z }}</text></text
             >
         </uni-group>
         <uni-group>
@@ -35,52 +35,14 @@
 <script>
 import uCharts from "@/js_sdk/u-charts/u-charts/u-charts.js";
 import { mapState, mapMutations, mapActions, mapGetters } from "vuex";
+import { pregnantTimeToDay } from "@/utils/pragnant-time-convert";
+import { isChildFat } from "./child-bmi-fat";
 
 export default {
     data() {
         return {
             data: "", // 页面一中 information form的数据
 
-            nutrients: [
-                {
-                    name: "糖类",
-                    data: 0.4,
-                },
-                {
-                    name: "蛋白质",
-                    data: 0.3,
-                },
-                {
-                    name: "脂肪",
-                    data: 0.3,
-                },
-            ],
-            foods: [
-                {
-                    name: "奶类",
-                    data: 0.1,
-                },
-                {
-                    name: "蔬菜",
-                    data: 0.2,
-                },
-                {
-                    name: "水果",
-                    data: 0.05,
-                },
-                {
-                    name: "谷薯",
-                    data: 0.15,
-                },
-                {
-                    name: "肉蛋",
-                    data: 0.3,
-                },
-                {
-                    name: "油脂",
-                    data: 0.1,
-                },
-            ],
             nutrientsPie: "",
             foodsPie: "",
             pixelRatio: 1,
@@ -89,33 +51,33 @@ export default {
     computed: {
         ...mapState(["diabetesType", "information"]),
         BMI: function () {
-            //BMI
+            // BMI
             switch (this.diabetesType) {
                 case 1:
                 case 3:
                     return (
-                        Number(this.information["weight"]) /
-                        Math.pow(Number(this.information["height"]) / 100, 2)
+                        this.information.weight /
+                        Math.pow(this.information.height / 100, 2)
                     );
                 case 2:
                     return (
-                        Number(this.information["weightBeforePragnant"]) /
-                        Math.pow(Number(this.information["height"]) / 100, 2)
+                        this.information.weightBeforePragnant /
+                        Math.pow(this.information.height / 100, 2)
                     );
                 default:
                     return NaN;
             }
         },
         idealWeight: function () {
-            //理想体重
+            // 理想体重
             switch (this.diabetesType) {
                 case 1:
                     return (
-                        (Number(this.information["height"]) - 100) * 0.9 -
-                        Number(this.information["gender"] == 2 ? 2.5 : 0)
+                        (this.information.height - 100) * 0.9 -
+                        (this.information.gender == 2 ? 2.5 : 0)
                     );
                 case 2:
-                    let h = Number(this.information["height"]);
+                    const h = this.information.height;
                     return h <= 150 ? h - 100 : h < 175 ? h - 105 : h - 110;
                 case 3:
                     break;
@@ -124,50 +86,179 @@ export default {
             }
         },
         energyCoefficient: function () {
-            //能量系数
+            // 能量系数
             switch (this.diabetesType) {
                 case 1:
                     return (
                         (this.BMI <= 18.5 ? 30 : this.BMI < 24 ? 25 : 20) +
-                        Number(this.information.laborIntensity * 5)
+                        this.information.laborIntensity * 5
                     );
                 case 2:
                     return (
                         (this.BMI < 18.5 ? 30 : this.BMI < 25 ? 25 : 20) +
-                        Number(this.information.laborIntensity * 5)
+                        this.information.laborIntensity * 5
                     );
                 case 3:
-                    break;
+                    return this.information.age < 3
+                        ? 100
+                        : this.information.age <= 6
+                        ? 90
+                        : this.information.age <= 10
+                        ? 80
+                        : 70;
                 default:
                     return NaN;
             }
         },
+        pregnancy: function () {
+            // 1:早期 2:中期 3: 晚期
+            const { pregnantWeek, pregnantDay } = pregnantTimeToDay(
+                this.information.pregnantTime
+            );
+            if (pregnantWeek < 12 || (pregnantWeek == 12 && pregnantDay == 0)) {
+                return 1;
+            } else if (pregnantWeek < 28) {
+                return 2;
+            } else {
+                return 3;
+            }
+        },
         Z: function () {
+            let X, Y, Z;
             switch (this.diabetesType) {
                 case 1:
                     return this.energyCoefficient * this.idealWeight;
                 case 2:
-                    break;
+                    X =
+                        this.BMI < 30
+                            ? this.energyCoefficient * this.idealWeight
+                            : 25 * this.information.weight;
+                    Y =
+                        this.information.babyNumber == 1
+                            ? X
+                            : this.information.babyNumber == 2
+                            ? X + 200
+                            : X + 300;
+                    Z =
+                        this.pregnancy == 1
+                            ? Y
+                            : this.pregnancy == 2
+                            ? Y + 200
+                            : Y + 400;
+                    return this.pregnancy == 1
+                        ? Z < 1500
+                            ? 1500
+                            : Z
+                        : Z < 1800
+                        ? 1800
+                        : Z;
                 case 3:
-                    break;
+                    Y = 1000 + this.information.age * this.energyCoefficient;
+                    return isChildFat(
+                        this.information.gender,
+                        this.information.age,
+                        this.BMI
+                    )
+                        ? Y - 300
+                        : Y;
                 default:
                     return NaN;
             }
         },
+        nutrients: function () {
+            let A = this.Z * 0.55;
+            if (this.diabetesType == 2) {
+                if (this.pregnancy == 1 && A < 150) {
+                    A = 150;
+                } else if (A < 180) {
+                    A = 180;
+                }
+            }
+            return [
+                {
+                    name: "糖类",
+                    data: Number(A.toFixed(2)),
+                },
+                {
+                    name: "蛋白质",
+                    data: Number((this.Z * 0.15).toFixed(2)),
+                },
+                {
+                    name: "脂肪",
+                    data: Number((this.Z * 0.3).toFixed(2)),
+                },
+            ];
+        },
+
+        foods: function () {
+            if (
+                this.diabetesType == 1 ||
+                (this.diabetesType == 3 && this.information.age >= 6)
+            ) {
+                return [
+                    {
+                        name: "奶类",
+                        data: 1.5,
+                    },
+                    {
+                        name: "蔬菜",
+                        data: 1,
+                    },
+                    {
+                        name: "水果",
+                        data: 1,
+                    },
+                    {
+                        name: "谷薯",
+                        data: Math.floor((this.Z * 0.55 - 188 / 80) * 2) / 2,
+                    },
+                    {
+                        name: "肉蛋",
+                        data: Math.round((this.Z * 0.095 - 35.2 / 36) * 2) / 2,
+                    },
+                    {
+                        name: "油脂",
+                        data: Math.floor((this.Z * 0.1575 - 14.7 / 90) * 2) / 2,
+                    },
+                ];
+            }
+            return [
+                {
+                    name: "奶类",
+                    data: 3,
+                },
+                {
+                    name: "蔬菜",
+                    data: 1,
+                },
+                {
+                    name: "水果",
+                    data: 1,
+                },
+                {
+                    name: "谷薯",
+                    data: Math.floor((this.Z * 0.55 - 224 / 80) * 2) / 2,
+                },
+                {
+                    name: "肉蛋",
+                    data: Math.round((this.Z * 0.095 - 61.6 / 36) * 2) / 2,
+                },
+                {
+                    name: "油脂",
+                    data: Math.floor((this.Z * 0.1575 - 42.6 / 90) * 2) / 2,
+                },
+            ];
+        },
     },
 
     mounted: function (option) {
-        console.log(this.diabetesType, this.information);
         this.showPie("nutrientsPie", this.nutrients);
         this.showPie("foodsPie", this.foods);
     },
 
     methods: {
-        calcNutrients() {
-            let Z = 0;
-        },
         showPie(canvasId, series) {
-            let pie = new uCharts({
+            const pie = new uCharts({
                 $this: this,
                 canvasId: canvasId,
                 type: "pie",
