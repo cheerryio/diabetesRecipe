@@ -8,6 +8,7 @@
 		<button type="primary" @tap="username='user';password='user';loginh5()">登录user(h5)</button>
 		<button type="primary" @tap="loginByWeixin">微信登录</button>
 		<button type="primary" @tap="code2SessionWeixin">获取微信openid</button>
+		<text>提交糖尿病表单数据需要先登录</text>
 		<u-toast ref="uToast" />
 	</view>
 </template>

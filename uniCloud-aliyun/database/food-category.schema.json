@@ -1,12 +1,17 @@
 // 文档教程: https://uniapp.dcloud.net.cn/uniCloud/schema
 {
 	"bsonType": "object",
-	"required": ["priority","name"],
+	"required": ["categoryID","goodsList","priority","name"],
 	"permission": {
 		"read": true,
 		"create": false,
 		"update": false,
 		"delete": false
+	},
+	"fieldRules":{
+		"rule":"categoryID == goodsList",
+		"errorMessage":"categoryID字段与goodsList字段应该相同",
+		"client":true
 	},
 	"properties": {
 		"_id": {
