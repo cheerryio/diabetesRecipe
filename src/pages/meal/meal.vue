@@ -1,6 +1,3 @@
-/**
- * @description 界面四 分餐
- */
 <template>
 	<view>
 		<canvas type="webgl" id="webgl" style="width: 100%; height: 450px;"></canvas>
@@ -8,6 +5,11 @@
 </template>
 
 <script>
+	/**
+	 * @description 界面四 分餐
+	 * 微信端可以尝试3d吗？
+	 */
+	// #ifdef MP-WEIXIN
 	import {
 	    createScopedThreejs
 	} from '@/common/threejs'
@@ -26,6 +28,7 @@
 	import {
 		renderSphere
 	} from '@/common/test-cases/sphere'
+	// #endif
 
 	export default {
 		data() {
@@ -35,6 +38,7 @@
 		},
 
 		onLoad(){
+			// #ifdef MP-WEIXIN
 			uni.createSelectorQuery()
 				.select('#webgl')
 				.node()
@@ -44,6 +48,7 @@
 
 					renderSphere(canvas, THREE)
 				})
+				// #endif
 			},
 
 		methods:{
