@@ -1,7 +1,13 @@
 // 文档教程: https://uniapp.dcloud.net.cn/uniCloud/schema
 {
 	"bsonType": "object",
-	"required": ["categoryID","foodID","name","price","isOnSale"],
+	"required": [
+		"categoryID",
+		"foodID",
+		"name",
+		"price",
+		"isOnSale"
+	],
 	"permission": {
 		"read": "doc.isOnSale == true",
 		"create": false,
@@ -12,16 +18,16 @@
 		"_id": {
 			"description": "ID，系统自动生成"
 		},
-		"categoryID":{
-      "bsonType": "int",
-      "description": "分类 id，参考`food-category`表",
-			"foreignKey":"food-category.categoryID"
-    },
-		"foodID":{
-      "bsonType": "int",
-      "description": "食物的唯一货号",
-      "title": "货号",
-      "trim": "both"
+		"categoryID": {
+			"bsonType": "int",
+			"description": "分类 id，参考`food-category`表",
+			"foreignKey": "food-category.categoryID"
+		},
+		"foodID": {
+			"bsonType": "int",
+			"description": "食物的唯一货号",
+			"title": "货号",
+			"trim": "both"
 		},
 		"name": {
 			"bsonType": "string",
@@ -29,22 +35,22 @@
 			"title": "名称",
 			"trim": "both"
 		},
-    "description": {
-      "bsonType": "string",
-      "description": "商品详细描述",
-      "title": "详细描述",
-      "trim": "both"
-    },
-		"price":{
-			"bsonType":"int",
-			"title":"价格",
-			"description":"食物单价"
+		"description": {
+			"bsonType": "string",
+			"description": "商品详细描述",
+			"title": "详细描述",
+			"trim": "both"
 		},
-		"unit":{
-			"bsonType":"string",
-			"title":"单位",
-			"description":"食物售卖最小单位",
-			"defaultValue":"g/份"
+		"price": {
+			"bsonType": "int",
+			"title": "价格",
+			"description": "食物单价"
+		},
+		"unit": {
+			"bsonType": "string",
+			"title": "单位",
+			"description": "食物售卖最小单位",
+			"defaultValue": "g/份"
 		},
 		"thumbImg": {
 			"bsonType": "string",

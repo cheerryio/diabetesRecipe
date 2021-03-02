@@ -3,9 +3,10 @@
  */
 <template>
     <view class="container" v-if="!loading">
+        <u-toast ref="uToast" />
         <view class="main" v-if="goods.length">
             <view class="content">
-							<!-- 左侧食品大类目录 -->
+                <!-- 左侧食品大类目录 -->
                 <scroll-view
                     class="menus"
                     :scroll-into-view="menuScrollIntoView"
@@ -16,15 +17,19 @@
                         <view
                             class="menu"
                             :id="`menu-${item.categoryID}`"
-                            :class="{ current: item.categoryID === currentCateId }"
+                            :class="{
+                                current: item.categoryID === currentCateId,
+                            }"
                             v-for="(item, index) in goods"
                             :key="index"
                             @tap="handleMenuTap(item.categoryID)"
                         >
                             <text>{{ item.name }}</text>
-                            <view class="dot" v-show="menuCartNum(item.categoryID)">{{
-                                menuCartNum(item.categoryID)
-                            }}</view>
+                            <view
+                                class="dot"
+                                v-show="menuCartNum(item.categoryID)"
+                                >{{ menuCartNum(item.categoryID) }}</view
+                            >
                         </view>
                     </view>
                 </scroll-view>
@@ -78,7 +83,8 @@
                                             }}</text>
                                             <view class="price_and_action">
                                                 <text class="price">{{
-                                                    String(good.price) + good.unit
+                                                    String(good.price) +
+                                                    good.unit
                                                 }}</text>
                                                 <!-- 呈现选规则按钮 -->
 
@@ -87,7 +93,9 @@
                                                     <button
                                                         type="default"
                                                         v-show="
-                                                            goodCartNum(good.foodID)
+                                                            goodCartNum(
+                                                                good.foodID
+                                                            )
                                                         "
                                                         plain
                                                         class="btn reduce_btn"
@@ -108,11 +116,15 @@
                                                     <view
                                                         class="number"
                                                         v-show="
-                                                            goodCartNum(good.foodID)
+                                                            goodCartNum(
+                                                                good.foodID
+                                                            )
                                                         "
                                                         @tap.stop=""
                                                         >{{
-                                                            goodCartNum(good.foodID)
+                                                            goodCartNum(
+                                                                good.foodID
+                                                            )
                                                         }}</view
                                                     >
                                                     <button
@@ -150,20 +162,15 @@
             <view class="cart-box" v-if="cart.length > 0">
                 <view class="mark">
                     <image
-                        src="/static/images/menu/cart.png"
+                        src="/static/icon/bucket.png"
                         class="cart-img"
                         @tap="openCartPopup"
                     ></image>
                     <view class="tag">{{ getCartGoodsNumber }}</view>
                 </view>
-                <view class="price">￥{{ getCartGoodsPrice }}</view>
-                <button
-                    type="primary"
-                    class="pay-btn"
-                    @tap="toPay"
-                    :disabled="disabledPay"
-                >
-                    {{ disabledPay ? `差${spread}元起送` : "去结算" }}
+                <view class="price">{{ getCartGoodsPrice }}g</view>
+                <button type="primary" class="pay-btn" @tap="toPay">
+                    {{ "去分餐" }}
                 </button>
             </view>
             <!-- 购物车栏 end -->
@@ -240,7 +247,7 @@
                 </view>
             </view>
             <view class="add-to-cart-btn" @tap="handleAddToCartInModal">
-                <view>加入购物车</view>
+                <view>加入食谱</view>
             </view>
         </modal>
         <!-- 商品详情模态框 end -->
@@ -249,6 +256,7 @@
             direction="top"
             :show-pop="cartPopupVisible"
             class="cart-popup"
+            @close="cartPopupVisible = false"
         >
             <template slot="content">
                 <view class="top">
@@ -263,10 +271,11 @@
                         >
                             <view class="left">
                                 <view class="name">{{ item.name }}</view>
-                                <view class="props">{{ item.props_text }}</view>
                             </view>
                             <view class="center">
-                                <text>￥{{ item.price }}</text>
+                                <text>{{
+                                    String(item.price) + item.unit
+                                }}</text>
                             </view>
                             <view class="right">
                                 <button
@@ -275,7 +284,7 @@
                                     size="mini"
                                     class="btn"
                                     hover-class="none"
-                                    @tap="handleCartItemReduce(index)"
+                                    @tap="handleCartItemReduce(item)"
                                 >
                                     <view
                                         class="iconfont iconsami-select"
@@ -287,7 +296,7 @@
                                     class="btn"
                                     size="min"
                                     hover-class="none"
-                                    @tap="handleCartItemAdd(index)"
+                                    @tap="handleCartItemAdd(item)"
                                 >
                                     <view
                                         class="iconfont iconadd-select"
@@ -372,6 +381,49 @@ export default {
             orderType: "takein",
             isLogin: true,
             store,
+            recipeLimit: {
+                energe: 1234,
+                nutrients: [
+                    {
+                        name: "糖类",
+                        data: 123,
+                    },
+                    {
+                        name: "蛋白质",
+                        data: 3213,
+                    },
+                    {
+                        name: "脂肪",
+                        data: 12,
+                    },
+                ],
+                foods: [
+                    {
+                        name: "奶类",
+                        data: 3,
+                    },
+                    {
+                        name: "肉蛋",
+                        data: 2,
+                    },
+                    {
+                        name: "谷薯",
+                        data: 2.5,
+                    },
+                    {
+                        name: "蔬菜",
+                        data: 1,
+                    },
+                    {
+                        name: "油脂",
+                        data: 1.5,
+                    },
+                    {
+                        name: "水果",
+                        data: 1,
+                    },
+                ],
+            },
         };
     },
     async onLoad() {
@@ -380,7 +432,7 @@ export default {
     computed: {
         // ...mapState(['orderType', 'address', 'store']),
         // ...mapGetters(['isLogin']),
-				// ...mapState(["recipeLimit"]),
+        // ...mapState(["recipeLimit"]),
         goodCartNum() {
             //计算单个饮品添加到购物车的数量
             return (id) =>
@@ -411,20 +463,6 @@ export default {
                 0
             );
         },
-        disabledPay() {
-            //是否达到起送价
-            return this.orderType == "takeout" &&
-                this.getCartGoodsPrice < this.store.min_price
-                ? true
-                : false;
-        },
-        spread() {
-            //差多少元起送
-            if (this.orderType != "takeout") return;
-            return parseFloat(
-                (this.store.min_price - this.getCartGoodsPrice).toFixed(2)
-            );
-        },
     },
     methods: {
         // ...mapMutations(['SET_ORDER_TYPE']),
@@ -432,11 +470,11 @@ export default {
         async init() {
             //页面初始化
             this.loading = true;
-						// 获取商品信息
-						const db = uniCloud.database()
-						const dbCmd = db.command
-						const $ = dbCmd.aggregate
-						/*
+            // 获取商品信息
+            const db = uniCloud.database();
+            const dbCmd = db.command;
+            const $ = dbCmd.aggregate;
+            /*
 						const res=await this.$db.collection("food-category").aggregate()
 							.lookup({
 								from:'food',
@@ -450,9 +488,13 @@ export default {
 							})
 							.end()
 							*/
-						const res=await this.$db.collection("food-category,food")
-							.field("goodsList{foodID,name,description,price,unit,thumbImg},categoryID,name,priority").get();
-						this.goods=res.result.data;
+            const res = await this.$db
+                .collection("food-category,food")
+                .field(
+                    "goodsList{foodID,name,description,price,unit,thumbImg,categoryId},categoryID,name,priority"
+                )
+                .get();
+            this.goods = res.result.data;
             this.loading = false;
             this.cart = uni.getStorageSync("cart") || [];
         },
@@ -481,7 +523,9 @@ export default {
             let h = 10;
 
             this.goods.forEach((item) => {
-                let view = uni.createSelectorQuery().select(`#cate-${item.categoryID}`);
+                let view = uni
+                    .createSelectorQuery()
+                    .select(`#cate-${item.categoryID}`);
                 view.fields(
                     {
                         size: true,
@@ -496,16 +540,24 @@ export default {
             this.sizeCalcState = true;
         },
         handleAddToCart(cate, good, num) {
+            if (num == 0) {
+                return;
+            }
             //添加到购物车
+            let total = this.menuCartNum(cate.categoryID);
+            if (
+                total + num >
+                this.recipeLimit.foods[cate.categoryID - 1].data
+            ) {
+                this.$refs.uToast.show({
+                    title: `${cate.name}每天的交换份限额为${
+                        this.recipeLimit.foods[cate.categoryID - 1].data
+                    }`,
+                });
+                return;
+            }
             const index = this.cart.findIndex((item) => {
-                if (good.use_property) {
-                    return (
-                        item.foodID === good.foodID &&
-                        item.props_text === good.props_text
-                    );
-                } else {
-                    return item.foodID === good.foodID;
-                }
+                return item.foodID === good.foodID;
             });
             if (index > -1) {
                 this.cart[index].number += num;
@@ -517,14 +569,15 @@ export default {
                     price: good.price,
                     number: num,
                     image: good.thumbImg,
-                    use_property: good.use_property,
-                    props_text: good.props_text,
-                    props: good.props,
+                    unit: good.unit,
+                    categoryName: cate.name,
                 });
             }
         },
         handleReduceFromCart(item, good, num) {
-            const index = this.cart.findIndex((item) => item.id === good.id);
+            const index = this.cart.findIndex(
+                (item) => item.foodID === good.foodID
+            );
             this.cart[index].number -= num;
             if (this.cart[index].number <= 0) {
                 this.cart.splice(index, 1);
@@ -572,18 +625,19 @@ export default {
                 },
             });
         },
-        handleCartItemAdd(index) {
-            this.cart[index].number += 1;
+        handleCartItemAdd(item) {
+            this.handleAddToCart(
+                { categoryID: item.categoryID, name: item.categoryName },
+                item,
+                0.5
+            );
         },
-        handleCartItemReduce(index) {
-            if (this.cart[index].number === 1) {
-                this.cart.splice(index, 1);
-            } else {
-                this.cart[index].number -= 1;
-            }
-            if (!this.cart.length) {
-                this.cartPopupVisible = false;
-            }
+        handleCartItemReduce(item) {
+            this.handleReduceFromCart(
+                { categoryID: item.categoryID, name: item.categoryName },
+                item,
+                0.5
+            );
         },
         toPay() {
             if (!this.isLogin) {

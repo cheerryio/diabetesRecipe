@@ -5,23 +5,23 @@
     <view class="main-container">
         <uni-group class="group">
             <text class="normal-font">您一天所需总能量为:</text>
-						<text class="energe-highlight">{{ Z }}</text>
+            <text class="energe-highlight">{{ Z }}</text>
         </uni-group>
         <uni-group class="group">
-					<template v-for="(item,index) in nutrients">
-						<view :key="index" class="text-box">
-							<text class="normal-font">{{item.name}}</text>
-							<text class="energe-highlight">{{item.data}}</text>
-						</view>
-					</template>
+            <template v-for="(item, index) in nutrients">
+                <view :key="index" class="text-box">
+                    <text class="normal-font">{{ item.name }}</text>
+                    <text class="energe-highlight">{{ item.data }}</text>
+                </view>
+            </template>
         </uni-group>
         <uni-group class="group">
-					<template v-for="(item,index) in foods">
-						<view :key="index" class="text-box">
-							<text class="normal-font">{{item.name}}</text>
-							<text class="energe-highlight">{{item.data}}</text>
-						</view>
-					</template>
+            <template v-for="(item, index) in foods">
+                <view :key="index" class="text-box">
+                    <text class="normal-font">{{ item.name }}</text>
+                    <text class="energe-highlight">{{ item.data }}</text>
+                </view>
+            </template>
         </uni-group>
     </view>
 </template>
@@ -43,7 +43,7 @@ export default {
         };
     },
     computed: {
-        ...mapState(["diabetesType", "information","recipeLimit","user"]),
+        ...mapState(["diabetesType", "information", "recipeLimit", "user"]),
         BMI: function () {
             // BMI
             switch (this.diabetesType) {
@@ -118,9 +118,9 @@ export default {
             }
         },
         Z: function () {
-						if(this.recipeLimit.energe){
-							return this.recipeLimit.energe;
-						}
+            if (this.recipeLimit.energe) {
+                return this.recipeLimit.energe;
+            }
             let X, Y, Z;
             switch (this.diabetesType) {
                 case 1:
@@ -163,10 +163,10 @@ export default {
             }
         },
         nutrients: function () {
-						if(this.recipeLimit.nutrients){
-							console.log("aaaa")
-							return this.recipeLimit.nutrients;
-						}
+            if (this.recipeLimit.nutrients) {
+                console.log("aaaa");
+                return this.recipeLimit.nutrients;
+            }
             let A = this.Z * 0.55;
             if (this.diabetesType == 2) {
                 if (this.pregnancy == 1 && A < 150) {
@@ -192,9 +192,9 @@ export default {
         },
 
         foods: function () {
-						if(this.recipeLimit.foods){
-							return this.recipeLimit.foods;
-						}
+            if (this.recipeLimit.foods) {
+                return this.recipeLimit.foods;
+            }
             if (
                 this.diabetesType == 1 ||
                 (this.diabetesType == 3 && this.information.age >= 6)
@@ -205,24 +205,24 @@ export default {
                         data: 1.5,
                     },
                     {
-                        name: "蔬菜",
-                        data: 1,
-                    },
-                    {
-                        name: "水果",
-                        data: 1,
+                        name: "肉蛋",
+                        data: Math.round((this.Z * 0.095 - 35.2 / 36) * 2) / 2,
                     },
                     {
                         name: "谷薯",
                         data: Math.floor((this.Z * 0.55 - 188 / 80) * 2) / 2,
                     },
                     {
-                        name: "肉蛋",
-                        data: Math.round((this.Z * 0.095 - 35.2 / 36) * 2) / 2,
+                        name: "蔬菜",
+                        data: 1,
                     },
                     {
                         name: "油脂",
                         data: Math.floor((this.Z * 0.1575 - 14.7 / 90) * 2) / 2,
+                    },
+                    {
+                        name: "水果",
+                        data: 1,
                     },
                 ];
             }
@@ -232,47 +232,49 @@ export default {
                     data: 3,
                 },
                 {
-                    name: "蔬菜",
-                    data: 1,
-                },
-                {
-                    name: "水果",
-                    data: 1,
+                    name: "肉蛋",
+                    data: Math.round((this.Z * 0.095 - 61.6 / 36) * 2) / 2,
                 },
                 {
                     name: "谷薯",
                     data: Math.floor((this.Z * 0.55 - 224 / 80) * 2) / 2,
                 },
                 {
-                    name: "肉蛋",
-                    data: Math.round((this.Z * 0.095 - 61.6 / 36) * 2) / 2,
+                    name: "蔬菜",
+                    data: 1,
                 },
                 {
                     name: "油脂",
                     data: Math.floor((this.Z * 0.1575 - 42.6 / 90) * 2) / 2,
+                },
+                {
+                    name: "水果",
+                    data: 1,
                 },
             ];
         },
     },
 
     mounted: function (option) {
-				this.$nextTick((function(){
-					const recipeLimit={
-						energe:this.Z,
-						nutrients:this.nutrients,
-						foods:this.foods
-					}
-					this.SET_RECIPELIMIT(recipeLimit)
-					this.$db.collection("recipe-limit").add({
-						username:this.user.username,
-						uid:this.user.uid,
-						...recipeLimit
-					})
-				}).bind(this))
+        this.$nextTick(
+            function () {
+                const recipeLimit = {
+                    energe: this.Z,
+                    nutrients: this.nutrients,
+                    foods: this.foods,
+                };
+                this.SET_RECIPELIMIT(recipeLimit);
+                this.$db.collection("recipe-limit").add({
+                    username: this.user.username,
+                    uid: this.user.uid,
+                    ...recipeLimit,
+                });
+            }.bind(this)
+        );
     },
 
     methods: {
-				...mapMutations(["SET_RECIPELIMIT"]),
+        ...mapMutations(["SET_RECIPELIMIT"]),
     },
 };
 </script>
@@ -289,21 +291,21 @@ page {
 }
 
 .group {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-	animation:.2s ease-in-out 0s 1 scroll-down;
+    animation: 0.2s ease-in-out 0s 1 scroll-down;
 }
 
 .text-box {
-	margin:20rpx;
+    margin: 20rpx;
 }
 
 .normal-font {
-	font:{
-		size: 30rpx;
-	}
+    font: {
+        size: 30rpx;
+    }
 }
 
 .energe-highlight {
@@ -317,9 +319,9 @@ page {
         transform: rotate(-10deg);
     }
 
-		50% {
-			transform: rotate(5deg);
-		}
+    50% {
+        transform: rotate(5deg);
+    }
 
     100% {
         transform: rotate(0);
