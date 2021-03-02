@@ -27,6 +27,9 @@ const store = new Vuex.Store({
 
 	},
 	mutations:{
+		update(state,[key,value]){
+			state[key]=value;
+		},
 		SET_DIABETES_TYPE(state,diabetesType){
 			state.diabetesType=diabetesType;
 		},
