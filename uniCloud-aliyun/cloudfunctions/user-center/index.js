@@ -173,7 +173,8 @@ exports.main = async (event) => {
 					code
 				} = params
 				res = await uniID.loginByWeixin({
-					code
+					code,
+					role:["USER"]
 				});
 				if(res.code === 0 && res.type === "register"){
 					const db=uniCloud.database();

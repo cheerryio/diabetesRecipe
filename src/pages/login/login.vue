@@ -2,7 +2,7 @@
  * @description 界面四 分餐
  */
 <template>
-	<view>
+	<view class="main-container">
 		<!-- #ifdef H5 -->
 		<view class="input-box">
 				<view class="input-item">
@@ -272,6 +272,14 @@
 </script>
 
 <style lang="scss">
+
+	.main-container {
+		display: flex;
+		flex-direction: column;
+		top:200rpx;
+		left:100rpx;
+	}
+
 	button::after{
 		border: none;
 	}
