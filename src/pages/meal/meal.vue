@@ -48,7 +48,7 @@
 
 					renderSphere(canvas, THREE)
 				})
-				// #endif
+			// #endif
 			},
 
 		methods:{
