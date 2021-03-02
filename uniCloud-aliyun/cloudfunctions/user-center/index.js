@@ -11,7 +11,7 @@ exports.main = async (event) => {
 	let params = event.params || {}
 	let payload = {}
 	let noCheckAction = ['register', 'checkToken', 'encryptPwd', 'login', 'loginByWeixin', 'sendSmsCode',
-		'setVerifyCode', 'loginBySms', 'loginByEmail', 'code2SessionWeixin', 'code2SessionAlipay'
+		'setVerifyCode', 'loginBySms', 'loginByEmail', 'code2SessionWeixin', 'code2SessionAlipay','myLoginByWeixin'
 	]
 	if (noCheckAction.indexOf(event.action) === -1) {
 		if (!event.uniIdToken) {
@@ -164,6 +164,30 @@ exports.main = async (event) => {
 				res = await uniID.loginByWeixin({
 					code
 				});
+				break;
+			}
+		case 'myLoginByWeixin':
+			{
+				const {
+					username,
+					code
+				} = params
+				res = await uniID.loginByWeixin({
+					code
+				});
+				if(res.code === 0 && res.type === "register"){
+					const db=uniCloud.database();
+					db.collection("uni-id-users").doc(res.uid).update({
+						username,
+						nickname:username,
+					})
+					res.userInfo={
+						...res.userInfo,
+						username,
+						nickname:username
+					}
+					res.username=username;
+				}
 				break;
 			}
 		case 'bindWeixin':

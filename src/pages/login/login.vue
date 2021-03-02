@@ -27,9 +27,7 @@
 		<!-- #endif -->
 
 		<!-- #ifdef MP-WEIXIN -->
-		<button type="primary" open-type="getPhoneNumber" @getphonenumber="test">获取手机号</button>
-		<button type="primary" @tap="loginByWeixin">微信登录</button>
-		<button type="primary" @tap="code2SessionWeixin">获取微信openid</button>
+		<button type="primary" open-type="getUserInfo" @getuserinfo="loginByWeixin">微信登录</button>
 		<!-- #endif -->
 		<text>提交糖尿病表单数据需要先登录</text>
 		<u-toast ref="uToast" />
@@ -143,7 +141,7 @@
 			},
 			// #endif
 			// 微信端代码
-
+			// #ifdef MP-WEIXIN
 			getWeixinCode() {
 				return new Promise((resolve, reject) => {
 					// #ifdef APP-PLUS
@@ -235,24 +233,25 @@
 					})
 				})
 			},
-			test(e){
-				console.log(e);
-			},
-			loginByWeixin() {
+			loginByWeixin(res) {
+				const {userInfo,signature,encryptedData}=res.detail;
 				this.getWeixinCode().then((code) => {
 					return uniCloud.callFunction({
 						name: 'user-center',
 						data: {
-							action: 'loginByWeixin',
+							action: 'myLoginByWeixin',
 							params: {
+								username:userInfo.nickName,
 								code,
 							}
 						}
 					})
 				}).then((res) => {
-					uni.showModal({
-						showCancel: false,
-						content: JSON.stringify(res.result)
+					this.$refs.uToast.show({
+						title:"登陆成功",
+						type:"success",
+						url:"/pages/classify/classify",
+						isTab:true,
 					})
 					if (res.result.code === 0) {
 						uni.setStorageSync('uni_id_token', res.result.token)
@@ -260,14 +259,14 @@
 						uni.setStorageSync("uid",res.result.uid)
 					}
 				}).catch((e) => {
-					console.error(e)
-					uni.showModal({
-						showCancel: false,
-						content: '微信登录失败，请稍后再试'
+					console.error(e);
+					this.$refs.uToast.show({
+						title:"微信登录失败，请稍后再试",
+						type:"error"
 					})
 				})
 			},
-
+			// #endif
 		}
 	}
 </script>

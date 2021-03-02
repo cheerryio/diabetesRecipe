@@ -244,7 +244,6 @@
 </template>
 
 <script>
-import uSelect from "../../../uview-ui/components/u-select/u-select.vue";
 import { mapState, mapMutations, mapActions, mapGetters } from "vuex";
 import { pregnantDayToTime } from "@/utils/pragnant-time-convert";
 /**
