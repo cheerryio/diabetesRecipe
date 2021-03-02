@@ -3,9 +3,9 @@
 	"bsonType": "object",
 	"required": [],
 	"permission": {
-		"read": "doc.uid == auth.id",
+		"read": "doc.uid == auth.uid",
 		"create": true,
-		"update": "doc.uid == auth.id",
+		"update": "doc.uid == auth.uid",
 		"delete": false
 	},
 	"properties": {
