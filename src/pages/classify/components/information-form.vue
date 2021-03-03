@@ -16,7 +16,7 @@
                 prop="gender"
             >
                 <u-radio-group
-                    @change="radioGroupChange1"
+                    @change="radioGroupChangeGender"
                     :width="radioCheckWidth"
                     :wrap="radioCheckWrap"
                 >
@@ -50,17 +50,21 @@
                 <text slot="right" class="unit">kg</text>
             </u-form-item>
             <u-form-item label="劳动强度" prop="laborIntensity">
-                <u-input
-                    :border="border"
-                    type="select"
-                    :select-open="actionSheet"
-                    v-model="laborIntensityText"
-                    placeholder="请选择劳动强度"
-                    @click="
-                        actionSheet = true;
-                        selectType = 4;
-                    "
-                ></u-input>
+							<u-radio-group
+								@change="radioGroupChangeLaborIntensity"
+								:width="radioCheckWidth"
+								:wrap="radioCheckWrap"
+							>
+								<u-radio
+										v-model="form2.laborIntensity"
+										shape="circle"
+										v-for="(sItem, sIndex) in laborIntensityList"
+										:key="sIndex"
+										:name="sItem.id"
+								>
+									<text>{{sItem.name}}</text>
+								</u-radio>
+							</u-radio-group>
             </u-form-item>
         </u-form>
         <!-- 妊娠糖尿病信息表单 -->
@@ -115,30 +119,38 @@
                 <text slot="right" class="unit">kg</text>
             </u-form-item>
             <u-form-item label="胎儿个数" prop="babyNumber">
-                <u-input
-                    :border="border"
-                    type="select"
-                    :select-open="actionSheet"
-                    v-model="form2.babyNumber"
-                    placeholder="请选择胎儿个数"
-                    @click="
-                        actionSheet = true;
-                        selectType = 3;
-                    "
-                ></u-input>
+							<u-radio-group
+								@change="radioGroupChangeBabyNumber"
+								:width="radioCheckWidth"
+								:wrap="radioCheckWrap"
+							>
+								<u-radio
+										v-model="form2.babyNumber"
+										shape="circle"
+										v-for="(sItem, sIndex) in [1,2,3]"
+										:key="sIndex"
+										:name="sItem"
+								>
+									<text>{{sItem}}</text>
+								</u-radio>
+							</u-radio-group>
             </u-form-item>
             <u-form-item label="劳动强度" prop="laborIntensity">
-                <u-input
-                    :border="border"
-                    type="select"
-                    :select-open="actionSheet"
-                    v-model="laborIntensityText"
-                    placeholder="请选择劳动强度"
-                    @click="
-                        actionSheet = true;
-                        selectType = 4;
-                    "
-                ></u-input>
+							<u-radio-group
+								@change="radioGroupChangeLaborIntensity"
+								:width="radioCheckWidth"
+								:wrap="radioCheckWrap"
+							>
+								<u-radio
+										v-model="form2.laborIntensity"
+										shape="circle"
+										v-for="(sItem, sIndex) in laborIntensityList.slice(0,2)"
+										:key="sIndex"
+										:name="sItem.id"
+								>
+									<text>{{sItem.name}}</text>
+								</u-radio>
+							</u-radio-group>
             </u-form-item>
         </u-form>
         <!-- 儿童糖尿病信息表单 -->
@@ -157,7 +169,7 @@
                 prop="gender"
             >
                 <u-radio-group
-                    @change="radioGroupChange1"
+                    @change="radioGroupChangeGender"
                     :width="radioCheckWidth"
                     :wrap="radioCheckWrap"
                 >
@@ -199,22 +211,26 @@
                     placeholder="请选择年龄"
                     @click="
                         actionSheet = true;
-                        selectType = 6;
+                        selectType = 3;
                     "
                 ></u-input>
             </u-form-item>
             <u-form-item label="体型" prop="bodyShape">
-                <u-input
-                    :border="border"
-                    type="select"
-                    :select-open="actionSheet"
-                    v-model="bodyShapeText"
-                    placeholder="请选择体型"
-                    @click="
-                        actionSheet = true;
-                        selectType = 5;
-                    "
-                ></u-input>
+							<u-radio-group
+								@change="radioGroupChangeBodyShape"
+								:width="radioCheckWidth"
+								:wrap="radioCheckWrap"
+							>
+								<u-radio
+										v-model="form3.bodyShape"
+										shape="circle"
+										v-for="(sItem, sIndex) in bodyShapeList"
+										:key="sIndex"
+										:name="sItem.id"
+								>
+									<text>{{sItem.name}}</text>
+								</u-radio>
+							</u-radio-group>
             </u-form-item>
         </u-form>
         <view v-else><text>diabetesType数据无效</text></view>
@@ -226,12 +242,6 @@
                     : selectType == 2
                     ? pregnantDayList
                     : selectType == 3
-                    ? babyNumberList
-                    : selectType == 4
-                    ? laborIntensityList
-                    : selectType == 5
-                    ? bodyShapeList
-                    : selectType == 6
                     ? childAgeList
                     : []
             "
@@ -309,8 +319,6 @@ export default {
             labelPosition: "left",
             radioCheckWidth: "auto",
             radioCheckWrap: false,
-            laborIntensityText: "",
-            bodyShapeText: "",
             genders: [
                 {
                     id: 1,
@@ -342,27 +350,37 @@ export default {
             childAgeList,
             laborIntensityList: [
                 {
-                    value: 1,
-                    label: "轻",
+                    id: 1,
+                    name: "轻",
+										checked:false,
+										disabled:false
                 },
                 {
-                    value: 2,
-                    label: "中",
+                    id: 2,
+                    name: "中",
+										checked:false,
+										disabled:false
                 },
                 {
-                    value: 3,
-                    label: "高",
+                    id: 1,
+                    name: "高",
+										checked:false,
+										disabled:false
                 },
             ],
             bodyShapeList: [
-                {
-                    value: 1,
-                    label: "消瘦",
-                },
-                {
-                    value: 2,
-                    label: "超重",
-                },
+								{
+										id: 1,
+										name: "消瘦",
+										checked:false,
+										disabled:false
+								},
+								{
+										id: 2,
+										name: "正常",
+										checked:false,
+										disabled:false
+								},
             ],
             form1: {
                 gender: "", // 1 for male, 2 for femail
@@ -521,9 +539,18 @@ export default {
     },
 
     methods: {
-        radioGroupChange1(e) {
+        radioGroupChangeGender(e) {
             this.form.gender = e;
         },
+				radioGroupChangeLaborIntensity(e){
+					this.form.laborIntensity=e;
+				},
+				radioGroupChangeBabyNumber(e){
+					this.form.babyNumber=e;
+				},
+				radioGroupChangeBodyShape(e){
+					this.form.bodyShape=e;
+				},
         selectCallback(e) {
             e = e[0];
             switch (this.selectType) {
@@ -534,18 +561,8 @@ export default {
                     this.form.pregnantDay = e.label;
                     break;
                 case 3:
-                    this.form.babyNumber = e.label;
-                    break;
-                case 4:
-                    this.laborIntensityText = e.label;
-                    this.form.laborIntensity = e.value;
-                    break;
-                case 5:
-                    this.bodyShapeText = e.label;
-                    this.form.bodyShape = e.value;
-                    break;
-                case 6:
                     this.form.age = e.label;
+										break;
                 default:
                     break;
             }

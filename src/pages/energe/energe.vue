@@ -5,7 +5,7 @@
     <view class="main-container">
         <uni-group class="group">
             <text class="normal-font">您一天所需总能量为:</text>
-            <text class="energe-highlight">{{ Z }}</text>
+            <text class="energe-highlight">{{ Z.toFixed(2) }}</text>
         </uni-group>
         <uni-group class="group">
             <template v-for="(item, index) in nutrients">
@@ -15,13 +15,15 @@
                 </view>
             </template>
         </uni-group>
-        <uni-group class="group">
-            <template v-for="(item, index) in foods">
-                <view :key="index" class="text-box">
-                    <text class="normal-font">{{ item.name }}</text>
-                    <text class="energe-highlight">{{ item.data }}</text>
-                </view>
-            </template>
+        <uni-group>
+					<uni-grid :column="2" :square="false">
+						<uni-grid-item v-for="(sItem,sIndex) in foods" :key="sIndex">
+							<view class="container">
+								<text class="normal-font">{{ sItem.name }}</text>
+								<text class="energe-highlight">{{ sItem.data }}</text>
+							</view>
+						</uni-grid-item>
+					</uni-grid>
         </uni-group>
     </view>
 </template>
@@ -294,8 +296,13 @@ page {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
 
-    animation: 0.2s ease-in-out 0s 1 scroll-down;
+.container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	margin:20rpx;
 }
 
 .text-box {
