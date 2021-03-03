@@ -62,6 +62,8 @@
 					},
 					success(res){
 						if(res.result.code === 0){
+							uni.setStorageSync('uni_id_token',res.result.token)
+							uni.setStorageSync('uni_id_token_expired', res.result.tokenExpired)
 							// 成功提示
 							that.$refs.uToast.show({
 								title:"登录成功",
@@ -73,7 +75,8 @@
 							const {username,token,uid}=res.result;
 							that.$store.commit("update",["isLogin",true]);
 							that.$store.commit("update",["user",{
-								username,token,uid
+								username,token,uid,
+								nickname:username,
 							}]);
 						}else{
 							that.$refs.uToast.show({

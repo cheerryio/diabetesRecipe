@@ -347,9 +347,6 @@
         </popup-layer>
         <!-- 购物车详情popup -->
     </view>
-    <view class="loading" v-else>
-        <image src="/static/images/loading.gif"></image>
-    </view>
 </template>
 
 <script>
@@ -644,14 +641,30 @@ export default {
                 uni.navigateTo({ url: "/pages/login/login" });
                 return;
             }
+						const that=this;
 
             uni.showLoading({ title: "加载中" });
             uni.setStorageSync("cart", JSON.parse(JSON.stringify(this.cart)));
-
-            uni.navigateTo({
-                url: "/pages/pay/pay",
-            });
-            uni.hideLoading();
+						this.$db.collection("recipe").add({
+							uid:this.$store.state.user.uid,
+							username:this.$store.state.user.username,
+							recipe:this.cart,
+							...this.$store.state.recipeLimit,
+						}).then(()=>{
+							uni.hideLoading();
+						}).catch(err=>{
+							that.$db.collection("recipe").where({
+								uid:that.$store.state.uid
+							}).update({
+								username:this.$store.state.user.username,
+								recipe:this.cart,
+								...this.$store.state.recipeLimit,
+							})
+							uni.hideLoading();
+						})
+            // uni.navigateTo({
+            //     url: "/pages/pay/pay",
+            // });
         },
     },
 };

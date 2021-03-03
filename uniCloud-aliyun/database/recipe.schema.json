@@ -4,7 +4,7 @@
 	"required": [],
 	"permission": {
 		"read": "doc.uid == auth.uid",
-		"create": false,
+		"create": true,
 		"update": false,
 		"delete": false
 	},
@@ -49,7 +49,7 @@
 		},
 		"recipe":{
 			"bsonType":"array",
-			"arrayType":"array",
+			"arrayType":"object",
 			"title":"当天食谱",
 			"description":"当天吃的食物"
 		}

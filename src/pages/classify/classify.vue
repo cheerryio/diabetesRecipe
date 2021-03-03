@@ -4,19 +4,19 @@
  *  三个选项分别对应三个数据输入类别
  */
 <template>
-    <view>
+    <view class="main-container">
         <uni-steps
-            class="steps"
+            class="c-steps"
             :options="steps"
             direction="row"
             :active="step"
         ></uni-steps>
-        <diabetes-classify v-if="step === 0"></diabetes-classify>
+        <diabetes-classify class="c-classify" v-if="step === 0"></diabetes-classify>
         <information-form
             v-else-if="step === 1"
             :diabetesType="diabetesType"
         ></information-form>
-        <energe v-else-if="step === 2"></energe>
+        <energe class="c-energe" v-else-if="step === 2"></energe>
         <view v-else><text>数据错误</text></view>
     </view>
 </template>
@@ -78,11 +78,16 @@ page {
     background-color: $background-color;
 }
 
-.steps {
-    margin: {
-        top: 20rpx;
-    }
-    animation: 1.5s ease-in-out 0s 1 fade-in;
+.main-container {
+	.c-steps {
+		margin: {
+		    top: 20rpx;
+		}
+	}
+
+	.c-steps,.c-classify,.c-energe {
+		animation: 1.5s ease-in-out 0s 1 fade-in;
+	}
 }
 
 @keyframes fade-in {
