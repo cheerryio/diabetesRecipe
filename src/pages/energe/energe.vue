@@ -206,11 +206,12 @@ export default {
                     },
                     {
                         name: "肉蛋",
-                        data: Math.round((this.Z * 0.095 - 35.2 / 36) * 2) / 2,
+                        data:
+                            Math.round(((this.Z * 0.095 - 35.2) / 36) * 2) / 2,
                     },
                     {
                         name: "谷薯",
-                        data: Math.floor((this.Z * 0.55 - 188 / 80) * 2) / 2,
+                        data: Math.floor(((this.Z * 0.55 - 188) / 80) * 2) / 2,
                     },
                     {
                         name: "蔬菜",
@@ -218,7 +219,8 @@ export default {
                     },
                     {
                         name: "油脂",
-                        data: Math.floor((this.Z * 0.1575 - 14.7 / 90) * 2) / 2,
+                        data:
+                            Math.floor(((this.Z * 0.1575 - 14.7) / 90) * 2) / 2,
                     },
                     {
                         name: "水果",
@@ -233,11 +235,11 @@ export default {
                 },
                 {
                     name: "肉蛋",
-                    data: Math.round((this.Z * 0.095 - 61.6 / 36) * 2) / 2,
+                    data: Math.round(((this.Z * 0.095 - 61.6) / 36) * 2) / 2,
                 },
                 {
                     name: "谷薯",
-                    data: Math.floor((this.Z * 0.55 - 224 / 80) * 2) / 2,
+                    data: Math.floor(((this.Z * 0.55 - 224) / 80) * 2) / 2,
                 },
                 {
                     name: "蔬菜",
@@ -245,7 +247,7 @@ export default {
                 },
                 {
                     name: "油脂",
-                    data: Math.floor((this.Z * 0.1575 - 42.6 / 90) * 2) / 2,
+                    data: Math.floor(((this.Z * 0.1575 - 42.6) / 90) * 2) / 2,
                 },
                 {
                     name: "水果",
