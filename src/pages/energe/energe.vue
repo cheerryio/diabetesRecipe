@@ -16,7 +16,8 @@
             </template>
         </uni-group>
         <uni-group>
-					<uni-grid :column="2" :square="false">
+					<text class="normal-font center">每种食物的交换份数为：</text>
+					<uni-grid :column="2" :showBorder="false" :square="false">
 						<uni-grid-item v-for="(sItem,sIndex) in foods" :key="sIndex">
 							<view class="container">
 								<text class="normal-font">{{ sItem.name }}</text>
@@ -166,7 +167,6 @@ export default {
         },
         nutrients: function () {
             if (this.recipeLimit.nutrients) {
-                console.log("aaaa");
                 return this.recipeLimit.nutrients;
             }
             let A = this.Z * 0.55;
@@ -321,6 +321,10 @@ page {
     color: #ff8000;
     font-size: 35rpx;
     margin-left: 10rpx;
+}
+
+.center {
+	margin-left: 200rpx;
 }
 
 @keyframes scroll-down {
