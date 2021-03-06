@@ -42,11 +42,3 @@ jobs:
         run: |
           npm install
           npm run build:h5
-      - name: upload ftp
-        uses: sebastianpopp/ftp-action@releases/v2
-        with:
-          server: ftp.sinacloud.com:10121
-          username: chee
-          password: ${{ secrets.ftp_password }}
-          local-dir: dist/build/h5/
-          options: "--delete"
