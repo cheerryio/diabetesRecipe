@@ -16,12 +16,11 @@
                 prop="gender"
             >
                 <u-radio-group
-                    @change="radioGroupChangeGender"
                     :width="radioCheckWidth"
                     :wrap="radioCheckWrap"
+                    v-model="form1.gender"
                 >
                     <u-radio
-                        v-model="form1.gender"
                         shape="circle"
                         v-for="(sItem, sIndex) in genders"
                         :key="sIndex"
@@ -50,21 +49,21 @@
                 <text slot="right" class="unit">kg</text>
             </u-form-item>
             <u-form-item label="劳动强度" prop="laborIntensity">
-							<u-radio-group
-								@change="radioGroupChangeLaborIntensity"
-								:width="radioCheckWidth"
-								:wrap="radioCheckWrap"
-							>
-								<u-radio
-										v-model="form2.laborIntensity"
-										shape="circle"
-										v-for="(sItem, sIndex) in laborIntensityList"
-										:key="sIndex"
-										:name="sItem.id"
-								>
-									<text>{{sItem.name}}</text>
-								</u-radio>
-							</u-radio-group>
+                <u-radio-group
+                    v-model="form1.laborIntensity"
+                    :width="radioCheckWidth"
+                    :wrap="radioCheckWrap"
+                >
+                    <u-radio
+                        shape="circle"
+                        v-for="(sItem, sIndex) in laborIntensityList"
+                        :key="sIndex"
+                        :name="sItem.id"
+                    >
+                        <text>{{ sItem.name }}</text>
+                    </u-radio>
+                </u-radio-group>
+                <u-icon name="question-circle-fill"></u-icon>
             </u-form-item>
         </u-form>
         <!-- 妊娠糖尿病信息表单 -->
@@ -119,38 +118,39 @@
                 <text slot="right" class="unit">kg</text>
             </u-form-item>
             <u-form-item label="胎儿个数" prop="babyNumber">
-							<u-radio-group
-								@change="radioGroupChangeBabyNumber"
-								:width="radioCheckWidth"
-								:wrap="radioCheckWrap"
-							>
-								<u-radio
-										v-model="form2.babyNumber"
-										shape="circle"
-										v-for="(sItem, sIndex) in [1,2,3]"
-										:key="sIndex"
-										:name="sItem"
-								>
-									<text>{{sItem}}</text>
-								</u-radio>
-							</u-radio-group>
+                <u-radio-group
+                    :width="radioCheckWidth"
+                    :wrap="radioCheckWrap"
+                    v-model="form2.babyNumber"
+                >
+                    <u-radio
+                        shape="circle"
+                        v-for="(sItem, sIndex) in babyNumberList"
+                        :key="sIndex"
+                        :name="sItem.value"
+                    >
+                        <text>{{ sItem.label }}</text>
+                    </u-radio>
+                </u-radio-group>
             </u-form-item>
             <u-form-item label="劳动强度" prop="laborIntensity">
-							<u-radio-group
-								@change="radioGroupChangeLaborIntensity"
-								:width="radioCheckWidth"
-								:wrap="radioCheckWrap"
-							>
-								<u-radio
-										v-model="form2.laborIntensity"
-										shape="circle"
-										v-for="(sItem, sIndex) in laborIntensityList.slice(0,2)"
-										:key="sIndex"
-										:name="sItem.id"
-								>
-									<text>{{sItem.name}}</text>
-								</u-radio>
-							</u-radio-group>
+                <u-radio-group
+                    :width="radioCheckWidth"
+                    :wrap="radioCheckWrap"
+                    v-model="form2.laborIntensity"
+                >
+                    <u-radio
+                        shape="circle"
+                        v-for="(sItem, sIndex) in laborIntensityList.slice(
+                            0,
+                            2
+                        )"
+                        :key="sIndex"
+                        :name="sItem.id"
+                    >
+                        <text>{{ sItem.name }}</text>
+                    </u-radio>
+                </u-radio-group>
             </u-form-item>
         </u-form>
         <!-- 儿童糖尿病信息表单 -->
@@ -169,12 +169,11 @@
                 prop="gender"
             >
                 <u-radio-group
-                    @change="radioGroupChangeGender"
                     :width="radioCheckWidth"
                     :wrap="radioCheckWrap"
+                    v-model="form3.gender"
                 >
                     <u-radio
-                        v-model="form3.gender"
                         shape="circle"
                         v-for="(sItem, sIndex) in genders"
                         :key="sIndex"
@@ -216,21 +215,20 @@
                 ></u-input>
             </u-form-item>
             <u-form-item label="体型" prop="bodyShape">
-							<u-radio-group
-								@change="radioGroupChangeBodyShape"
-								:width="radioCheckWidth"
-								:wrap="radioCheckWrap"
-							>
-								<u-radio
-										v-model="form3.bodyShape"
-										shape="circle"
-										v-for="(sItem, sIndex) in bodyShapeList"
-										:key="sIndex"
-										:name="sItem.id"
-								>
-									<text>{{sItem.name}}</text>
-								</u-radio>
-							</u-radio-group>
+                <u-radio-group
+                    :width="radioCheckWidth"
+                    :wrap="radioCheckWrap"
+                    v-model="form3.bodyShape"
+                >
+                    <u-radio
+                        shape="circle"
+                        v-for="(sItem, sIndex) in bodyShapeList"
+                        :key="sIndex"
+                        :name="sItem.id"
+                    >
+                        <text>{{ sItem.name }}</text>
+                    </u-radio>
+                </u-radio-group>
             </u-form-item>
         </u-form>
         <view v-else><text>diabetesType数据无效</text></view>
@@ -352,35 +350,35 @@ export default {
                 {
                     id: 1,
                     name: "轻",
-										checked:false,
-										disabled:false
+                    checked: false,
+                    disabled: false,
                 },
                 {
                     id: 2,
                     name: "中",
-										checked:false,
-										disabled:false
+                    checked: false,
+                    disabled: false,
                 },
                 {
-                    id: 1,
+                    id: 3,
                     name: "高",
-										checked:false,
-										disabled:false
+                    checked: false,
+                    disabled: false,
                 },
             ],
             bodyShapeList: [
-								{
-										id: 1,
-										name: "消瘦",
-										checked:false,
-										disabled:false
-								},
-								{
-										id: 2,
-										name: "正常",
-										checked:false,
-										disabled:false
-								},
+                {
+                    id: 1,
+                    name: "消瘦",
+                    checked: false,
+                    disabled: false,
+                },
+                {
+                    id: 2,
+                    name: "正常",
+                    checked: false,
+                    disabled: false,
+                },
             ],
             form1: {
                 gender: "", // 1 for male, 2 for femail
@@ -542,15 +540,15 @@ export default {
         radioGroupChangeGender(e) {
             this.form.gender = e;
         },
-				radioGroupChangeLaborIntensity(e){
-					this.form.laborIntensity=e;
-				},
-				radioGroupChangeBabyNumber(e){
-					this.form.babyNumber=e;
-				},
-				radioGroupChangeBodyShape(e){
-					this.form.bodyShape=e;
-				},
+        radioGroupChangeLaborIntensity(e) {
+            this.form.laborIntensity = e;
+        },
+        radioGroupChangeBabyNumber(e) {
+            this.form.babyNumber = e;
+        },
+        radioGroupChangeBodyShape(e) {
+            this.form.bodyShape = e;
+        },
         selectCallback(e) {
             e = e[0];
             switch (this.selectType) {
@@ -562,12 +560,13 @@ export default {
                     break;
                 case 3:
                     this.form.age = e.label;
-										break;
+                    break;
                 default:
                     break;
             }
         },
         submit() {
+            console.log(this.form);
             const that = this;
             this.$refs[`uForm${this.diabetesType}`].validate((valid) => {
                 if (valid) {
