@@ -247,7 +247,17 @@
             @confirm="selectCallback"
         >
         </u-select>
+				<button @tap="explanationShow=!explanationShow">转换</button>
+				<u-popup v-model="explanationShow" mode="bottom" border-radius="14">
+					<ul>
+						<text>劳动强度描述</text>
+						<li v-for="(sItem,sIndex) in laborIntensityList" :key="sIndex">
+							<text>{{sItem.name}}: {{sItem.description}}</text>
+						</li>
+					</ul>
+				</u-popup>
         <u-toast ref="uToast"></u-toast>
+
     </view>
 </template>
 
@@ -310,6 +320,7 @@ export default {
 
         return {
             isMounted: false,
+						explanationShow:false,
             labelStyle: {
                 fontSize: "20rpx",
             },
@@ -352,18 +363,21 @@ export default {
                     name: "轻",
                     checked: false,
                     disabled: false,
+										description:"以站着或少量走动为主的工作，如店员售货、教师讲课、办公室职员、修钟表工等"
                 },
                 {
                     id: 2,
                     name: "中",
                     checked: false,
                     disabled: false,
+										description:"以轻度活动为主的工作，如学生日常活动、机动车驾驶、电工、外科医生等"
                 },
                 {
                     id: 3,
                     name: "高",
                     checked: false,
                     disabled: false,
+										description:"农名、建筑工、搬运工、伐木工等"
                 },
             ],
             bodyShapeList: [
