@@ -249,14 +249,20 @@
         >
         </u-select>
 				<u-popup v-model="explanationShow" mode="bottom" border-radius="14" height="500rpx">
-					<ul title="劳动强度对照">
-						<li v-if="diabetesType == 2" v-for="(sItem,sIndex) in laborIntensityList.slice(0,2)" :key="sIndex">
-							<text>{{sItem.name}}: {{sItem.description}}</text>
-						</li>
-						<li v-else v-for="(sItem,sIndex) in laborIntensityList" :key="sIndex">
-							<text>{{sItem.name}}: {{sItem.description}}</text>
-						</li>
-					</ul>
+					<view v-if="diabetesType == 2">
+						<ul title="劳动强度对照">
+							<li v-if="diabetesType == 2" v-for="(sItem,sIndex) in laborIntensityList.slice(0,2)" :key="sIndex">
+								<text>{{sItem.name}}: {{sItem.description}}</text>
+							</li>
+						</ul>
+					</view>
+					<view v-else>
+						<ul title="劳动强度对照">
+							<li v-for="(sItem,sIndex) in laborIntensityList" :key="sIndex">
+								<text>{{sItem.name}}: {{sItem.description}}</text>
+							</li>
+						</ul>
+					</view>
 				</u-popup>
         <u-toast ref="uToast"></u-toast>
 
