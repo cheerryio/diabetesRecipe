@@ -248,9 +248,8 @@
         >
         </u-select>
 				<button @tap="explanationShow=!explanationShow">转换</button>
-				<u-popup v-model="explanationShow" mode="bottom" border-radius="14">
-					<ul>
-						<text>劳动强度描述</text>
+				<u-popup v-model="explanationShow" mode="bottom" border-radius="14" height="500rpx">
+					<ul title="劳动强度对照">
 						<li v-for="(sItem,sIndex) in laborIntensityList" :key="sIndex">
 							<text>{{sItem.name}}: {{sItem.description}}</text>
 						</li>
@@ -651,7 +650,6 @@ $show-duration: 0.5s;
         left: 50rpx;
         right: 50rpx;
     }
-    animation: $show-duration ease-in-out 0s 1 bounce-in-right;
 }
 
 .unit {
@@ -663,12 +661,15 @@ $show-duration: 0.5s;
     width: 40rpx;
 }
 
-@keyframes bounce-in-right {
-    0% {
-        transform: translate(600rpx, 0);
-    }
-    100% {
-        transform: translate(0, 0);
-    }
+ul {
+	margin:{
+		top:50rpx;
+	}
+	&:before {
+		content:attr(title);
+		font-size:120%;
+		font-weight:bold;
+		margin-left:-15px;
+	}
 }
 </style>
