@@ -656,9 +656,9 @@ export default {
 							that.$db.collection("recipe").where({
 								uid:that.$store.state.uid
 							}).update({
-								username:this.$store.state.user.username,
-								recipe:this.cart,
-								...this.$store.state.recipeLimit,
+								username:that.$store.state.user.username,
+								recipe:that.cart,
+								...that.$store.state.recipeLimit,
 							})
 							uni.hideLoading();
 						})

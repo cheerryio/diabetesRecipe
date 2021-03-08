@@ -5,6 +5,7 @@
  */
 <template>
     <view class="main-container">
+				<navbar @reload="reload"></navbar>
         <uni-steps
             class="c-steps"
             :options="steps"
@@ -24,6 +25,7 @@
 <script>
 import InformationForm from "./components/information-form";
 import diabetesClassify from "./components/diabetes-classify";
+import navbar from "./components/navbar"
 import energe from "@/pages/energe/energe";
 import { mapState, mapMutations, mapActions, mapGetters } from "vuex";
 
@@ -32,6 +34,7 @@ export default {
         "information-form": InformationForm,
         "diabetes-classify": diabetesClassify,
         energe,
+				navbar,
     },
     data() {
         return {
@@ -67,7 +70,20 @@ export default {
             this.$store.commit("SET_INFORMATION", information);
         });
     },
-    methods: {},
+    methods: {
+			// 回到最初步骤，store中数据清空
+			reload(){
+				uni.showModal({
+					title:"数据重填",
+					content:"您确定要重新填写您的数据吗？",
+					success:(function(){
+						this.step=0;
+					}).bind(this),
+
+				})
+
+			}
+		},
 };
 </script>
 

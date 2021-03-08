@@ -272,7 +272,8 @@ export default {
                     username: this.user.username,
                     uid: this.user.uid,
                     ...recipeLimit,
-                });
+                }).catch(err=>{
+								})
             }.bind(this)
         );
     },

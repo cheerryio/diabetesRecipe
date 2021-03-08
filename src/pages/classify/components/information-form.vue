@@ -63,7 +63,7 @@
                         <text>{{ sItem.name }}</text>
                     </u-radio>
                 </u-radio-group>
-                <u-icon name="question-circle-fill"></u-icon>
+                <u-icon name="question-circle-fill" @tap="explanationShow =! explanationShow"></u-icon>
             </u-form-item>
         </u-form>
         <!-- 妊娠糖尿病信息表单 -->
@@ -151,6 +151,7 @@
                         <text>{{ sItem.name }}</text>
                     </u-radio>
                 </u-radio-group>
+								<u-icon name="question-circle-fill" @tap="explanationShow =! explanationShow"></u-icon>
             </u-form-item>
         </u-form>
         <!-- 儿童糖尿病信息表单 -->
@@ -247,10 +248,12 @@
             @confirm="selectCallback"
         >
         </u-select>
-				<button @tap="explanationShow=!explanationShow">转换</button>
 				<u-popup v-model="explanationShow" mode="bottom" border-radius="14" height="500rpx">
 					<ul title="劳动强度对照">
-						<li v-for="(sItem,sIndex) in laborIntensityList" :key="sIndex">
+						<li v-if="diabetesType == 2" v-for="(sItem,sIndex) in laborIntensityList.slice(0,2)" :key="sIndex">
+							<text>{{sItem.name}}: {{sItem.description}}</text>
+						</li>
+						<li v-else v-for="(sItem,sIndex) in laborIntensityList" :key="sIndex">
 							<text>{{sItem.name}}: {{sItem.description}}</text>
 						</li>
 					</ul>
@@ -579,7 +582,6 @@ export default {
             }
         },
         submit() {
-            console.log(this.form);
             const that = this;
             this.$refs[`uForm${this.diabetesType}`].validate((valid) => {
                 if (valid) {
@@ -670,6 +672,12 @@ ul {
 		font-size:120%;
 		font-weight:bold;
 		margin-left:-15px;
+	}
+	li {
+		margin:{
+			top:20rpx;
+			bottom:20rpx;
+		}
 	}
 }
 </style>
