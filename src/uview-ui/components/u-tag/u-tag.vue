@@ -8,7 +8,7 @@
 	 class="u-tag" :style="[customStyle]" @tap="clickTag">
 		{{text}}
 		<view class="u-icon-wrap" @tap.stop>
-			<u-icon @click="close" size="22" v-if="closeable" :color="closeIconColor" 
+			<u-icon @click="close" size="22" v-if="closeable" :color="closeIconColor"
 			name="close" class="u-close-icon" :style="[iconStyle]"></u-icon>
 		</view>
 	</view>
@@ -105,7 +105,7 @@
 		},
 		data() {
 			return {
-				
+
 			}
 		},
 		computed: {
@@ -118,6 +118,7 @@
 				// 如果是镂空型tag，没有传递边框颜色（borderColor）的话，使用文字的颜色（color属性）
 				if(this.mode == 'plain' && this.color && !this.borderColor) style.borderColor = this.color;
 				else style.borderColor = this.borderColor;
+
 				return style;
 			},
 			iconStyle() {
@@ -159,7 +160,7 @@
 
 <style lang="scss" scoped>
 	@import "../../libs/css/style.components.scss";
-	
+
 	.u-tag {
 		box-sizing: border-box;
 		align-items: center;
@@ -168,16 +169,17 @@
 		display: inline-block;
 		/* #endif */
 		line-height: 1;
+		font-size:500px;
 	}
-	
+
 	.u-size-default {
 		font-size: 22rpx;
 		padding: 12rpx 22rpx;
 	}
-	
+
 	.u-size-mini {
-		font-size: 20rpx;
-		padding: 6rpx 12rpx;
+		font-size: 10rpx;
+		padding: 6rpx 2rpx;
 	}
 
 	.u-mode-light-primary {
@@ -185,86 +187,86 @@
 		color: $u-type-primary;
 		border: 1px solid $u-type-primary-disabled;
 	}
-	
+
 	.u-mode-light-success {
 		background-color: $u-type-success-light;
 		color: $u-type-success;
 		border: 1px solid $u-type-success-disabled;
 	}
-	
+
 	.u-mode-light-error {
 		background-color: $u-type-error-light;
 		color: $u-type-error;
 		border: 1px solid $u-type-error-disabled;
 	}
-	
+
 	.u-mode-light-warning {
 		background-color: $u-type-warning-light;
 		color: $u-type-warning;
 		border: 1px solid $u-type-warning-disabled;
 	}
-	
+
 	.u-mode-light-info {
 		background-color: $u-type-info-light;
 		color: $u-type-info;
 		border: 1px solid $u-type-info-disabled;
 	}
-	
+
 	.u-mode-dark-primary {
 		background-color: $u-type-primary;
 		color: #FFFFFF;
 	}
-	
+
 	.u-mode-dark-success {
 		background-color: $u-type-success;
 		color: #FFFFFF;
 	}
-	
+
 	.u-mode-dark-error {
 		background-color: $u-type-error;
 		color: #FFFFFF;
 	}
-	
+
 	.u-mode-dark-warning {
 		background-color: $u-type-warning;
 		color: #FFFFFF;
 	}
-	
+
 	.u-mode-dark-info {
 		background-color: $u-type-info;
 		color: #FFFFFF;
 	}
-	
+
 	.u-mode-plain-primary {
 		background-color: #FFFFFF;
 		color: $u-type-primary;
 		border: 1px solid $u-type-primary;
 	}
-	
+
 	.u-mode-plain-success {
 		background-color: #FFFFFF;
 		color: $u-type-success;
 		border: 1px solid $u-type-success;
 	}
-	
+
 	.u-mode-plain-error {
 		background-color: #FFFFFF;
 		color: $u-type-error;
 		border: 1px solid $u-type-error;
 	}
-	
+
 	.u-mode-plain-warning {
 		background-color: #FFFFFF;
 		color: $u-type-warning;
 		border: 1px solid $u-type-warning;
 	}
-	
+
 	.u-mode-plain-info {
 		background-color: #FFFFFF;
 		color: $u-type-info;
 		border: 1px solid $u-type-info;
 	}
-	
+
 	.u-disabled {
 		opacity: 0.55;
 	}
@@ -272,7 +274,7 @@
 	.u-shape-circle {
 		border-radius: 100rpx;
 	}
-	
+
 	.u-shape-circleRight {
 		border-radius:  0 100rpx 100rpx 0;
 	}
@@ -280,13 +282,13 @@
 	.u-shape-circleLeft {
 		border-radius: 100rpx 0 0 100rpx;
 	}
-	
+
 	.u-close-icon {
 		margin-left: 14rpx;
 		font-size: 22rpx;
 		color: $u-type-success;
 	}
-	
+
 	.u-icon-wrap {
 		display: inline-flex;
 		transform: scale(0.86);

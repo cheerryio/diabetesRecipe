@@ -5,7 +5,8 @@
 		}" :class="{
 			'u-border-bottom': borderBottom
 		}">
-			<view class="u-dropdown__menu__item" v-for="(item, index) in menuList" :key="index" @tap.stop="menuClick(index)">
+			<!-- 此处我强制修改了源码 -->
+			<view class="u-dropdown__menu__item" style="justify-content: flex-end;" v-for="(item, index) in menuList" :key="index" @tap.stop="menuClick(index)">
 				<view class="u-flex">
 					<text class="u-dropdown__menu__item__text" :style="{
 						color: item.disabled ? '#c0c4cc' : (index === current || highlightIndex == index) ? activeColor : inactiveColor,
@@ -273,7 +274,7 @@
 			left: 0px;
 			bottom: 0;
 			overflow: hidden;
-			
+
 
 			&__mask {
 				position: absolute;
