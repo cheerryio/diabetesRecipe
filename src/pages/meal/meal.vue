@@ -7,7 +7,6 @@
 <script>
 	/**
 	 * @description 界面四 分餐
-	 * 微信端可以尝试3d吗？
 	 */
 	// #ifdef MP-WEIXIN
 	import {

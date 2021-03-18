@@ -4,6 +4,7 @@
 <template>
     <view class="container" v-if="!loading">
         <u-toast ref="uToast" />
+				<navbar></navbar>
         <view class="main" v-if="goods.length">
             <view class="content">
                 <!-- 左侧食品大类目录 -->
@@ -352,15 +353,15 @@
 <script>
 import modal from "@/components/modal/modal";
 import popupLayer from "@/components/popup-layer/popup-layer";
-import goods from "./goods";
+import navbar from "./components/navbar"
 import store from "./store";
-import recipes from "./recipes";
 import { mapState, mapMutations, mapActions, mapGetters } from "vuex";
 
 export default {
     components: {
         modal,
         popupLayer,
+				navbar,
     },
     data() {
         return {
@@ -468,23 +469,6 @@ export default {
             //页面初始化
             this.loading = true;
             // 获取商品信息
-            const db = uniCloud.database();
-            const dbCmd = db.command;
-            const $ = dbCmd.aggregate;
-            /*
-						const res=await this.$db.collection("food-category").aggregate()
-							.lookup({
-								from:'food',
-								let:{
-									cid:'$categoryID'
-								},
-								pipeline: $.pipeline()
-									.match(dbCmd.expr($.eq(['$categoryID','$$cid'])))
-									.done(),
-								as:"goodsList"
-							})
-							.end()
-							*/
             const res = await this.$db
                 .collection("food-category,food")
                 .field(
@@ -542,10 +526,7 @@ export default {
             }
             //添加到购物车
             let total = this.menuCartNum(cate.categoryID);
-            if (
-                total + num >
-                this.recipeLimit.foods[cate.categoryID - 1].data
-            ) {
+            if (total + num > this.recipeLimit.foods[cate.categoryID - 1].data) {
                 this.$refs.uToast.show({
                     title: `${cate.name}每天的交换份限额为${
                         this.recipeLimit.foods[cate.categoryID - 1].data

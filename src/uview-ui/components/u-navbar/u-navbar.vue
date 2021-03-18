@@ -20,6 +20,9 @@
 						{{ title }}
 					</view>
 				</view>
+				<view class="u-slot-left">
+					<slot name="left"></slot>
+				</view>
 				<view class="u-slot-content">
 					<slot></slot>
 				</view>

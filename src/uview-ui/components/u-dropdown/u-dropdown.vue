@@ -5,8 +5,11 @@
 		}" :class="{
 			'u-border-bottom': borderBottom
 		}">
-			<view class="u-dropdown__menu__item" v-for="(item, index) in menuList" :key="index" @tap.stop="menuClick(index)">
+			<!-- 此处我强制修改了源码 -->
+			<view class="u-dropdown__menu__item" style="justify-content: flex-end;" v-for="(item, index) in menuList" :key="index" @tap.stop="menuClick(index)">
+				<slot name="addition-left"></slot>
 				<view class="u-flex">
+					<slot name="addition-right"></slot>
 					<text class="u-dropdown__menu__item__text" :style="{
 						color: item.disabled ? '#c0c4cc' : (index === current || highlightIndex == index) ? activeColor : inactiveColor,
 						fontSize: $u.addUnit(titleSize)
@@ -26,7 +29,7 @@
 		}]"
 		 @tap="maskClick" @touchmove.stop.prevent>
 			<view @tap.stop.prevent class="u-dropdown__content__popup" :style="[popupStyle]">
-				<slot></slot>
+				<slot name="item1"></slot>
 			</view>
 			<view class="u-dropdown__content__mask"></view>
 		</view>
@@ -157,6 +160,7 @@
 			},
 			// 点击菜单
 			menuClick(index) {
+				console.log(index)
 				// 判断是否被禁用
 				if (this.menuList[index].disabled) return;
 				// 如果点击时的索引和当前激活项索引相同，意味着点击了激活项，需要收起下拉菜单
@@ -273,7 +277,7 @@
 			left: 0px;
 			bottom: 0;
 			overflow: hidden;
-			
+
 
 			&__mask {
 				position: absolute;
