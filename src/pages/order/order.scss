@@ -100,7 +100,7 @@ page {
 	display: flex;
 	flex-direction: column;
 
-	height: calc(100vh);
+	// height: calc(100vh);
 	/* #ifdef H5 */
 	height: calc(100vh - var(--window-bottom) - var(--window-top));
 	/* #endif */
