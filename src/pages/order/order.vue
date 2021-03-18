@@ -3,8 +3,8 @@
  */
 <template>
     <view class="container" v-if="!loading">
-				<navbar></navbar>
         <u-toast ref="uToast" />
+				<navbar></navbar>
         <view class="main" v-if="goods.length">
             <view class="content">
                 <!-- 左侧食品大类目录 -->

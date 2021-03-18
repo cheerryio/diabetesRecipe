@@ -4,11 +4,17 @@
 			<view class="navbar-left" slot="left">
 				<u-tag :text="`${selectYear}-${selectMonth}-${selectDate}`" mode="plain" shape="circle" @tap="dateSelectShow=!dateSelectShow" />
 			</view>
-			<view class="navbar-center">
+			<u-dropdown>
+				<view slot="addition-left" style="margin:auto;font-size:10rpx;color:#71D5A1;">
+					<text v-if="mealType <=6 && mealType>=1">选择{{mealTypeOptions[mealType-1].label}}</text>
+					<text v-else>请选择餐点</text>
+				</view>
 				<view
 					class="meal-type-tag-box"
+					slot="addition-right"
 					v-for="(sItem,sIndex) in mealTypeOptions.filter(item=>item.active === true)"
-					:key="sIndex">
+					:key="sIndex"
+					@tap.stop="mealTypeTagClick(sItem)">
 					<u-tag
 						:class="{
 							'active':sItem.value === mealType
@@ -16,12 +22,10 @@
 						size="mini"
 						:text="sItem.label"
 						mode="plain"
-						@tap="mealTypeTagClick(sItem)">
+						>
 					</u-tag>
 				</view>
-			</view>
-			<u-dropdown>
-				<u-dropdown-item title="更新分餐">
+				<u-dropdown-item slot="item1" title="更新分餐">
 					<view class="slot-content">
 						<view class="item-box">
 							<view class="item" :class="[item.active ? 'active' : '']" @tap="mealChooseTagClick(index)" v-for="(item, index) in mealTypeOptions" :key="index">
@@ -33,6 +37,7 @@
 			</u-dropdown>
 		</u-navbar>
 		<u-select
+			class="update-select"
 			v-model="dateSelectShow"
 			mode="mutil-column-auto"
 			:list="dateList"
@@ -60,7 +65,7 @@
 				selectDate:0,
 				defaultDate:0,
 				dateList:[],
-				mealType:1,
+				mealType:0,
 				mealTypeOptions:[],
 				mealTypeChosen:[1,3,5],
 				mealTypeDropdownTitle:"选择餐点类型"
@@ -214,7 +219,6 @@
 
 <style lang="scss" scoped>
 	.navbar-center {
-		position: absolute;
 		display: flex;
 		align-items: center;
 		justify-content: center;
