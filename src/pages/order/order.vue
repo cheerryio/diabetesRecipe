@@ -5,6 +5,7 @@
     <view class="container" v-if="!loading">
         <u-toast ref="uToast" />
 				<navbar></navbar>
+				<tools @categoryTypeChange="categoryTypeChange"></tools>
         <view class="main" v-if="goods.length">
             <view class="content">
                 <!-- 左侧食品大类目录 -->
@@ -305,43 +306,6 @@
                                 </button>
                             </view>
                         </view>
-                        <view
-                            class="item"
-                            v-if="orderType == 'takeout' && store.packing_fee"
-                        >
-                            <view class="left">
-                                <view class="name">包装费</view>
-                            </view>
-                            <view class="center">
-                                <text
-                                    >￥{{ parseFloat(store.packing_fee) }}</text
-                                >
-                            </view>
-                            <view class="right invisible">
-                                <button
-                                    type="default"
-                                    plain
-                                    size="mini"
-                                    class="btn"
-                                    hover-class="none"
-                                >
-                                    <view
-                                        class="iconfont iconsami-select"
-                                    ></view>
-                                </button>
-                                <view class="number">1</view>
-                                <button
-                                    type="primary"
-                                    class="btn"
-                                    size="min"
-                                    hover-class="none"
-                                >
-                                    <view
-                                        class="iconfont iconadd-select"
-                                    ></view>
-                                </button>
-                            </view>
-                        </view>
                     </view>
                 </scroll-view>
             </template>
@@ -353,7 +317,8 @@
 <script>
 import modal from "@/components/modal/modal";
 import popupLayer from "@/components/popup-layer/popup-layer";
-import navbar from "./components/navbar"
+import navbar from "./components/navbar";
+import tools from "./components/tools";
 import store from "./store";
 import { mapState, mapMutations, mapActions, mapGetters } from "vuex";
 
@@ -362,10 +327,13 @@ export default {
         modal,
         popupLayer,
 				navbar,
+				tools,
     },
     data() {
         return {
             goods: [], //所有商品
+						rawFoodGoods:[],
+						cookedFoodGoods:[],
             loading: true,
             currentCateId: 1, //默认分类
             cateScrollTop: 0,
@@ -379,6 +347,8 @@ export default {
             orderType: "takein",
             isLogin: true,
             store,
+						categoryType:1,
+
             recipeLimit: {
                 energe: 1234,
                 nutrients: [
@@ -467,30 +437,39 @@ export default {
         // ...mapActions(['getStore']),
         async init() {
             //页面初始化
-            this.loading = true;
-            // 获取商品信息
-            const res = await this.$db
-                .collection("food-category,food")
-                .field(
-                    "goodsList{foodID,name,description,price,unit,thumbImg,categoryId},categoryID,name,priority"
-                )
-                .get();
-            this.goods = res.result.data;
-            this.loading = false;
+						this.loading=true;
+						await this.loadFoodData();
             this.cart = uni.getStorageSync("cart") || [];
+						this.loading=false;
         },
-        takout() {
-            if (this.orderType == "takeout") return;
+				async loadFoodData(){
+					// 获取商品信息
+					if(this.categoryType == 1){
+						if(!this.cookedFoodGoods.length){
+							const res = await this.$db
+									.collection("food-category,food")
+									.where("categoryType == 1")
+									.field(
+											"goodsList{foodID,name,description,price,unit,thumbImg,categoryId},categoryID,name,priority"
+									)
+									.get();
+							this.cookedFoodGoods=res.result.data;
+						}
+						this.goods=this.cookedFoodGoods;
+					}
+					else if(this.categoryType == 2){
+						if(!this.rawFoodGoods.length){
+							const res=await this.$db
+								.collection("food-category,food")
+								.where("categoryType == 2")
+								.field("goodsList{foodID,name,description,kilo as price,unit,thumbImg,categoryId,nutrientContent},categoryID,name,priority")
+								.get()
 
-            if (!this.isLogin) {
-                uni.navigateTo({ url: "/pages/login/login" });
-                return;
-            }
-
-            uni.navigateTo({
-                url: "/pages/address/address?is_choose=true",
-            });
-        },
+							this.rawFoodGoods=res.result.data;
+						}
+						this.goods=this.rawFoodGoods;
+					}
+				},
         handleMenuTap(id) {
             //点击菜单项事件
             if (!this.sizeCalcState) {
@@ -647,6 +626,10 @@ export default {
             //     url: "/pages/pay/pay",
             // });
         },
+				async categoryTypeChange(e){
+					this.categoryType=e;
+					await this.loadFoodData();
+				},
     },
 };
 </script>

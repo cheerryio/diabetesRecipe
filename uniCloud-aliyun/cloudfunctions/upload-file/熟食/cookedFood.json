@@ -1,0 +1,1950 @@
+{
+    "Sheet1": [
+        {
+            "name": "面筋（肉馅）",
+            "categoryName": "主食类",
+            "carbohydrates": "0",
+            "protein": "16",
+            "fat": "33"
+        },
+        {
+            "name": "凉粉",
+            "categoryName": "主食类",
+            "carbohydrates": "9",
+            "protein": "0",
+            "fat": "0"
+        },
+        {
+            "name": "过桥米线",
+            "categoryName": "主食类",
+            "carbohydrates": "12",
+            "protein": "4",
+            "fat": "4"
+        },
+        {
+            "name": "饺子（猪肉香菇馅）",
+            "categoryName": "主食类",
+            "carbohydrates": "12",
+            "protein": "12",
+            "fat": "15"
+        },
+        {
+            "name": "三明治（夹鸡蛋干酪）",
+            "categoryName": "主食类",
+            "carbohydrates": "18",
+            "protein": "11",
+            "fat": "13"
+        },
+        {
+            "name": "热狗（原味）",
+            "categoryName": "主食类",
+            "carbohydrates": "18",
+            "protein": "11",
+            "fat": "15"
+        },
+        {
+            "name": "原味板烧鸡腿堡",
+            "categoryName": "主食类",
+            "carbohydrates": "19",
+            "protein": "13",
+            "fat": "10"
+        },
+        {
+            "name": "汉堡",
+            "categoryName": "主食类",
+            "carbohydrates": "20",
+            "protein": "13",
+            "fat": "12"
+        },
+        {
+            "name": "肠粉",
+            "categoryName": "主食类",
+            "carbohydrates": "21",
+            "protein": "1",
+            "fat": "2"
+        },
+        {
+            "name": "思念北方家常水饺（猪肉韭菜馅）",
+            "categoryName": "主食类",
+            "carbohydrates": "22",
+            "protein": "9",
+            "fat": "8"
+        },
+        {
+            "name": "三明治（夹火腿、干酪）",
+            "categoryName": "主食类",
+            "carbohydrates": "23",
+            "protein": "14",
+            "fat": "11"
+        },
+        {
+            "name": "三明治（夹鸡肉片）",
+            "categoryName": "主食类",
+            "carbohydrates": "23",
+            "protein": "14",
+            "fat": "10"
+        },
+        {
+            "name": "饺子（鸡肉蘑菇馅）",
+            "categoryName": "主食类",
+            "carbohydrates": "13",
+            "protein": "7",
+            "fat": "7"
+        },
+        {
+            "name": "三明治",
+            "categoryName": "主食类",
+            "carbohydrates": "23",
+            "protein": "15",
+            "fat": "10"
+        },
+        {
+            "name": "面条（煮）",
+            "categoryName": "主食类",
+            "carbohydrates": "24",
+            "protein": "3",
+            "fat": "0"
+        },
+        {
+            "name": "汉堡包",
+            "categoryName": "主食类",
+            "carbohydrates": "25",
+            "protein": "13",
+            "fat": "12"
+        },
+        {
+            "name": "米饭",
+            "categoryName": "主食类",
+            "carbohydrates": "26",
+            "protein": "3",
+            "fat": "0"
+        },
+        {
+            "name": "饺子（猪肉白菜馅）",
+            "categoryName": "主食类",
+            "carbohydrates": "26",
+            "protein": "8",
+            "fat": "11"
+        },
+        {
+            "name": "饺子",
+            "categoryName": "主食类",
+            "carbohydrates": "27",
+            "protein": "8",
+            "fat": "12"
+        },
+        {
+            "name": "冬菜虾仁馄饨",
+            "categoryName": "主食类",
+            "carbohydrates": "27",
+            "protein": "9",
+            "fat": "4"
+        },
+        {
+            "name": "嫩牛五方",
+            "categoryName": "主食类",
+            "carbohydrates": "27",
+            "protein": "10",
+            "fat": "11"
+        },
+        {
+            "name": "包子（猪肉馅）",
+            "categoryName": "主食类",
+            "carbohydrates": "29",
+            "protein": "7",
+            "fat": "10"
+        },
+        {
+            "name": "热干面",
+            "categoryName": "主食类",
+            "carbohydrates": "29",
+            "protein": "4",
+            "fat": "2"
+        },
+        {
+            "name": "虾仁炒饭",
+            "categoryName": "主食类",
+            "carbohydrates": "29",
+            "protein": "5",
+            "fat": "2"
+        },
+        {
+            "name": "韭菜盒子",
+            "categoryName": "主食类",
+            "carbohydrates": "30",
+            "protein": "8",
+            "fat": "5"
+        },
+        {
+            "name": "凉面",
+            "categoryName": "主食类",
+            "carbohydrates": "33",
+            "protein": "5",
+            "fat": "2"
+        },
+        {
+            "name": "思念印度飞饼",
+            "categoryName": "主食类",
+            "carbohydrates": "34",
+            "protein": "6",
+            "fat": "26"
+        },
+        {
+            "name": "肉粽",
+            "categoryName": "主食类",
+            "carbohydrates": "34",
+            "protein": "6",
+            "fat": "5"
+        },
+        {
+            "name": "海鲜鸡汁味米线",
+            "categoryName": "主食类",
+            "carbohydrates": "36",
+            "protein": "4",
+            "fat": "1"
+        },
+        {
+            "name": "叉烧粽",
+            "categoryName": "主食类",
+            "carbohydrates": "36",
+            "protein": "4",
+            "fat": "3"
+        },
+        {
+            "name": "干酪汉堡包",
+            "categoryName": "主食类",
+            "carbohydrates": "37",
+            "protein": "15",
+            "fat": "8"
+        },
+        {
+            "name": "油饼",
+            "categoryName": "主食类",
+            "carbohydrates": "42",
+            "protein": "8",
+            "fat": "23"
+        },
+        {
+            "name": "叉烧包",
+            "categoryName": "主食类",
+            "carbohydrates": "42",
+            "protein": "7",
+            "fat": "6"
+        },
+        {
+            "name": "馒头",
+            "categoryName": "主食类",
+            "carbohydrates": "46",
+            "protein": "7",
+            "fat": "1"
+        },
+        {
+            "name": "花卷",
+            "categoryName": "主食类",
+            "carbohydrates": "46",
+            "protein": "6",
+            "fat": "1"
+        },
+        {
+            "name": "黑芝麻汤圆",
+            "categoryName": "主食类",
+            "carbohydrates": "46",
+            "protein": "4",
+            "fat": "14"
+        },
+        {
+            "name": "葡萄干面包",
+            "categoryName": "主食类",
+            "carbohydrates": "50",
+            "protein": "6",
+            "fat": "4"
+        },
+        {
+            "name": "咸面包",
+            "categoryName": "主食类",
+            "carbohydrates": "51",
+            "protein": "9",
+            "fat": "4"
+        },
+        {
+            "name": "油条",
+            "categoryName": "主食类",
+            "carbohydrates": "52",
+            "protein": "7",
+            "fat": "18"
+        },
+        {
+            "name": "烙饼",
+            "categoryName": "主食类",
+            "carbohydrates": "53",
+            "protein": "8",
+            "fat": "2"
+        },
+        {
+            "name": "黄油面包",
+            "categoryName": "主食类",
+            "carbohydrates": "55",
+            "protein": "8",
+            "fat": "9"
+        },
+        {
+            "name": "牛角面包",
+            "categoryName": "主食类",
+            "carbohydrates": "55",
+            "protein": "8",
+            "fat": "14"
+        },
+        {
+            "name": "鸡汁味干脆面",
+            "categoryName": "主食类",
+            "carbohydrates": "55",
+            "protein": "11",
+            "fat": "27"
+        },
+        {
+            "name": "牛骨汤红烧牛肉面",
+            "categoryName": "主食类",
+            "carbohydrates": "55",
+            "protein": "7",
+            "fat": "21"
+        },
+        {
+            "name": "麻辣牛肉味方便面",
+            "categoryName": "主食类",
+            "carbohydrates": "56",
+            "protein": "9",
+            "fat": "22"
+        },
+        {
+            "name": "面包",
+            "categoryName": "主食类",
+            "carbohydrates": "58",
+            "protein": "8",
+            "fat": "5"
+        },
+        {
+            "name": "方便面",
+            "categoryName": "主食类",
+            "carbohydrates": "61",
+            "protein": "10",
+            "fat": "21"
+        },
+        {
+            "name": "麦片",
+            "categoryName": "主食类",
+            "carbohydrates": "67",
+            "protein": "12",
+            "fat": "7"
+        },
+        {
+            "name": "燕麦片（果仁）",
+            "categoryName": "主食类",
+            "carbohydrates": "74",
+            "protein": "19",
+            "fat": "11"
+        },
+        {
+            "name": "小米粥",
+            "categoryName": "主食类",
+            "carbohydrates": "75",
+            "protein": "9",
+            "fat": "3"
+        },
+        {
+            "name": "挂面",
+            "categoryName": "主食类",
+            "carbohydrates": "75",
+            "protein": "10",
+            "fat": "1"
+        },
+        {
+            "name": "桂花藕粉",
+            "categoryName": "主食类",
+            "carbohydrates": "85",
+            "protein": "0",
+            "fat": "0"
+        },
+        {
+            "name": "荷包蛋（煮）",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "0",
+            "protein": "12",
+            "fat": "12"
+        },
+        {
+            "name": "羊肉（熟）",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "0",
+            "protein": "23",
+            "fat": "14"
+        },
+        {
+            "name": "猪肉（清蒸）",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "0",
+            "protein": "18",
+            "fat": "14"
+        },
+        {
+            "name": "烤鸭（老唐牌）",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "0",
+            "protein": "20",
+            "fat": "25"
+        },
+        {
+            "name": "猪耳",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "0",
+            "protein": "19",
+            "fat": "11"
+        },
+        {
+            "name": "猪肉（肥）",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "0",
+            "protein": "2",
+            "fat": "89"
+        },
+        {
+            "name": "烤鸭（全聚德牌）",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "0",
+            "protein": "18",
+            "fat": "51"
+        },
+        {
+            "name": "瓦罐鸡汤",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "0",
+            "protein": "1",
+            "fat": "2"
+        },
+        {
+            "name": "咸鸭蛋（煮）",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "0",
+            "protein": "14",
+            "fat": "14"
+        },
+        {
+            "name": "烤鸡",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "0",
+            "protein": "22",
+            "fat": "17"
+        },
+        {
+            "name": "猪蹄（熟）",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "0",
+            "protein": "24",
+            "fat": "19"
+        },
+        {
+            "name": "虾仁（红）",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "0",
+            "protein": "10",
+            "fat": "1"
+        },
+        {
+            "name": "盐水鸭（熟）",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "1",
+            "protein": "15",
+            "fat": "19"
+        },
+        {
+            "name": "香肠（罐头）",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "1",
+            "protein": "8",
+            "fat": "28"
+        },
+        {
+            "name": "红烧鸭（罐头）",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "1",
+            "protein": "15",
+            "fat": "31"
+        },
+        {
+            "name": "鳕鱼（烤）",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "1",
+            "protein": "21",
+            "fat": "1"
+        },
+        {
+            "name": "荷包蛋（煎）",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "1",
+            "protein": "13",
+            "fat": "15"
+        },
+        {
+            "name": "鸡蛋（红皮）",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "1",
+            "protein": "13",
+            "fat": "11"
+        },
+        {
+            "name": "鳗鱼（红烧）",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "2",
+            "protein": "21",
+            "fat": "10"
+        },
+        {
+            "name": "熟鸡蛋",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "2",
+            "protein": "12",
+            "fat": "11"
+        },
+        {
+            "name": "鸡蛋（煮）",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "2",
+            "protein": "12",
+            "fat": "11"
+        },
+        {
+            "name": "培根（熏肉）",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "3",
+            "protein": "22",
+            "fat": "9"
+        },
+        {
+            "name": "牛肉（酱、五香）",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "3",
+            "protein": "33",
+            "fat": "11"
+        },
+        {
+            "name": "扇贝（鲜）",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "3",
+            "protein": "11",
+            "fat": "1"
+        },
+        {
+            "name": "羊肉串（炸）",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "3",
+            "protein": "26",
+            "fat": "12"
+        },
+        {
+            "name": "牛蹄筋（熟）",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "3",
+            "protein": "35",
+            "fat": "1"
+        },
+        {
+            "name": "酱牛肉",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "3",
+            "protein": "31",
+            "fat": "12"
+        },
+        {
+            "name": "瓦罐鸡汤（肉）",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "5",
+            "protein": "21",
+            "fat": "10"
+        },
+        {
+            "name": "羊肉串（电烤）",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "6",
+            "protein": "26",
+            "fat": "12"
+        },
+        {
+            "name": "松花蛋（鸡蛋）",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "6",
+            "protein": "15",
+            "fat": "16"
+        },
+        {
+            "name": "酱鸭",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "6",
+            "protein": "19",
+            "fat": "18"
+        },
+        {
+            "name": "烤鸭",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "6",
+            "protein": "0",
+            "fat": "38"
+        },
+        {
+            "name": "广东香肠",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "6",
+            "protein": "18",
+            "fat": "37"
+        },
+        {
+            "name": "热狗肠",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "7",
+            "protein": "13",
+            "fat": "25"
+        },
+        {
+            "name": "酱汁肉",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "8",
+            "protein": "16",
+            "fat": "50"
+        },
+        {
+            "name": "叉烧肉",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "8",
+            "protein": "24",
+            "fat": "17"
+        },
+        {
+            "name": "酱排骨",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "10",
+            "protein": "22",
+            "fat": "27"
+        },
+        {
+            "name": "猪肝（卤煮）",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "11",
+            "protein": "16",
+            "fat": "3"
+        },
+        {
+            "name": "香肠",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "11",
+            "protein": "24",
+            "fat": "41"
+        },
+        {
+            "name": "腊肠",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "15",
+            "protein": "22",
+            "fat": "48"
+        },
+        {
+            "name": "炸鸡",
+            "categoryName": "肉蛋类",
+            "carbohydrates": "16",
+            "protein": "16",
+            "fat": "11"
+        },
+        {
+            "name": "鸡蛋干（五香味）",
+            "categoryName": "大豆及制品",
+            "carbohydrates": "1",
+            "protein": "13",
+            "fat": "9"
+        },
+        {
+            "name": "豆浆",
+            "categoryName": "大豆及制品",
+            "carbohydrates": "1",
+            "protein": "3",
+            "fat": "1"
+        },
+        {
+            "name": "南豆腐",
+            "categoryName": "大豆及制品",
+            "carbohydrates": "2",
+            "protein": "7",
+            "fat": "2"
+        },
+        {
+            "name": "白玉豆腐脑",
+            "categoryName": "大豆及制品",
+            "carbohydrates": "2",
+            "protein": "3",
+            "fat": "3"
+        },
+        {
+            "name": "豆奶",
+            "categoryName": "大豆及制品",
+            "carbohydrates": "2",
+            "protein": "2",
+            "fat": "2"
+        },
+        {
+            "name": "中华嫩豆腐",
+            "categoryName": "大豆及制品",
+            "carbohydrates": "2",
+            "protein": "6",
+            "fat": "3"
+        },
+        {
+            "name": "原味豆浆（袋装）",
+            "categoryName": "大豆及制品",
+            "carbohydrates": "3",
+            "protein": "3",
+            "fat": "2"
+        },
+        {
+            "name": "豆腐（北）",
+            "categoryName": "大豆及制品",
+            "carbohydrates": "3",
+            "protein": "10",
+            "fat": "8"
+        },
+        {
+            "name": "豆腐（南）",
+            "categoryName": "大豆及制品",
+            "carbohydrates": "4",
+            "protein": "6",
+            "fat": "6"
+        },
+        {
+            "name": "豆腐干（酱油干）",
+            "categoryName": "大豆及制品",
+            "carbohydrates": "4",
+            "protein": "15",
+            "fat": "9"
+        },
+        {
+            "name": "毛豆腐（熟）",
+            "categoryName": "大豆及制品",
+            "carbohydrates": "5",
+            "protein": "21",
+            "fat": "15"
+        },
+        {
+            "name": "豆浆（甜）",
+            "categoryName": "大豆及制品",
+            "carbohydrates": "5",
+            "protein": "2",
+            "fat": "1"
+        },
+        {
+            "name": "豆腐脑（带卤）",
+            "categoryName": "大豆及制品",
+            "carbohydrates": "5",
+            "protein": "3",
+            "fat": "2"
+        },
+        {
+            "name": "豆腐干（香干）",
+            "categoryName": "大豆及制品",
+            "carbohydrates": "5",
+            "protein": "16",
+            "fat": "8"
+        },
+        {
+            "name": "油豆腐",
+            "categoryName": "大豆及制品",
+            "carbohydrates": "5",
+            "protein": "17",
+            "fat": "18"
+        },
+        {
+            "name": "豆腐干（小香干）",
+            "categoryName": "大豆及制品",
+            "carbohydrates": "5",
+            "protein": "18",
+            "fat": "9"
+        },
+        {
+            "name": "豆腐干（熏干）",
+            "categoryName": "大豆及制品",
+            "carbohydrates": "9",
+            "protein": "16",
+            "fat": "6"
+        },
+        {
+            "name": "素肉（五香味）",
+            "categoryName": "大豆及制品",
+            "carbohydrates": "11",
+            "protein": "22",
+            "fat": "2"
+        },
+        {
+            "name": "豆腐皮、豆油皮",
+            "categoryName": "大豆及制品",
+            "carbohydrates": "12",
+            "protein": "51",
+            "fat": "23"
+        },
+        {
+            "name": "鱼豆腐",
+            "categoryName": "大豆及制品",
+            "carbohydrates": "14",
+            "protein": "9",
+            "fat": "10"
+        },
+        {
+            "name": "豆腐丝（油）",
+            "categoryName": "大豆及制品",
+            "carbohydrates": "14",
+            "protein": "24",
+            "fat": "17"
+        },
+        {
+            "name": "素红烧肉",
+            "categoryName": "大豆及制品",
+            "carbohydrates": "20",
+            "protein": "15",
+            "fat": "22"
+        },
+        {
+            "name": "素香菇面筋",
+            "categoryName": "大豆及制品",
+            "carbohydrates": "20",
+            "protein": "17",
+            "fat": "12"
+        },
+        {
+            "name": "豆腐干（卤干）",
+            "categoryName": "大豆及制品",
+            "carbohydrates": "33",
+            "protein": "15",
+            "fat": "17"
+        },
+        {
+            "name": "豆腐花（干）",
+            "categoryName": "大豆及制品",
+            "carbohydrates": "84",
+            "protein": "10",
+            "fat": "3"
+        },
+        {
+            "name": "亚麻籽油、胡麻油、胡麻子油",
+            "categoryName": "油脂类",
+            "carbohydrates": "0",
+            "protein": "0",
+            "fat": "100"
+        },
+        {
+            "name": "有机特级初榨椰子油",
+            "categoryName": "油脂类",
+            "carbohydrates": "0",
+            "protein": "0",
+            "fat": "100"
+        },
+        {
+            "name": "纯正芝麻香油",
+            "categoryName": "油脂类",
+            "carbohydrates": "0",
+            "protein": "0",
+            "fat": "100"
+        },
+        {
+            "name": "山茶油",
+            "categoryName": "油脂类",
+            "carbohydrates": "0",
+            "protein": "0",
+            "fat": "100"
+        },
+        {
+            "name": "面包黄油",
+            "categoryName": "油脂类",
+            "carbohydrates": "0",
+            "protein": "2",
+            "fat": "99"
+        },
+        {
+            "name": "特技淡味橄榄油",
+            "categoryName": "油脂类",
+            "carbohydrates": "0",
+            "protein": "0",
+            "fat": "100"
+        },
+        {
+            "name": "柠檬味橄榄调味油",
+            "categoryName": "油脂类",
+            "carbohydrates": "0",
+            "protein": "0",
+            "fat": "93"
+        },
+        {
+            "name": "食用调和油",
+            "categoryName": "油脂类",
+            "carbohydrates": "0",
+            "protein": "0",
+            "fat": "100"
+        },
+        {
+            "name": "酸奶油",
+            "categoryName": "油脂类",
+            "carbohydrates": "0",
+            "protein": "3",
+            "fat": "28"
+        },
+        {
+            "name": "干锅油",
+            "categoryName": "油脂类",
+            "carbohydrates": "0",
+            "protein": "0",
+            "fat": "100"
+        },
+        {
+            "name": "花椒油",
+            "categoryName": "油脂类",
+            "carbohydrates": "0",
+            "protein": "0",
+            "fat": "91"
+        },
+        {
+            "name": "淡味黄油块",
+            "categoryName": "油脂类",
+            "carbohydrates": "0",
+            "protein": "0",
+            "fat": "82"
+        },
+        {
+            "name": "有机南瓜子油",
+            "categoryName": "油脂类",
+            "carbohydrates": "0",
+            "protein": "0",
+            "fat": "100"
+        },
+        {
+            "name": "有机婴幼儿装亚麻籽油",
+            "categoryName": "油脂类",
+            "carbohydrates": "0",
+            "protein": "0",
+            "fat": "100"
+        },
+        {
+            "name": "清淡稀奶油",
+            "categoryName": "油脂类",
+            "carbohydrates": "0",
+            "protein": "0",
+            "fat": "60"
+        },
+        {
+            "name": "火锅油碟（芝麻调和油）",
+            "categoryName": "油脂类",
+            "carbohydrates": "0",
+            "protein": "0",
+            "fat": "91"
+        },
+        {
+            "name": "香猪油",
+            "categoryName": "油脂类",
+            "carbohydrates": "0",
+            "protein": "0",
+            "fat": "100"
+        },
+        {
+            "name": "有机葵花籽油",
+            "categoryName": "油脂类",
+            "carbohydrates": "0",
+            "protein": "0",
+            "fat": "100"
+        },
+        {
+            "name": "植物油",
+            "categoryName": "油脂类",
+            "carbohydrates": "0",
+            "protein": "0",
+            "fat": "92"
+        },
+        {
+            "name": "太太乐芝麻油",
+            "categoryName": "油脂类",
+            "carbohydrates": "0",
+            "protein": "0",
+            "fat": "100"
+        },
+        {
+            "name": "葵花籽食用油",
+            "categoryName": "油脂类",
+            "carbohydrates": "0",
+            "protein": "0",
+            "fat": "92"
+        },
+        {
+            "name": "花生油",
+            "categoryName": "油脂类",
+            "carbohydrates": "0",
+            "protein": "0",
+            "fat": "100"
+        },
+        {
+            "name": "橄榄油",
+            "categoryName": "油脂类",
+            "carbohydrates": "0",
+            "protein": "0",
+            "fat": "100"
+        },
+        {
+            "name": "辣椒油",
+            "categoryName": "油脂类",
+            "carbohydrates": "0",
+            "protein": "0",
+            "fat": "100"
+        },
+        {
+            "name": "葵花籽调和油",
+            "categoryName": "油脂类",
+            "carbohydrates": "0",
+            "protein": "0",
+            "fat": "92"
+        },
+        {
+            "name": "淡黄油",
+            "categoryName": "油脂类",
+            "carbohydrates": "1",
+            "protein": "0",
+            "fat": "82"
+        },
+        {
+            "name": "咸黄油",
+            "categoryName": "油脂类",
+            "carbohydrates": "1",
+            "protein": "0",
+            "fat": "82"
+        },
+        {
+            "name": "奶油",
+            "categoryName": "油脂类",
+            "carbohydrates": "1",
+            "protein": "1",
+            "fat": "97"
+        },
+        {
+            "name": "核桃油",
+            "categoryName": "油脂类",
+            "carbohydrates": "1",
+            "protein": "0",
+            "fat": "99"
+        },
+        {
+            "name": "无盐黄油",
+            "categoryName": "油脂类",
+            "carbohydrates": "1",
+            "protein": "0",
+            "fat": "82"
+        },
+        {
+            "name": "牛油",
+            "categoryName": "油脂类",
+            "carbohydrates": "2",
+            "protein": "0",
+            "fat": "92"
+        },
+        {
+            "name": "鲜奶油",
+            "categoryName": "油脂类",
+            "carbohydrates": "3",
+            "protein": "0",
+            "fat": "35"
+        },
+        {
+            "name": "稀奶油",
+            "categoryName": "油脂类",
+            "carbohydrates": "3",
+            "protein": "0",
+            "fat": "35"
+        },
+        {
+            "name": "淡奶油",
+            "categoryName": "油脂类",
+            "carbohydrates": "4",
+            "protein": "0",
+            "fat": "36"
+        },
+        {
+            "name": "猪油（板油）",
+            "categoryName": "油脂类",
+            "carbohydrates": "7",
+            "protein": "0",
+            "fat": "89"
+        },
+        {
+            "name": "奶油（液态奶油）",
+            "categoryName": "油脂类",
+            "carbohydrates": "16",
+            "protein": "0",
+            "fat": "24"
+        },
+        {
+            "name": "白苏打饼干（花椒味）",
+            "categoryName": "油脂类",
+            "carbohydrates": "55",
+            "protein": "10",
+            "fat": "26"
+        },
+        {
+            "name": "信威大姚核桃仁",
+            "categoryName": "坚果类",
+            "carbohydrates": "1",
+            "protein": "16",
+            "fat": "72"
+        },
+        {
+            "name": "美味七七巴旦木",
+            "categoryName": "坚果类",
+            "carbohydrates": "3",
+            "protein": "25",
+            "fat": "45"
+        },
+        {
+            "name": "盐焗杏仁",
+            "categoryName": "坚果类",
+            "carbohydrates": "3",
+            "protein": "28",
+            "fat": "49"
+        },
+        {
+            "name": "松子（原味）",
+            "categoryName": "坚果类",
+            "carbohydrates": "6",
+            "protein": "15",
+            "fat": "67"
+        },
+        {
+            "name": "核桃（鲜）",
+            "categoryName": "坚果类",
+            "carbohydrates": "6",
+            "protein": "13",
+            "fat": "30"
+        },
+        {
+            "name": "杏仁（过油炸干）",
+            "categoryName": "坚果类",
+            "carbohydrates": "7",
+            "protein": "21",
+            "fat": "55"
+        },
+        {
+            "name": "巴旦木",
+            "categoryName": "坚果类",
+            "carbohydrates": "7",
+            "protein": "24",
+            "fat": "45"
+        },
+        {
+            "name": "新疆核桃",
+            "categoryName": "坚果类",
+            "carbohydrates": "8",
+            "protein": "0",
+            "fat": "66"
+        },
+        {
+            "name": "南瓜子（炒）",
+            "categoryName": "坚果类",
+            "carbohydrates": "8",
+            "protein": "36",
+            "fat": "46"
+        },
+        {
+            "name": "杏仁（烤干、不加盐）",
+            "categoryName": "坚果类",
+            "carbohydrates": "8",
+            "protein": "22",
+            "fat": "53"
+        },
+        {
+            "name": "西瓜子仁",
+            "categoryName": "坚果类",
+            "carbohydrates": "9",
+            "protein": "32",
+            "fat": "46"
+        },
+        {
+            "name": "黑瓜子",
+            "categoryName": "坚果类",
+            "carbohydrates": "10",
+            "protein": "18",
+            "fat": "46"
+        },
+        {
+            "name": "西瓜子（熟）",
+            "categoryName": "坚果类",
+            "carbohydrates": "10",
+            "protein": "29",
+            "fat": "46"
+        },
+        {
+            "name": "南瓜子仁",
+            "categoryName": "坚果类",
+            "carbohydrates": "11",
+            "protein": "33",
+            "fat": "48"
+        },
+        {
+            "name": "杏仁（熟、带壳）",
+            "categoryName": "坚果类",
+            "carbohydrates": "11",
+            "protein": "25",
+            "fat": "58"
+        },
+        {
+            "name": "奶香巴旦木",
+            "categoryName": "坚果类",
+            "carbohydrates": "11",
+            "protein": "25",
+            "fat": "58"
+        },
+        {
+            "name": "核桃仁",
+            "categoryName": "坚果类",
+            "carbohydrates": "11",
+            "protein": "15",
+            "fat": "63"
+        },
+        {
+            "name": "松子仁",
+            "categoryName": "坚果类",
+            "carbohydrates": "12",
+            "protein": "13",
+            "fat": "71"
+        },
+        {
+            "name": "扁桃仁粉",
+            "categoryName": "坚果类",
+            "carbohydrates": "12",
+            "protein": "26",
+            "fat": "56"
+        },
+        {
+            "name": "黑松子（原味烘焙）",
+            "categoryName": "坚果类",
+            "carbohydrates": "13",
+            "protein": "14",
+            "fat": "68"
+        },
+        {
+            "name": "夏威夷果（原味烘焙）",
+            "categoryName": "坚果类",
+            "carbohydrates": "13",
+            "protein": "8",
+            "fat": "76"
+        },
+        {
+            "name": "西瓜子（话梅）",
+            "categoryName": "坚果类",
+            "carbohydrates": "13",
+            "protein": "30",
+            "fat": "47"
+        },
+        {
+            "name": "榛子（炒）",
+            "categoryName": "坚果类",
+            "carbohydrates": "13",
+            "protein": "31",
+            "fat": "50"
+        },
+        {
+            "name": "香瓜子",
+            "categoryName": "坚果类",
+            "carbohydrates": "13",
+            "protein": "28",
+            "fat": "52"
+        },
+        {
+            "name": "盐焗扁桃仁",
+            "categoryName": "坚果类",
+            "carbohydrates": "14",
+            "protein": "25",
+            "fat": "61"
+        },
+        {
+            "name": "有机葵花籽仁",
+            "categoryName": "坚果类",
+            "carbohydrates": "1",
+            "protein": "19",
+            "fat": "53"
+        },
+        {
+            "name": "盐焗腰果",
+            "categoryName": "坚果类",
+            "carbohydrates": "14",
+            "protein": "16",
+            "fat": "56"
+        },
+        {
+            "name": "碧根果仁",
+            "categoryName": "坚果类",
+            "carbohydrates": "14",
+            "protein": "9",
+            "fat": "63"
+        },
+        {
+            "name": "夏威夷果（奶香味）",
+            "categoryName": "坚果类",
+            "carbohydrates": "14",
+            "protein": "8",
+            "fat": "71"
+        },
+        {
+            "name": "白瓜子仁",
+            "categoryName": "坚果类",
+            "carbohydrates": "15",
+            "protein": "0",
+            "fat": "44"
+        },
+        {
+            "name": "天然原味西瓜子仁",
+            "categoryName": "坚果类",
+            "carbohydrates": "15",
+            "protein": "28",
+            "fat": "47"
+        },
+        {
+            "name": "西瓜子（炒）",
+            "categoryName": "坚果类",
+            "carbohydrates": "15",
+            "protein": "33",
+            "fat": "45"
+        },
+        {
+            "name": "葵花籽（熟）",
+            "categoryName": "坚果类",
+            "carbohydrates": "15",
+            "protein": "29",
+            "fat": "49"
+        },
+        {
+            "name": "笑口巴旦木（奶香味）",
+            "categoryName": "坚果类",
+            "carbohydrates": "15",
+            "protein": "22",
+            "fat": "50"
+        },
+        {
+            "name": "山核桃仁",
+            "categoryName": "坚果类",
+            "carbohydrates": "15",
+            "protein": "9",
+            "fat": "66"
+        },
+        {
+            "name": "椒盐巴旦木",
+            "categoryName": "坚果类",
+            "carbohydrates": "16",
+            "protein": "22",
+            "fat": "52"
+        },
+        {
+            "name": "葵花籽（奶油香瓜子）",
+            "categoryName": "坚果类",
+            "carbohydrates": "18",
+            "protein": "23",
+            "fat": "54"
+        },
+        {
+            "name": "松子（炒）",
+            "categoryName": "坚果类",
+            "carbohydrates": "22",
+            "protein": "14",
+            "fat": "59"
+        },
+        {
+            "name": "花生（炒）",
+            "categoryName": "坚果类",
+            "carbohydrates": "24",
+            "protein": "22",
+            "fat": "48"
+        },
+        {
+            "name": "山核桃（奶油味）",
+            "categoryName": "坚果类",
+            "carbohydrates": "54",
+            "protein": "11",
+            "fat": "23"
+        },
+        {
+            "name": "芝麻核桃粉",
+            "categoryName": "坚果类",
+            "carbohydrates": "49",
+            "protein": "15",
+            "fat": "19"
+        },
+        {
+            "name": "炭烧腰果",
+            "categoryName": "坚果类",
+            "carbohydrates": "40",
+            "protein": "18",
+            "fat": "34"
+        },
+        {
+            "name": "松子（熟）",
+            "categoryName": "坚果类",
+            "carbohydrates": "40",
+            "protein": "13",
+            "fat": "40"
+        },
+        {
+            "name": "黑咖啡（液）",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "0",
+            "protein": "0",
+            "fat": "0"
+        },
+        {
+            "name": "啤酒",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "0",
+            "protein": "0",
+            "fat": "0"
+        },
+        {
+            "name": "江米酒",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "0",
+            "protein": "2",
+            "fat": "0"
+        },
+        {
+            "name": "红葡萄酒",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "0",
+            "protein": "0",
+            "fat": "0"
+        },
+        {
+            "name": "黄酒",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "0",
+            "protein": "2",
+            "fat": "0"
+        },
+        {
+            "name": "清爽型啤酒（6度）",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "0",
+            "protein": "0",
+            "fat": "0"
+        },
+        {
+            "name": "汉口白酒（49.6度）",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "0",
+            "protein": "0",
+            "fat": "0"
+        },
+        {
+            "name": "白葡萄酒",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "0",
+            "protein": "0",
+            "fat": "0"
+        },
+        {
+            "name": "北京啤酒",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "0",
+            "protein": "0",
+            "fat": "0"
+        },
+        {
+            "name": "威士忌",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "0",
+            "protein": "0",
+            "fat": "0"
+        },
+        {
+            "name": "葡萄酒",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "0",
+            "protein": "0",
+            "fat": "0"
+        },
+        {
+            "name": "鸡尾酒",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "0",
+            "protein": "0",
+            "fat": "0"
+        },
+        {
+            "name": "美式咖啡",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "1",
+            "protein": "0",
+            "fat": "0"
+        },
+        {
+            "name": "黑加仑酒（8%）",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "1",
+            "protein": "0",
+            "fat": "0"
+        },
+        {
+            "name": "葡萄酒（干红、11.5%、长城牌）",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "2",
+            "protein": "0",
+            "fat": "0"
+        },
+        {
+            "name": "啤酒（4.3%、青岛牌）",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "3",
+            "protein": "0",
+            "fat": "0"
+        },
+        {
+            "name": "星巴克卡布基诺（豆奶/大杯）",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "3",
+            "protein": "1",
+            "fat": "1"
+        },
+        {
+            "name": "康师傅绿茶（低糖）",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "4",
+            "protein": "0",
+            "fat": "0"
+        },
+        {
+            "name": "柠檬汁",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "5",
+            "protein": "1",
+            "fat": "0"
+        },
+        {
+            "name": "橙汁汽水",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "5",
+            "protein": "0",
+            "fat": "0"
+        },
+        {
+            "name": "维维豆奶",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "5",
+            "protein": "2",
+            "fat": "1"
+        },
+        {
+            "name": "农夫山泉尖叫运动饮料-西柚味",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "5",
+            "protein": "0",
+            "fat": "0"
+        },
+        {
+            "name": "胡萝卜汁饮料",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "6",
+            "protein": "0",
+            "fat": "0"
+        },
+        {
+            "name": "巧克力豆奶",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "6",
+            "protein": "3",
+            "fat": "1"
+        },
+        {
+            "name": "维他奶原味豆奶饮料（低脂肪）",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "7",
+            "protein": "2",
+            "fat": "1"
+        },
+        {
+            "name": "西柚汁饮料",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "7",
+            "protein": "1",
+            "fat": "0"
+        },
+        {
+            "name": "农夫山泉100%胡萝卜混合果蔬汁",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "7",
+            "protein": "0",
+            "fat": "0"
+        },
+        {
+            "name": "统一麦香舞鹤奶茶",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "7",
+            "protein": "0",
+            "fat": "1"
+        },
+        {
+            "name": "维他奶原味豆奶饮料",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "7",
+            "protein": "2",
+            "fat": "1"
+        },
+        {
+            "name": "雀巢咖啡香滑饮料",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "8",
+            "protein": "1",
+            "fat": "1"
+        },
+        {
+            "name": "七喜",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "8",
+            "protein": "0",
+            "fat": "0"
+        },
+        {
+            "name": "菠萝汁饮料",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "8",
+            "protein": "0",
+            "fat": "0"
+        },
+        {
+            "name": "酸乳饮料",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "9",
+            "protein": "1",
+            "fat": "1"
+        },
+        {
+            "name": "杏仁椰汁饮料",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "9",
+            "protein": "1",
+            "fat": "0"
+        },
+        {
+            "name": "星巴克热豆奶香草拿铁",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "9",
+            "protein": "2",
+            "fat": "1"
+        },
+        {
+            "name": "橙汁饮料（光明牌）",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "10",
+            "protein": "1",
+            "fat": "0"
+        },
+        {
+            "name": "美汁源热带果汁",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "11",
+            "protein": "0",
+            "fat": "0"
+        },
+        {
+            "name": "维尔康运动饮料",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "11",
+            "protein": "0",
+            "fat": "0"
+        },
+        {
+            "name": "贝纳颂咖啡（倍醇拿铁味）",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "12",
+            "protein": "2",
+            "fat": "4"
+        },
+        {
+            "name": "芒果汁饮料",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "12",
+            "protein": "0",
+            "fat": "0"
+        },
+        {
+            "name": "好口福泡椒凤爪",
+            "categoryName": "饮料冷饮",
+            "carbohydrates": "0",
+            "protein": "20",
+            "fat": "2"
+        },
+        {
+            "name": "冰棍",
+            "categoryName": "零食点心类",
+            "carbohydrates": "11",
+            "protein": "1",
+            "fat": "0"
+        },
+        {
+            "name": "绿豆饼（少糖少油）",
+            "categoryName": "零食点心类",
+            "carbohydrates": "13",
+            "protein": "15",
+            "fat": "1"
+        },
+        {
+            "name": "米婆婆甜香酒酿",
+            "categoryName": "零食点心类",
+            "carbohydrates": "15",
+            "protein": "1",
+            "fat": "0"
+        },
+        {
+            "name": "香辣鸡翅",
+            "categoryName": "零食点心类",
+            "carbohydrates": "16",
+            "protein": "24",
+            "fat": "29"
+        },
+        {
+            "name": "棒冰（可乐冰）",
+            "categoryName": "零食点心类",
+            "carbohydrates": "16",
+            "protein": "0",
+            "fat": "1"
+        },
+        {
+            "name": "洽洽香瓜子",
+            "categoryName": "零食点心类",
+            "carbohydrates": "17",
+            "protein": "24",
+            "fat": "53"
+        },
+        {
+            "name": "果冻（AD钙果冻）",
+            "categoryName": "零食点心类",
+            "carbohydrates": "17",
+            "protein": "0",
+            "fat": "0"
+        },
+        {
+            "name": "喜之郎乳酸钙果汁果冻",
+            "categoryName": "零食点心类",
+            "carbohydrates": "17",
+            "protein": "0",
+            "fat": "0"
+        },
+        {
+            "name": "冰淇淋",
+            "categoryName": "零食点心类",
+            "carbohydrates": "17",
+            "protein": "2",
+            "fat": "5"
+        },
+        {
+            "name": "果冻（草莓水果冻）",
+            "categoryName": "零食点心类",
+            "carbohydrates": "18",
+            "protein": "0",
+            "fat": "0"
+        },
+        {
+            "name": "冰淇淋（脆皮甜筒）",
+            "categoryName": "零食点心类",
+            "carbohydrates": "24",
+            "protein": "4",
+            "fat": "6"
+        },
+        {
+            "name": "冰淇淋（苦咖啡味）",
+            "categoryName": "零食点心类",
+            "carbohydrates": "26",
+            "protein": "3",
+            "fat": "10"
+        },
+        {
+            "name": "披萨饼（夹奶酪、肉和蔬菜）",
+            "categoryName": "零食点心类",
+            "carbohydrates": "27",
+            "protein": "17",
+            "fat": "7"
+        },
+        {
+            "name": "披萨饼（夹奶酪）",
+            "categoryName": "零食点心类",
+            "carbohydrates": "27",
+            "protein": "16",
+            "fat": "6"
+        },
+        {
+            "name": "冰淇淋（草莓圣代）",
+            "categoryName": "零食点心类",
+            "carbohydrates": "28",
+            "protein": "3",
+            "fat": "3"
+        },
+        {
+            "name": "DQ冰雪皇后奥利奥暴风雪标准杯",
+            "categoryName": "零食点心类",
+            "carbohydrates": "30",
+            "protein": "4",
+            "fat": "8"
+        },
+        {
+            "name": "三鲜豆皮",
+            "categoryName": "零食点心类",
+            "carbohydrates": "30",
+            "protein": "6",
+            "fat": "10"
+        },
+        {
+            "name": "春卷",
+            "categoryName": "零食点心类",
+            "carbohydrates": "34",
+            "protein": "6",
+            "fat": "34"
+        },
+        {
+            "name": "菠萝派",
+            "categoryName": "零食点心类",
+            "carbohydrates": "34",
+            "protein": "6",
+            "fat": "18"
+        },
+        {
+            "name": "马铃薯片（炸）",
+            "categoryName": "零食点心类",
+            "carbohydrates": "40",
+            "protein": "4",
+            "fat": "48"
+        },
+        {
+            "name": "蛋糕（巧克力）",
+            "categoryName": "零食点心类",
+            "carbohydrates": "40",
+            "protein": "5",
+            "fat": "30"
+        },
+        {
+            "name": "驴打滚",
+            "categoryName": "零食点心类",
+            "carbohydrates": "41",
+            "protein": "8",
+            "fat": "0"
+        },
+        {
+            "name": "意大利费列罗巧克力",
+            "categoryName": "零食点心类",
+            "carbohydrates": "44",
+            "protein": "9",
+            "fat": "42"
+        },
+        {
+            "name": "康师傅妙芙欧式蛋糕（巧克力味）",
+            "categoryName": "零食点心类",
+            "carbohydrates": "45",
+            "protein": "6",
+            "fat": "28"
+        },
+        {
+            "name": "猪肉脯",
+            "categoryName": "零食点心类",
+            "carbohydrates": "47",
+            "protein": "28",
+            "fat": "9"
+        },
+        {
+            "name": "薯片（烧烤味）",
+            "categoryName": "零食点心类",
+            "carbohydrates": "49",
+            "protein": "8",
+            "fat": "38"
+        },
+        {
+            "name": "月饼（蛋黄）",
+            "categoryName": "零食点心类",
+            "carbohydrates": "50",
+            "protein": "6",
+            "fat": "20"
+        },
+        {
+            "name": "巧克力",
+            "categoryName": "零食点心类",
+            "carbohydrates": "52",
+            "protein": "4",
+            "fat": "40"
+        },
+        {
+            "name": "巧克力（黑）",
+            "categoryName": "零食点心类",
+            "carbohydrates": "53",
+            "protein": "4",
+            "fat": "40"
+        },
+        {
+            "name": "薯片（香辣味）",
+            "categoryName": "零食点心类",
+            "carbohydrates": "53",
+            "protein": "7",
+            "fat": "40"
+        },
+        {
+            "name": "巧克力（果仁）",
+            "categoryName": "零食点心类",
+            "carbohydrates": "54",
+            "protein": "10",
+            "fat": "34"
+        },
+        {
+            "name": "奶油蛋糕",
+            "categoryName": "零食点心类",
+            "carbohydrates": "56",
+            "protein": "7",
+            "fat": "14"
+        },
+        {
+            "name": "曲奇饼（加奶油）",
+            "categoryName": "零食点心类",
+            "carbohydrates": "64",
+            "protein": "6",
+            "fat": "30"
+        },
+        {
+            "name": "饼干",
+            "categoryName": "零食点心类",
+            "carbohydrates": "71",
+            "protein": "9",
+            "fat": "13"
+        },
+        {
+            "name": "奶油饼干",
+            "categoryName": "零食点心类",
+            "carbohydrates": "69",
+            "protein": "9",
+            "fat": "13"
+        },
+        {
+            "name": "月饼（奶油果馅）",
+            "categoryName": "零食点心类",
+            "carbohydrates": "67",
+            "protein": "6",
+            "fat": "17"
+        },
+        {
+            "name": "月饼（桂花板栗）",
+            "categoryName": "零食点心类",
+            "carbohydrates": "66",
+            "protein": "6",
+            "fat": "7"
+        },
+        {
+            "name": "月饼（枣泥）",
+            "categoryName": "零食点心类",
+            "carbohydrates": "64",
+            "protein": "7",
+            "fat": "16"
+        },
+        {
+            "name": "月饼（豆沙）",
+            "categoryName": "零食点心类",
+            "carbohydrates": "63",
+            "protein": "8",
+            "fat": "14"
+        }
+    ]
+}

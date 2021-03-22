@@ -239,6 +239,7 @@
 	"food-category": {
 		"data": [
 			{
+				"categoryType":1,
 				"categoryID": 1,
 				"goodsList": 1,
 				"priority": 1,
@@ -246,6 +247,7 @@
 				"description": "奶类目录"
 			},
 			{
+				"categoryType":1,
 				"categoryID": 2,
 				"goodsList": 2,
 				"priority": 2,
@@ -253,6 +255,7 @@
 				"description": "肉蛋类及大豆类目录"
 			},
 			{
+				"categoryType":1,
 				"categoryID": 3,
 				"goodsList": 3,
 				"priority": 3,
@@ -260,6 +263,7 @@
 				"description": "谷薯类目录"
 			},
 			{
+				"categoryType":1,
 				"categoryID": 4,
 				"goodsList": 4,
 				"priority": 4,
@@ -267,6 +271,7 @@
 				"description": "蔬菜类目录"
 			},
 			{
+				"categoryType":1,
 				"categoryID": 5,
 				"goodsList": 5,
 				"priority": 5,
@@ -274,11 +279,68 @@
 				"description": "油脂类及硬果类目录"
 			},
 			{
+				"categoryType":1,
 				"categoryID": 6,
 				"goodsList": 6,
 				"priority": 6,
 				"name": "水果类",
 				"description": "水果类目录"
+			},
+			{
+				"categoryType":2,
+				"categoryID":7,
+				"goodsList":7,
+				"priority":7,
+				"name":"主食类",
+				"description":"主食类目录"
+			},
+			{
+				"categoryType":2,
+				"categoryID":8,
+				"goodsList":8,
+				"priority":8,
+				"name":"肉蛋类",
+				"description":"肉蛋类目录"
+			},
+			{
+				"categoryType":2,
+				"categoryID":9,
+				"goodsList":9,
+				"priority":9,
+				"name":"大豆及制品",
+				"description":"大豆及制品目录"
+			},
+			{
+				"categoryType":2,
+				"categoryID":10,
+				"goodsList":10,
+				"priority":10,
+				"name":"油脂类",
+				"description":"油脂类目录"
+			},
+			{
+				"categoryType":2,
+				"categoryID":11,
+				"goodsList":11,
+				"priority":11,
+				"name":"坚果类",
+				"description":"坚果类目录"
+			},
+			{
+				"categoryType":2,
+				"categoryID":12,
+				"goodsList":12,
+				"priority":12,
+				"name":"饮料冷饮",
+				"description":"饮料冷饮目录"
+			},
+			{
+				"categoryType":2,
+				"categoryID":13,
+				"goodsList":13,
+				"priority":13,
+				"name":"零食点心类",
+				"description":"零食点心类目录"
 			}
 		],
 		"index": [

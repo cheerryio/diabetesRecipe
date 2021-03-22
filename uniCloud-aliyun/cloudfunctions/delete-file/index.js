@@ -26,12 +26,13 @@ exports.main = async (event) => {
 			fileList.push(file.id)
 		})
 
-		console.log(`delete file page ${page} finish`)
-	}
+		const res2=await uniCloud.deleteFile({
+			fileList,
+		})
+		fileList=[]
 
-	const res2=await uniCloud.deleteFile({
-		fileList,
-	})
+		console.log(`get fileList to delete, page ${page} finish`)
+	}
 
 	return 1;
 };
