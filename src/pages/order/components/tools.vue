@@ -25,7 +25,7 @@
 			</view>
 		</view>
 		<u-dropdown>
-			<u-dropdown-item title="更新分餐">
+			<u-dropdown-item :title="mealTypeTitle">
 				<view class="slot-content">
 					<view class="item-box">
 						<view class="item" :class="[item.active ? 'active' : '']" @tap="mealChooseTagClick(index)" v-for="(item, index) in mealTypeOptions" :key="`meal-${index}`">
@@ -34,7 +34,7 @@
 					</view>
 				</view>
 			</u-dropdown-item>
-			<u-dropdown-item title="食物类别">
+			<u-dropdown-item :title="categoryTypeTitle">
 				<view class="slot-content">
 					<view class="item-box">
 						<view class="item" :class="[item.active ? 'active' : '']" @tap="categoryChooseTagClick(index)" v-for="(item, index) in categoryTypeOptions" :key="`category-${index}`">
@@ -76,7 +76,8 @@
 				mealType:0,
 				mealTypeOptions:[],
 				mealTypeChosen:[1,3,5],
-				mealTypeDropdownTitle:"选择餐点类型",
+				mealTypeTitle:"选择时间",
+				categoryTypeTitle:"选择类型",
 				categoryType:1,
 				categoryTypeOptions:[],
 			}
@@ -225,7 +226,8 @@
 					this.categoryTypeOptions[index].active=true;
 					this.categoryTypeOptions[this.categoryType-1].active=false;
 					this.categoryType=this.categoryTypeOptions[index].value;
-					this.$emit("categoryTypeChange",this.categoryType)
+					this.categoryTypeTitle=this.categoryTypeOptions[index].label;
+					this.$emit("categoryTypeChange",this.categoryType);
 				}
 			},
 			mealTypeTagClick(e){

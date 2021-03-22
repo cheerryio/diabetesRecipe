@@ -335,7 +335,7 @@ export default {
 						rawFoodGoods:[],
 						cookedFoodGoods:[],
             loading: true,
-            currentCateId: 1, //默认分类
+            currentCateId: 7, //默认分类
             cateScrollTop: 0,
             menuScrollIntoView: "",
             cart: [], //购物车
@@ -448,9 +448,9 @@ export default {
 						if(!this.cookedFoodGoods.length){
 							const res = await this.$db
 									.collection("food-category,food")
-									.where("categoryType == 1")
+									.where(`categoryType == ${this.categoryType}`)
 									.field(
-											"goodsList{foodID,name,description,price,unit,thumbImg,categoryId},categoryID,name,priority"
+											"goodsList{foodID,name,description,kilo as price,unit,thumbImg,categoryId,nutrientContent},categoryID,name,priority"
 									)
 									.get();
 							this.cookedFoodGoods=res.result.data;
@@ -461,14 +461,17 @@ export default {
 						if(!this.rawFoodGoods.length){
 							const res=await this.$db
 								.collection("food-category,food")
-								.where("categoryType == 2")
-								.field("goodsList{foodID,name,description,kilo as price,unit,thumbImg,categoryId,nutrientContent},categoryID,name,priority")
+								.where(`categoryType == ${this.categoryType}`)
+								.field("goodsList{foodID,name,description,price,unit,thumbImg,categoryId},categoryID,name,priority")
 								.get()
 
 							this.rawFoodGoods=res.result.data;
 						}
 						this.goods=this.rawFoodGoods;
+					}else{
+
 					}
+					this.currentCateId=this.goods[0].categoryID;
 				},
         handleMenuTap(id) {
             //点击菜单项事件
@@ -505,14 +508,21 @@ export default {
             }
             //添加到购物车
             let total = this.menuCartNum(cate.categoryID);
-            if (total + num > this.recipeLimit.foods[cate.categoryID - 1].data) {
-                this.$refs.uToast.show({
-                    title: `${cate.name}每天的交换份限额为${
-                        this.recipeLimit.foods[cate.categoryID - 1].data
-                    }`,
-                });
-                return;
-            }
+
+						if(this.categoryType == 1){
+
+						}
+						else if(this.categoryType == 2){
+							if (total + num > this.recipeLimit.foods[cate.categoryID - 1].data) {
+									this.$refs.uToast.show({
+											title: `${cate.name}每天的交换份限额为${
+													this.recipeLimit.foods[cate.categoryID - 1].data
+											}`,
+									});
+									return;
+							}
+						}
+
             const index = this.cart.findIndex((item) => {
                 return item.foodID === good.foodID;
             });
