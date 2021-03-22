@@ -44,10 +44,10 @@
 
         }
         ,{
-            "path" : "pages/meal/meal",
+            "path" : "pages/support/support",
             "style" :
             {
-                "navigationBarTitleText": "分餐",
+                "navigationBarTitleText": "辅助决策",
                 "enablePullDownRefresh": false
             }
         }
@@ -74,6 +74,12 @@
 		"backgroundColor":"#fafafa",
 		"list":[
 			{
+				"pagePath":"pages/login/login",
+				"iconPath":"static/tab/billa.png",
+				"selectedIconPath":"static/tab/billb.png",
+				"text":"登录"
+			},
+			{
 				"pagePath":"pages/classify/classify",
 				"iconPath":"static/tab/rechargea.png",
 				"selectedIconPath":"static/tab/rechargeb.png",
@@ -86,22 +92,16 @@
 				"text":"点餐"
 			},
 			{
-				"pagePath":"pages/meal/meal",
+				"pagePath":"pages/support/support",
 				"iconPath":"static/tab/billa.png",
 				"selectedIconPath":"static/tab/billb.png",
-				"text":"分餐"
+				"text":"辅助"
 			},
 			{
 				"pagePath":"pages/questionair/questionair",
 				"iconPath":"static/tab/billa.png",
 				"selectedIconPath":"static/tab/billb.png",
 				"text":"问卷"
-			},
-			{
-				"pagePath":"pages/login/login",
-				"iconPath":"static/tab/billa.png",
-				"selectedIconPath":"static/tab/billb.png",
-				"text":"登录"
 			}
 		]
 	},

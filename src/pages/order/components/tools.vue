@@ -1,29 +1,36 @@
 <template>
 	<view style="display: flex;flex-direction: column;">
 		<view style="display: flex;flex-direction: row;">
+			<!-- 选择日期tag begin -->
 			<view class="navbar-left">
 				<u-tag :text="`${selectYear}-${selectMonth}-${selectDate}`" mode="plain" shape="circle" @tap="dateSelectShow=!dateSelectShow" />
 			</view>
-			<view style="margin:auto;font-size:10rpx;color:#71D5A1;">
-				<text v-if="mealType <=6 && mealType>=1">选择{{mealTypeOptions[mealType-1].label}}</text>
+			<!-- 选择日期tag end -->
+			<!-- 当前正在选择哪一餐 start -->
+			<view style="margin-left:20rpx;margin-right: 20rpx;font-size:28rpx;color:#71D5A1;">
+				<text v-if="mealType <=6 && mealType>=1">正在选择{{mealTypeOptions[mealType-1].label}}</text>
 				<text v-else>请选择餐点</text>
 			</view>
-			<view
-				class="meal-type-tag-box"
-				v-for="(sItem,sIndex) in mealTypeOptions.filter(item=>item.active === true)"
-				:key="sIndex"
-				@tap.stop="mealTypeTagClick(sItem)">
-				<u-tag
-					:class="{
-						'active':sItem.value === mealType
-					}"
-					size="mini"
-					:text="sItem.label"
-					mode="plain"
-					>
-				</u-tag>
+			<view style="display: flex;flex-direction: row;justify-self: end;white-space: nowrap;">
+				<view
+					class="meal-type-tag-box"
+					v-for="(sItem,sIndex) in mealTypeOptions.filter(item=>item.active === true)"
+					:key="sIndex"
+					@tap.stop="mealTypeTagClick(sItem)">
+					<u-tag
+						:class="{
+							'active':sItem.value === mealType
+						}"
+						size="mini"
+						:text="sItem.label"
+						mode="plain"
+						>
+					</u-tag>
+				</view>
 			</view>
+			<!-- 当前正在选择哪一餐 start -->
 		</view>
+		<!-- 添加餐选和生食熟食切换选择的dropbox -->
 		<u-dropdown>
 			<u-dropdown-item :title="mealTypeTitle">
 				<view class="slot-content">
@@ -44,6 +51,7 @@
 				</view>
 			</u-dropdown-item>
 		</u-dropdown>
+		<!-- 选择日期从界面底部弹出的框 -->
 		<u-select
 			class="update-select"
 			v-model="dateSelectShow"
@@ -76,8 +84,8 @@
 				mealType:0,
 				mealTypeOptions:[],
 				mealTypeChosen:[1,3,5],
-				mealTypeTitle:"选择时间",
-				categoryTypeTitle:"选择类型",
+				mealTypeTitle:"添加餐选",
+				categoryTypeTitle:"",
 				categoryType:1,
 				categoryTypeOptions:[],
 			}
@@ -216,6 +224,8 @@
 					label:"生食",
 					active:false,
 				}]
+
+				this.categoryTypeTitle=this.categoryTypeOptions[this.categoryType-1].label;
 			},
 			mealChooseTagClick(index){
 				this.mealTypeOptions[index].active=!this.mealTypeOptions[index].active;

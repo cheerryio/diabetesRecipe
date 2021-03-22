@@ -443,6 +443,10 @@ export default {
 						this.loading=false;
         },
 				async loadFoodData(){
+					uni.showLoading({
+						title:"加载中",
+					});
+
 					// 获取商品信息
 					if(this.categoryType == 1){
 						if(!this.cookedFoodGoods.length){
@@ -472,6 +476,8 @@ export default {
 
 					}
 					this.currentCateId=this.goods[0].categoryID;
+
+					uni.hideLoading();
 				},
         handleMenuTap(id) {
             //点击菜单项事件
