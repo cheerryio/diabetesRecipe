@@ -55,10 +55,55 @@
             "path" : "pages/questionair/questionair",
             "style" :
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "问卷",
                 "enablePullDownRefresh": false
             }
 
+        }
+        ,{
+            "path" : "pages/support/sleep/sleep",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "睡眠记录",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/support/exercise/exercise",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "运动记录",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/support/bloodsugar/bloodsugar",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "血糖记录",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/support/mood/mood",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "心情记录",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/support/drug/drug",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "药物记录",
+                "enablePullDownRefresh": false
+            }
+            
         }
     ],
 	"globalStyle": {
