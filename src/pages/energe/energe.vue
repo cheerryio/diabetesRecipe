@@ -30,7 +30,6 @@
 </template>
 
 <script>
-import uCharts from "@/js_sdk/u-charts/u-charts/u-charts.js";
 import { mapState, mapMutations, mapActions, mapGetters } from "vuex";
 import { pregnantTimeToDay } from "@/utils/pragnant-time-convert";
 import { isChildFat } from "./child-bmi-fat";

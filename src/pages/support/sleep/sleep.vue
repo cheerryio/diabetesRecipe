@@ -78,6 +78,7 @@
 				this.$refs["uForm"].validate((valid)=>{
 					if(valid){
 						// 验证通过
+						
 						uni.navigateBack({
 							delta:1
 						})

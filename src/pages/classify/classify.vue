@@ -38,7 +38,7 @@ export default {
     },
     data() {
         return {
-            step: 0,
+            step: 2,
             steps: [
                 {
                     title: "选择类型",
@@ -49,16 +49,17 @@ export default {
                     desc: "",
                 },
                 {
-                    title: "物质分配",
+                    title: "能量分配",
                     desc: "",
                 },
             ],
         };
     },
     computed: {
-        ...mapState(["diabetesType"]),
+        ...mapState(["diabetesType","recipeLimit"]),
     },
     onLoad() {
+				this.init();
         let that = this;
         uni.$on("diabetes-classify-finish", function ({ diabetesType }) {
             that.step += 1;
@@ -71,6 +72,17 @@ export default {
         });
     },
     methods: {
+			async init(){
+				if(!this.$store.state.isLogin){
+					uni.switchTab({
+						url:"/pages/login/login"
+					})
+				}
+				
+				if(!this.$store.state.recipeLimit || !this.$store.state.recipeLimit.energe || !this.$store.state.recipeLimit.nutrients){
+
+				}
+			},
 			// 回到最初步骤，store中数据清空
 			reload(){
 				uni.showModal({
