@@ -385,7 +385,7 @@ export default {
                     name: "高",
                     checked: false,
                     disabled: false,
-										description:"农名、建筑工、搬运工、伐木工等"
+										description:"农民、建筑工、搬运工、伐木工等"
                 },
             ],
             bodyShapeList: [

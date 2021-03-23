@@ -1,11 +1,23 @@
 <template>
-	<view>
+	<view v-if="!loading">
 		<view>
-			<text>时间：{{date.getMonth() + 1}} - {{date.getDate()}}</text>
+			<text>当前时间：{{date.getMonth() + 1}} - {{date.getDate()}}</text>
 		</view>
 		<view>
-			<u-input v-model="value" type="select" :border="true" @click="show = true" />
-			<u-action-sheet :list="sleepHoursList" v-model="show" @click="sleepHoursActionSheetCallback"></u-action-sheet>
+			<u-form :model="form" ref="uForm">
+				<u-form-item label="时间" prop="sleepHour">
+					<u-input
+						v-model="form.sleepHour"
+						type="select"
+						placeholder="请选择睡眠时间"
+						:select-open="show"
+						@tap="show = true">
+					</u-input>
+					<text slot="right" class="unit">h</text>
+				</u-form-item>
+			</u-form>
+			<u-select v-model="show" :list="sleepHourList" @confirm="sleepHourListCallback"></u-select>
+			<button type="primary" @tap="submit">提交</button>
 		</view>
 	</view>
 </template>
@@ -16,16 +28,24 @@
 			return {
 				loading:false,
 				show:false,
-				value:'',
 				date:'',
-				sleepHoursList:[{
-					text:"超过9小时"
-				},{
-					text:"6-9小时"
-				},{
-					text:"小于6小时"
-				}]
+				form:{
+					sleepHour:'',
+				},
+				rules:{
+					sleepHour:[{
+						required:true,
+						message:"请输入睡眠时间",
+						trigger:["change","blur"]
+					}]
+				},
+				sleepHourList:[],
+
 			}
+		},
+
+		onReady:function(){
+			this.$refs.uForm.setRules(this.rules);
 		},
 
 		onLoad:function(){
@@ -43,15 +63,33 @@
 		methods: {
 			init(){
 				this.date=new Date();
-
+				Array.from(new Array(24 + 1).keys())
+					.forEach(((value)=>{
+						this.sleepHourList.push({
+							value:Number(value),
+							label:String(value)
+						})
+					}).bind(this))
 			},
-			sleepHoursActionSheetCallback(index){
-				this.value=this.sleepHoursList[index].text;
+			sleepHourListCallback(e){
+				this.form.sleepHour=e[0].label;
+			},
+			submit(){
+				this.$refs["uForm"].validate((valid)=>{
+					if(valid){
+						// 验证通过
+						uni.navigateBack({
+							delta:1
+						})
+					}
+				})
 			},
 		}
 	}
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+	.unit {
+	    color: #000000;
+	}
 </style>

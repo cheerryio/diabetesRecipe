@@ -190,32 +190,26 @@
         >
             <scroll-view class="detail" scroll-y>
                 <view class="wrapper">
-                    <view class="basic">
+                    <view class="basic" style="display: flex;flex-direction: column;align-items: center;">
                         <view class="name">{{ good.name }}</view>
-                        <view class="tips">{{ good.content }}</view>
+                        <view class="tips" v-if="good.description">{{ good.description }}</view>
+												<image :src="good.thumbImg" style="width: 160rpx;height: 160rpx;"></image>
                     </view>
-                    <view class="properties" v-if="good.use_property">
-                        <view
-                            class="property"
-                            v-for="(item, index) in good.property"
-                            :key="index"
-                        >
-                            <view class="title">
-                                <text class="name">{{ item.name }}</text>
-                                <view class="desc" v-if="item.desc"
-                                    >({{ item.desc }})</view
-                                >
-                            </view>
-                            <view class="values">
-                                <view
-                                    class="value"
-                                    v-for="(value, key) in item.values"
-                                    :key="key"
-                                    :class="{ default: value.is_default }"
-                                    @tap="changePropertyDefault(index, key)"
-                                >
-                                    {{ value.value }}
-                                </view>
+                    <view class="properties" v-if="good.nutrientContent">
+                        <view class="property">
+                            <view class="title" style="display: flex;flex-direction: row;justify-content: space-evenly;">
+                                <text class="name">
+																	碳水化合物：
+																	{{ good.nutrientContent.carbohydrates }} {{good.nutrientContent.carbohydratesUnit}}
+																</text>
+																<text class="name">
+																	蛋白质：
+																	{{ good.nutrientContent.protein }} {{good.nutrientContent.proteinUnit}}
+																</text>
+																<text class="name">
+																	油脂：
+																	{{ good.nutrientContent.fat }} {{good.nutrientContent.fatUnit}}
+																</text>
                             </view>
                         </view>
                     </view>
