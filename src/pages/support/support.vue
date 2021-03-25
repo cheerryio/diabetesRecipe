@@ -10,6 +10,7 @@
 					</navigator>
 			</uni-grid-item>
 		</uni-grid>
+		<button type="primary" @click="submit">点我</button>
 	</view>
 </template>
 
@@ -47,7 +48,12 @@
 		},
 
 		methods:{
-
+			submit(){
+				this.$dRouter.navigateTo({
+					route:this.$routesConfig.energe,
+					query:{a:1}
+				})
+			}
 		}
 	}
 </script>

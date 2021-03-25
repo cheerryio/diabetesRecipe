@@ -119,12 +119,6 @@
 		"backgroundColor":"#fafafa",
 		"list":[
 			{
-				"pagePath":"pages/login/login",
-				"iconPath":"static/tab/billa.png",
-				"selectedIconPath":"static/tab/billb.png",
-				"text":"登录"
-			},
-			{
 				"pagePath":"pages/classify/classify",
 				"iconPath":"static/tab/rechargea.png",
 				"selectedIconPath":"static/tab/rechargeb.png",

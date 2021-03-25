@@ -15,7 +15,7 @@ class Router {
 		if (callBack instanceof Function) this.callBack = callBack;
 	}
 
-	push(to) {
+	navigateTo(to) {
 		this.callBack('navigateTo', to);
 	}
 

@@ -24,7 +24,7 @@ router.beforeEach((navType, to) => {
 	if (to.route === undefined) {
 		throw '路由钩子函数中没有找到to对象，路由信息:' + JSON.stringify(to);
 	}
-	if (to.route === $mRoutesConfig.login.path && store.getters.hasLogin) {
+	if (to.route === routesConfig.login.path && store.getters.hasLogin) {
 		uni.reLaunch({
 			url: helper.objParseUrlAndParam(routesConfig.main.path)
 		});
@@ -52,6 +52,7 @@ router.beforeEach((navType, to) => {
 				uni.navigateTo({
 					url: helper.objParseUrlAndParam(routesConfig.login.path, query)
 				});
+				console.log(helper.objParseUrlAndParam(routesConfig.login.path, query))
 			}
 		}
 	} else {
