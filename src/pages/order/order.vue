@@ -4,8 +4,8 @@
 <template>
     <view class="container" v-if="!loading">
         <u-toast ref="uToast" />
-				<navbar></navbar>
-				<tools @categoryTypeChange="categoryTypeChange"></tools>
+        <navbar></navbar>
+        <tools @categoryTypeChange="categoryTypeChange"></tools>
         <view class="main" v-if="goods.length">
             <view class="content">
                 <!-- 左侧食品大类目录 -->
@@ -190,26 +190,48 @@
         >
             <scroll-view class="detail" scroll-y>
                 <view class="wrapper">
-                    <view class="basic" style="display: flex;flex-direction: column;align-items: center;">
+                    <view
+                        class="basic"
+                        style="
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                        "
+                    >
                         <view class="name">{{ good.name }}</view>
-                        <view class="tips" v-if="good.description">{{ good.description }}</view>
-												<image :src="good.thumbImg" style="width: 160rpx;height: 160rpx;"></image>
+                        <view class="tips" v-if="good.description">{{
+                            good.description
+                        }}</view>
+                        <image
+                            :src="good.thumbImg"
+                            style="width: 160rpx; height: 160rpx"
+                        ></image>
                     </view>
                     <view class="properties" v-if="good.nutrientContent">
                         <view class="property">
-                            <view class="title" style="display: flex;flex-direction: row;justify-content: space-evenly;">
+                            <view
+                                class="title"
+                                style="
+                                    display: flex;
+                                    flex-direction: row;
+                                    justify-content: space-evenly;
+                                "
+                            >
                                 <text class="name">
-																	碳水化合物：
-																	{{ good.nutrientContent.carbohydrates }} {{good.nutrientContent.carbohydratesUnit}}
-																</text>
-																<text class="name">
-																	蛋白质：
-																	{{ good.nutrientContent.protein }} {{good.nutrientContent.proteinUnit}}
-																</text>
-																<text class="name">
-																	油脂：
-																	{{ good.nutrientContent.fat }} {{good.nutrientContent.fatUnit}}
-																</text>
+                                    碳水化合物：
+                                    {{ good.nutrientContent.carbohydrates }}
+                                    {{ good.nutrientContent.carbohydratesUnit }}
+                                </text>
+                                <text class="name">
+                                    蛋白质：
+                                    {{ good.nutrientContent.protein }}
+                                    {{ good.nutrientContent.proteinUnit }}
+                                </text>
+                                <text class="name">
+                                    油脂：
+                                    {{ good.nutrientContent.fat }}
+                                    {{ good.nutrientContent.fatUnit }}
+                                </text>
                             </view>
                         </view>
                     </view>
@@ -320,14 +342,14 @@ export default {
     components: {
         modal,
         popupLayer,
-				navbar,
-				tools,
+        navbar,
+        tools,
     },
     data() {
         return {
             goods: [], //所有商品
-						rawFoodGoods:[],
-						cookedFoodGoods:[],
+            rawFoodGoods: [],
+            cookedFoodGoods: [],
             loading: true,
             currentCateId: 7, //默认分类
             cateScrollTop: 0,
@@ -341,7 +363,7 @@ export default {
             orderType: "takein",
             isLogin: true,
             store,
-						categoryType:1,
+            categoryType: 1,
 
             recipeLimit: {
                 energe: 1234,
@@ -431,48 +453,48 @@ export default {
         // ...mapActions(['getStore']),
         async init() {
             //页面初始化
-						this.loading=true;
-						await this.loadFoodData();
+            this.loading = true;
+            await this.loadFoodData();
             this.cart = uni.getStorageSync("cart") || [];
-						this.loading=false;
+            this.loading = false;
         },
-				async loadFoodData(){
-					uni.showLoading({
-						title:"加载中",
-					});
+        async loadFoodData() {
+            uni.showLoading({
+                title: "加载中",
+            });
 
-					// 获取商品信息
-					if(this.categoryType == 1){
-						if(!this.cookedFoodGoods.length){
-							const res = await this.$db
-									.collection("food-category,food")
-									.where(`categoryType == ${this.categoryType}`)
-									.field(
-											"goodsList{foodID,name,description,kilo as price,unit,thumbImg,categoryId,nutrientContent},categoryID,name,priority"
-									)
-									.get();
-							this.cookedFoodGoods=res.result.data;
-						}
-						this.goods=this.cookedFoodGoods;
-					}
-					else if(this.categoryType == 2){
-						if(!this.rawFoodGoods.length){
-							const res=await this.$db
-								.collection("food-category,food")
-								.where(`categoryType == ${this.categoryType}`)
-								.field("goodsList{foodID,name,description,price,unit,thumbImg,categoryId},categoryID,name,priority")
-								.get()
+            // 获取商品信息
+            if (this.categoryType == 1) {
+                if (!this.cookedFoodGoods.length) {
+                    const res = await this.$db
+                        .collection("food-category,food")
+                        .where(`categoryType == ${this.categoryType}`)
+                        .field(
+                            "goodsList{foodID,name,description,kilo as price,unit,thumbImg,categoryId,nutrientContent},categoryID,name,priority"
+                        )
+                        .get();
+                    this.cookedFoodGoods = res.result.data;
+                }
+                this.goods = this.cookedFoodGoods;
+            } else if (this.categoryType == 2) {
+                if (!this.rawFoodGoods.length) {
+                    const res = await this.$db
+                        .collection("food-category,food")
+                        .where(`categoryType == ${this.categoryType}`)
+                        .field(
+                            "goodsList{foodID,name,description,price,unit,thumbImg,categoryId},categoryID,name,priority"
+                        )
+                        .get();
 
-							this.rawFoodGoods=res.result.data;
-						}
-						this.goods=this.rawFoodGoods;
-					}else{
+                    this.rawFoodGoods = res.result.data;
+                }
+                this.goods = this.rawFoodGoods;
+            } else {
+            }
+            this.currentCateId = this.goods[0].categoryID;
 
-					}
-					this.currentCateId=this.goods[0].categoryID;
-
-					uni.hideLoading();
-				},
+            uni.hideLoading();
+        },
         handleMenuTap(id) {
             //点击菜单项事件
             if (!this.sizeCalcState) {
@@ -509,19 +531,20 @@ export default {
             //添加到购物车
             let total = this.menuCartNum(cate.categoryID);
 
-						if(this.categoryType == 1){
-
-						}
-						else if(this.categoryType == 2){
-							if (total + num > this.recipeLimit.foods[cate.categoryID - 1].data) {
-									this.$refs.uToast.show({
-											title: `${cate.name}每天的交换份限额为${
-													this.recipeLimit.foods[cate.categoryID - 1].data
-											}`,
-									});
-									return;
-							}
-						}
+            if (this.categoryType == 1) {
+            } else if (this.categoryType == 2) {
+                if (
+                    total + num >
+                    this.recipeLimit.foods[cate.categoryID - 1].data
+                ) {
+                    this.$refs.uToast.show({
+                        title: `${cate.name}每天的交换份限额为${
+                            this.recipeLimit.foods[cate.categoryID - 1].data
+                        }`,
+                    });
+                    return;
+                }
+            }
 
             const index = this.cart.findIndex((item) => {
                 return item.foodID === good.foodID;
@@ -608,38 +631,45 @@ export default {
         },
         toPay() {
             if (!this.isLogin) {
-                uni.navigateTo({ url: "/pages/login/login" });
+                this.$dRouter.navigateTo({ url: "/pages/login/login" });
                 return;
             }
-						const that=this;
+            const that = this;
 
             uni.showLoading({ title: "加载中" });
             uni.setStorageSync("cart", JSON.parse(JSON.stringify(this.cart)));
-						this.$db.collection("recipe").add({
-							uid:this.$store.state.user.uid,
-							username:this.$store.state.user.username,
-							recipe:this.cart,
-							...this.$store.state.recipeLimit,
-						}).then(()=>{
-							uni.hideLoading();
-						}).catch(err=>{
-							that.$db.collection("recipe").where({
-								uid:that.$store.state.uid
-							}).update({
-								username:that.$store.state.user.username,
-								recipe:that.cart,
-								...that.$store.state.recipeLimit,
-							})
-							uni.hideLoading();
-						})
+            this.$db
+                .collection("recipe")
+                .add({
+                    uid: this.$store.state.user.uid,
+                    username: this.$store.state.user.username,
+                    recipe: this.cart,
+                    ...this.$store.state.recipeLimit,
+                })
+                .then(() => {
+                    uni.hideLoading();
+                })
+                .catch((err) => {
+                    that.$db
+                        .collection("recipe")
+                        .where({
+                            uid: that.$store.state.uid,
+                        })
+                        .update({
+                            username: that.$store.state.user.username,
+                            recipe: that.cart,
+                            ...that.$store.state.recipeLimit,
+                        });
+                    uni.hideLoading();
+                });
             // uni.navigateTo({
             //     url: "/pages/pay/pay",
             // });
         },
-				async categoryTypeChange(e){
-					this.categoryType=e;
-					await this.loadFoodData();
-				},
+        async categoryTypeChange(e) {
+            this.categoryType = e;
+            await this.loadFoodData();
+        },
     },
 };
 </script>
