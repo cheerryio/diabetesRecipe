@@ -24,7 +24,7 @@ router.beforeEach((navType, to) => {
 	if (to.route === undefined) {
 		throw '路由钩子函数中没有找到to对象，路由信息:' + JSON.stringify(to);
 	}
-	if (to.route === routesConfig.login.path && store.getters.hasLogin) {
+	if (to.route === routesConfig.login.path && store.state.isLogin) {
 		uni.reLaunch({
 			url: helper.objParseUrlAndParam(routesConfig.main.path)
 		});
@@ -32,7 +32,7 @@ router.beforeEach((navType, to) => {
 	}
 	// 过滤需要权限的页面
 	if (to.route.requiresAuth) {
-		if (store.getters.hasLogin) {
+		if (store.state.isLogin) {
 			// 已经登录
 			uni[navType]({
 				url: helper.objParseUrlAndParam(to.route.path, to.query)
@@ -52,12 +52,11 @@ router.beforeEach((navType, to) => {
 				uni.navigateTo({
 					url: helper.objParseUrlAndParam(routesConfig.login.path, query)
 				});
-				console.log(helper.objParseUrlAndParam(routesConfig.login.path, query))
 			}
 		}
 	} else {
 		uni[navType]({
-			url: helper.objParseUrlAndParam(to.route, to.query)
+			url: helper.objParseUrlAndParam(to.route.path, to.query)
 		});
 	}
 });

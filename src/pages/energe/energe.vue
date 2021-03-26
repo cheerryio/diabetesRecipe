@@ -8,7 +8,7 @@
             <text class="energe-highlight">{{ Z.toFixed(2) }}</text>
         </uni-group>
         <uni-group class="group">
-            <template v-for="(item, index) in nutrients">
+            <template v-for="(item, index) in nutrientsEnerge">
                 <view :key="index" class="text-box">
                     <text class="normal-font">{{ item.name }}</text>
                     <text class="energe-highlight">{{ item.data }}</text>
@@ -26,6 +26,9 @@
 						</uni-grid-item>
 					</uni-grid>
         </uni-group>
+				<button type="primary" @click="uni.switchTab({
+					url:$routesConfig.order.path
+				})">点熟食</button>
     </view>
 </template>
 
@@ -37,15 +40,17 @@ import { isChildFat } from "./child-bmi-fat";
 export default {
     data() {
         return {
-            data: "", // 页面一中 information form的数据
-
-            nutrientsPie: "",
-            foodsPie: "",
-            pixelRatio: 1,
+            data: {}, // 页面一中 information form的数据
+						uni:uni,
         };
     },
+
+		onLoad(){
+			this.init();
+		},
+
     computed: {
-        ...mapState(["diabetesType", "information", "recipeLimit", "user"]),
+        ...mapState(["diabetesType", "information", "energe", "user"]),
         BMI: function () {
             // BMI
             switch (this.diabetesType) {
@@ -120,8 +125,8 @@ export default {
             }
         },
         Z: function () {
-            if (this.recipeLimit.energe) {
-                return this.recipeLimit.energe;
+            if (this.energe.Z) {
+                return this.energe.Z;
             }
             let X, Y, Z;
             switch (this.diabetesType) {
@@ -164,9 +169,9 @@ export default {
                     return NaN;
             }
         },
-        nutrients: function () {
-            if (this.recipeLimit.nutrients) {
-                return this.recipeLimit.nutrients;
+        nutrientsEnerge: function () {
+            if (this.energe.nutrientsEnerge) {
+                return this.energe.nutrientsEnerge;
             }
             let A = this.Z * 0.55;
             if (this.diabetesType == 2) {
@@ -193,8 +198,8 @@ export default {
         },
 
         foods: function () {
-            if (this.recipeLimit.foods) {
-                return this.recipeLimit.foods;
+            if (this.energe.foods) {
+                return this.energe.foods;
             }
             if (
                 this.diabetesType == 1 ||
@@ -258,27 +263,59 @@ export default {
         },
     },
 
-    mounted: function (option) {
-        this.$nextTick(
-            function () {
-                const recipeLimit = {
-                    energe: this.Z,
-                    nutrients: this.nutrients,
-                    foods: this.foods,
-                };
-                this.SET_RECIPELIMIT(recipeLimit);
-                this.$db.collection("recipe-limit").add({
-                    username: this.user.username,
-                    uid: this.user.uid,
-                    ...recipeLimit,
-                }).catch(err=>{
-								})
-            }.bind(this)
-        );
-    },
-
     methods: {
-        ...mapMutations(["SET_RECIPELIMIT"]),
+			async init(){
+				if(!this.$store.state.isLogin){
+					this.$dRouter.redirectTo({
+						route:this.$routesConfig.login,
+						query:{
+							redirectTab:this.$routesConfig.energe.path
+						}
+					})
+					return;
+				}
+				let res;
+				// 请求云端是否有营养物质总能量数据
+				if(!Object.keys(this.$store.state.energe).length){
+					res=await this.$db.collection("energe").where({
+						uid:this.$store.state.user.uid
+					}).get();
+
+					if(!res.result.data.length){
+						// 请求云端有无糖尿病表单数据
+						if(!Object.keys(this.$store.state.information).length){
+							res=await this.$db.collection("user-diabetes-info").where({
+								uid:this.$store.state.user.uid
+							}).get();
+							if(!res.result.data.length){
+								this.$dRouter.redirectTo({
+									route:this.$routesConfig.classify,
+									query:{
+										redirectTab:this.$routesConfig.energe.path
+									}
+								})
+								return;
+							}else{
+								console.log("get information success");
+								this.$store.commit("update",["information",res.result.data[0].information]);
+								this.$store.commit("update",["energe",{
+									Z:this.Z,
+									nutrientsEnerge:this.nutrientsEnerge
+								}])
+								await this.$db.collection("energe").add(this.$store.state.energe);
+							}
+						}
+					}else{
+						console.log("get energe success");
+						const {Z,nutrientsEnerge}=res.result.data[0];
+						this.$store.commit("update",["energe",{
+							Z,
+							nutrientsEnerge
+						}]);
+					}
+				}
+
+			},
     },
 };
 </script>

@@ -9,17 +9,14 @@ const uid=uni.getStorageSync("uid") || ""
 const store = new Vuex.Store({
 	state:{
 		isLogin:false,
+		forcedLogin:true,
 		user:{
 			username,
 			nickname:"",
 			token:"",
 			uid,
 		},
-		recipeLimit:{
-			energe:"",
-			nutrients:null,
-			foods:null,
-		},
+		energe:{},
 		diabetesType:1,
 		information:{},
 

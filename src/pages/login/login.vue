@@ -29,7 +29,6 @@
 		<!-- #ifdef MP-WEIXIN -->
 		<button type="primary" open-type="getUserInfo" @getuserinfo="loginByWeixin">微信登录</button>
 		<!-- #endif -->
-		<text>提交糖尿病表单数据需要先登录</text>
 		<u-toast ref="uToast" />
 	</view>
 </template>
@@ -43,11 +42,16 @@
 				username:"admin",
 				password:"admin",
 				isHidePassword:false,
+				params:{}
 			}
 		},
 
 		computed:{
 			...mapState(["user"])
+		},
+
+		onLoad(params){
+			this.params=params;
 		},
 
 		methods:{
@@ -62,14 +66,12 @@
 					},
 					success(res){
 						if(res.result.code === 0){
-							uni.setStorageSync('uni_id_token',res.result.token)
-							uni.setStorageSync('uni_id_token_expired', res.result.tokenExpired)
+							uni.setStorageSync('uni_id_token',res.result.token);
+							uni.setStorageSync('uni_id_token_expired', res.result.tokenExpired);
 							// 成功提示
 							that.$refs.uToast.show({
 								title:"登录成功",
 								type:"success",
-								url:"pages/classify/classify",
-								isTab:true
 							})
 
 							const {username,token,uid}=res.result;
@@ -78,6 +80,18 @@
 								username,token,uid,
 								nickname:username,
 							}]);
+							console.log(uid)
+
+							if(that.params.redirectTab){
+								uni.switchTab({
+									url:that.params.redirectTab
+								})
+							}else{
+								that.$dRouter.redirectTo({
+									route:that.$routesConfig.classify
+								})
+							}
+
 						}else{
 							that.$refs.uToast.show({
 								title:res.result.message,
@@ -118,7 +132,7 @@
 									name:"bindRole",
 									data:{
 										uid:res.result.uid,
-										roleList:["USER"]
+										roleList:["admin"]
 									},
 									success(res){
 										that.$refs.uToast.show({

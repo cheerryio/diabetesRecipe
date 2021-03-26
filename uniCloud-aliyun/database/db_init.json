@@ -208,7 +208,7 @@
 			}
 		]
 	},
-	"user-diabetes-information": {
+	"user-diabetes-info": {
 		"index": [
 			{
 				"IndexName": "uid",
@@ -399,7 +399,7 @@
 			}
 		]
 	},
-	"recipe-limit": {
+	"energe": {
 		"data": [],
 		"index": [
 			{
@@ -411,7 +411,7 @@
 							"Direction": "1"
 						}
 					],
-					"MgoIsUnique": false
+					"MgoIsUnique": true
 				}
 			}
 		]

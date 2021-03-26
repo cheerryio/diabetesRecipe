@@ -17,7 +17,6 @@
             v-else-if="step === 1"
             :diabetesType="diabetesType"
         ></information-form>
-        <energe class="c-energe" v-else-if="step === 2"></energe>
         <view v-else><text>数据错误</text></view>
     </view>
 </template>
@@ -38,7 +37,7 @@ export default {
     },
     data() {
         return {
-            step: 2,
+            step: 1,
             steps: [
                 {
                     title: "选择类型",
@@ -47,41 +46,37 @@ export default {
                 {
                     title: "填写信息",
                     desc: "",
-                },
-                {
-                    title: "能量分配",
-                    desc: "",
-                },
+                }
             ],
         };
     },
     computed: {
         ...mapState(["diabetesType","recipeLimit"]),
     },
-    onLoad() {
+    onLoad(params) {
+				this.params=params;
 				this.init();
         let that = this;
         uni.$on("diabetes-classify-finish", function ({ diabetesType }) {
             that.step += 1;
-            this.$store.commit("SET_DIABETES_TYPE", diabetesType);
+            this.$store.commit("update",["diabitesType",diabitesType])
         });
         // 接受用户填好的表单数据
-        uni.$on("information-form-finish", function ({ information }) {
-            that.step += 1;
-            this.$store.commit("SET_INFORMATION", information);
+        uni.$on("information-form-finish", async function ({ information }) {
+            this.$store.commit("update",["information",information]);
+						await this.$db.collection("user-diabetes-info").add({
+							uid:this.$store.state.user.uid,
+							username:this.$store.state.user.username,
+							diabitesType:information.diabitesType,
+							information,
+						});
+						uni.switchTab({
+							url:this.params.redirectTab ? this.params.redirectTab : "/pages/energe/energe"
+						})
         });
     },
     methods: {
 			async init(){
-				if(!this.$store.state.isLogin){
-					uni.switchTab({
-						url:"/pages/login/login"
-					})
-				}
-				
-				if(!this.$store.state.recipeLimit || !this.$store.state.recipeLimit.energe || !this.$store.state.recipeLimit.nutrients){
-
-				}
 			},
 			// 回到最初步骤，store中数据清空
 			reload(){

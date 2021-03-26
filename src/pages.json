@@ -9,6 +9,14 @@
 	},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 			{
+			    "path" : "pages/energe/energe",
+			    "style" :
+			    {
+			        "navigationBarTitleText": "能量",
+			        "enablePullDownRefresh": false
+			    }
+			},
+			{
 				"path": "pages/login/login",
 				"style": {
 					"navigationBarTitleText": "登录"
@@ -24,15 +32,7 @@
 								"navigationBarTextStyle": "white" // 状态栏字体为白色，只能为 white-白色，black-黑色 二选一
             }
         },
-				{
-            "path" : "pages/energe/energe",
-            "style" :
-            {
-                "navigationBarTitleText": "能量",
-                "enablePullDownRefresh": false
-            }
-        }
-        ,{
+        {
             "path" : "pages/order/order",
             "style" :
             {
@@ -62,48 +62,48 @@
         }
         ,{
             "path" : "pages/support/sleep/sleep",
-            "style" :                                                                                    
+            "style" :
             {
                 "navigationBarTitleText": "睡眠记录",
                 "enablePullDownRefresh": false
             }
-            
+
         }
         ,{
             "path" : "pages/support/exercise/exercise",
-            "style" :                                                                                    
+            "style" :
             {
                 "navigationBarTitleText": "运动记录",
                 "enablePullDownRefresh": false
             }
-            
+
         }
         ,{
             "path" : "pages/support/bloodsugar/bloodsugar",
-            "style" :                                                                                    
+            "style" :
             {
                 "navigationBarTitleText": "血糖记录",
                 "enablePullDownRefresh": false
             }
-            
+
         }
         ,{
             "path" : "pages/support/mood/mood",
-            "style" :                                                                                    
+            "style" :
             {
                 "navigationBarTitleText": "心情记录",
                 "enablePullDownRefresh": false
             }
-            
+
         }
         ,{
             "path" : "pages/support/drug/drug",
-            "style" :                                                                                    
+            "style" :
             {
                 "navigationBarTitleText": "药物记录",
                 "enablePullDownRefresh": false
             }
-            
+
         }
     ],
 	"globalStyle": {
@@ -119,10 +119,10 @@
 		"backgroundColor":"#fafafa",
 		"list":[
 			{
-				"pagePath":"pages/classify/classify",
+				"pagePath":"pages/energe/energe",
 				"iconPath":"static/tab/rechargea.png",
 				"selectedIconPath":"static/tab/rechargeb.png",
-				"text":"类型"
+				"text":"首页"
 			},
 			{
 				"pagePath":"pages/order/order",

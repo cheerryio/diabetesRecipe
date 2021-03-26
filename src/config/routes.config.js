@@ -13,19 +13,25 @@
 
 export default {
 	// 权限路由 在main.js可实现路由拦截 所以路由都需要注册 待完善
-	energe: {
-		name: '能量',
-		path: '/pages/energe/energe',
+	classify: {
+		name: '类型',
+		path: '/pages/classify/classify',
+		requiresAuth:true
+	},
+	order:{
+		name:"点餐",
+		path:'/pages/order/order',
 		requiresAuth:true
 	},
 	// 非权限路由
+	energe: {
+		name: '能量',
+		path: '/pages/energe/energe',
+	},
+	
 	login: {
 		name: '登录',
 		path: '/pages/login/login'
-	},
-	classify: {
-		name: '类型',
-		path: '/pages/classify/classify'
 	},
 	index: {
 		name: '注册',

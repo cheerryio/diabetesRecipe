@@ -31,20 +31,16 @@
 				"$env":"now"
 			}
 		},
-		"energe": {
+		"Z": {
 			"bsonType":"double",
 			"title":"能量",
 			"description":"一天需要的总能量Z"
 		},
-		"nutrients": {
+		"nutrientsEnerge": {
 			"bsonType":"array",
-			"title":"三大营养物质比例",
-			"description":""
-		},
-		"foods": {
-			"bsonType":"array",
-			"title":"六大食物比例",
+			"title":"三大营养物质分别能量",
 			"description":""
 		}
+
 	}
 }
