@@ -37,7 +37,7 @@ export default {
     },
     data() {
         return {
-            step: 1,
+            step: 0,
             steps: [
                 {
                     title: "选择类型",
@@ -59,19 +59,28 @@ export default {
         let that = this;
         uni.$on("diabetes-classify-finish", function ({ diabetesType }) {
             that.step += 1;
-            this.$store.commit("update",["diabitesType",diabitesType])
+            this.$store.commit("update",["diabetesType",diabetesType])
         });
-        // 接受用户填好的表单数据
+        // 接受用户填好的表单数据，将表单数据更新在vue store里面 && 想数据库添加或更新对应用户表单数据
+				// 如果表单数据是进行的更新，那么能量数据就同样需要更新，所以在energe页面需要接受energe-update事件
+				// 在energe页面中更新vue store && 数据库中的energe数据
         uni.$on("information-form-finish", async function ({ information }) {
             this.$store.commit("update",["information",information]);
 						await this.$db.collection("user-diabetes-info").add({
 							uid:this.$store.state.user.uid,
 							username:this.$store.state.user.username,
-							diabitesType:information.diabitesType,
+							diabetesType:this.diabetesType,
 							information,
-						});
+						}).catch((async (e)=>{
+							await this.$db.collection("user-diabetes-info").where({
+								uid:this.$store.state.user.uid
+							}).update({
+								diabetesType:this.diabetesType,
+								information,
+							})
+						}).bind(this))
 						uni.switchTab({
-							url:this.params.redirectTab ? this.params.redirectTab : "/pages/energe/energe"
+							url:this.params && this.params.redirectTab ? this.params.redirectTab : "/pages/energe/energe"
 						})
         });
     },

@@ -31,7 +31,7 @@ class Router {
 		this.callBack('switchTab', to);
 	}
 
-	back(delta) {
+	navigateBack(delta) {
 		// #ifdef H5
 		history.back();
 		// #endif

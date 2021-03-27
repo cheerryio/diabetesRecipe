@@ -432,5 +432,57 @@
 				}
 			}
 		]
+	},
+	"drug": {
+		"data": [],
+		"index": [
+			{
+				"IndexName": "uid",
+				"MgoKeySchema": {
+					"MgoIndexKeys": [
+						{
+							"Name": "uid",
+							"Direction": "1"
+						}
+					],
+					"MgoIsUnique": false
+				}
+			}
+		]
+	},
+	"sleep": {
+		"data": [],
+		"index": [
+			{
+				"IndexName": "uid",
+				"MgoKeySchema": {
+					"MgoIndexKeys": [
+						{
+							"Name": "uid",
+							"Direction": "1"
+						}
+					],
+					"MgoIsUnique": false
+				}
+			}
+		]
+	},
+	"exercise": {
+		"data": [],
+		"index": [
+			{
+				"IndexName": "uid",
+				"MgoKeySchema": {
+					"MgoIndexKeys": [
+						{
+							"Name": "uid",
+							"Direction": "1"
+						}
+					],
+					"MgoIsUnique": false
+				}
+			}
+		]
 	}
+
 }

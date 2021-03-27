@@ -135,12 +135,6 @@
 				"iconPath":"static/tab/billa.png",
 				"selectedIconPath":"static/tab/billb.png",
 				"text":"辅助"
-			},
-			{
-				"pagePath":"pages/questionair/questionair",
-				"iconPath":"static/tab/billa.png",
-				"selectedIconPath":"static/tab/billb.png",
-				"text":"问卷"
 			}
 		]
 	},

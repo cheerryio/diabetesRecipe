@@ -5,14 +5,14 @@
             v-if="diabetesType == 1"
             :model="form1"
             ref="uForm1"
-            label-width="120"
+            :label-width="labelWidth"
             :label-position="labelPosition"
             :label-style="{}"
         >
             <u-form-item
                 :label-position="labelPosition"
                 label="性别"
-                label-width="150"
+                :label-width="labelWidth"
                 prop="gender"
             >
                 <u-radio-group
@@ -25,6 +25,8 @@
                         v-for="(sItem, sIndex) in genders"
                         :key="sIndex"
                         :name="sItem.id"
+												:checked="sItem.checked"
+												:disabled="sItem.disabled"
                     >
                         <image
                             :src="sItem.icon"
@@ -71,7 +73,7 @@
             v-else-if="diabetesType == 2"
             :model="form2"
             ref="uForm2"
-            label-width="120"
+            :label-width="labelWidth"
             :label-position="labelPosition"
             :label-style="{}"
         >
@@ -159,14 +161,14 @@
             v-else-if="diabetesType == 3"
             :model="form3"
             ref="uForm3"
-            label-width="120"
+            :label-width="labelWidth"
             :label-position="labelPosition"
             :label-style="{}"
         >
             <u-form-item
                 :label-position="labelPosition"
                 label="性别"
-                label-width="150"
+                :label-width="labelWidth"
                 prop="gender"
             >
                 <u-radio-group
@@ -179,6 +181,8 @@
                         v-for="(sItem, sIndex) in genders"
                         :key="sIndex"
                         :name="sItem.id"
+												:checked="sItem.checked"
+												:disabled="sItem.disabled"
                     >
                         <image
                             :src="sItem.icon"
@@ -332,6 +336,7 @@ export default {
             labelStyle: {
                 fontSize: "20rpx",
             },
+						labelWidth:150,
             border: false,
             labelPosition: "left",
             radioCheckWidth: "auto",
@@ -356,7 +361,7 @@ export default {
                     name: "跨性别",
                     icon: "/static/icon/transgender.png",
                     checked: false,
-                    disabled: false,
+                    disabled: true,
                 },
             ],
             actionSheet: false,
@@ -613,29 +618,9 @@ export default {
                         delete information.pregnantWeek;
                         delete information.pregnantDay;
                     }
-                    // 提交form表单到数据库 是不是要做token有效性验证？
-                    that.$db
-                        .collection("user-diabetes-info")
-                        .add({
-                            username,
-                            diabetesType,
-                            information,
-                        })
-                        .then((res) => {
-                            that.$refs.uToast.show({
-                                title: "上传成功",
-                                type: "success",
-                            });
-                            uni.$emit("information-form-finish", {
-                                information,
-                            });
-                        })
-                        .catch((err) => {
-                            that.$refs.uToast.show({
-                                title: err,
-                                type: "error",
-                            });
-                        });
+										uni.$emit("information-form-finish",{
+											information
+										})
                 } else {
                     // 验证失败
                 }

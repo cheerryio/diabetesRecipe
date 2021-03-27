@@ -10,7 +10,6 @@
 					</navigator>
 			</uni-grid-item>
 		</uni-grid>
-		<button type="primary" @click="submit">点我</button>
 	</view>
 </template>
 
@@ -22,15 +21,15 @@
 				items:[{
 					title:"睡眠记录",
 					icon:"../../static/icon/shuimian.png",
-					link:"/pages/support/sleep/sleep"
+					link:this.$routesConfig.sleep.path,
 				},{
 					title:"运动记录",
 					icon:"../../static/icon/yundong_1.png",
-					link:"/pages/support/exercise/exercise"
+					link:this.$routesConfig.exercise.path,
 				},{
 					title:"血糖记录",
 					icon:"../../static/icon/xietang.png",
-					link:"/pages/support/bloodsugar/bloodsugar"
+					link:this.$routesConfig.bloodsugar.path,
 				},{
 					title:"饮食记录",
 					icon:"../../static/icon/yinshi.png",
@@ -38,22 +37,16 @@
 				},{
 					title:"心情记录",
 					icon:"../../static/icon/xinqingyiban-yuan.png",
-					link:"/pages/support/mood/mood"
+					link:this.$routesConfig.mood.path,
 				},{
 					title:"药物记录",
 					icon:"../../static/icon/yao.png",
-					link:"/pages/support/drug/drug"
+					link:this.$routesConfig.drug.path,
 				}]
 			}
 		},
 
 		methods:{
-			submit(){
-				this.$dRouter.navigateTo({
-					route:this.$routesConfig.energe,
-					query:{a:1}
-				})
-			}
 		}
 	}
 </script>

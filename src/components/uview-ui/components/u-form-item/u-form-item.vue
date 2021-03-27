@@ -19,6 +19,7 @@
 					<view class="u-form-item--left__content__label" :style="[elLabelStyle, {
 						'justify-content': elLabelAlign == 'left' ? 'flex-start' : elLabelAlign == 'center' ? 'center' : 'flex-end'
 					}]">
+						<u-badge size="mini" type="error" :is-dot="true" v-if="necessary"></u-badge>
 						{{label}}
 					</view>
 				</view>
@@ -77,6 +78,10 @@
 			}
 		},
 		props: {
+			necessary:{
+				type:Boolean,
+				default:true
+			},
 			// input的label提示语
 			label: {
 				type: String,

@@ -2,30 +2,22 @@
  * @description 界面二，能量、物质比例、食物比例展示
  */
 <template>
-    <view class="main-container">
-        <uni-group class="group">
+    <view class="main-container" v-if="!loading">
+        <uni-group class="group" v-if="energe.Z">
             <text class="normal-font">您一天所需总能量为:</text>
-            <text class="energe-highlight">{{ Z.toFixed(2) }}</text>
+            <text class="energe-highlight">{{ energe.Z.toFixed(2) }}</text>
         </uni-group>
-        <uni-group class="group">
-            <template v-for="(item, index) in nutrientsEnerge">
+        <uni-group class="group" v-if="energe.nutrientsEnerge">
+            <template v-for="(item, index) in energe.nutrientsEnerge">
                 <view :key="index" class="text-box">
                     <text class="normal-font">{{ item.name }}</text>
                     <text class="energe-highlight">{{ item.data }}</text>
                 </view>
             </template>
         </uni-group>
-        <uni-group>
-					<text class="normal-font center">每种食物的交换份数为：</text>
-					<uni-grid :column="2" :showBorder="false" :square="false">
-						<uni-grid-item v-for="(sItem,sIndex) in foods" :key="sIndex">
-							<view class="container">
-								<text class="normal-font">{{ sItem.name }}</text>
-								<text class="energe-highlight">{{ sItem.data }}</text>
-							</view>
-						</uni-grid-item>
-					</uni-grid>
-        </uni-group>
+				<button type="primary" @tap="$dRouter.navigateTo({
+					route:$routesConfig.classify
+				})">重填表单</button>
 				<button type="primary" @click="uni.switchTab({
 					url:$routesConfig.order.path
 				})">点熟食</button>
@@ -40,6 +32,7 @@ import { isChildFat } from "./child-bmi-fat";
 export default {
     data() {
         return {
+						loading:false,
             data: {}, // 页面一中 information form的数据
 						uni:uni,
         };
@@ -124,10 +117,9 @@ export default {
                 return 3;
             }
         },
-        Z: function () {
-            if (this.energe.Z) {
-                return this.energe.Z;
-            }
+        // 仅仅会在information改变时自动计算
+				Z: {
+					get:function () {
             let X, Y, Z;
             switch (this.diabetesType) {
                 case 1:
@@ -168,11 +160,13 @@ export default {
                 default:
                     return NaN;
             }
-        },
-        nutrientsEnerge: function () {
-            if (this.energe.nutrientsEnerge) {
-                return this.energe.nutrientsEnerge;
-            }
+					},
+					set:function(newVal){
+					},
+				},
+        // 仅仅会在information改变时自动计算
+				nutrientsEnerge: {
+					get:function () {
             let A = this.Z * 0.55;
             if (this.diabetesType == 2) {
                 if (this.pregnancy == 1 && A < 150) {
@@ -195,7 +189,11 @@ export default {
                     data: Number((this.Z * 0.3).toFixed(2)),
                 },
             ];
-        },
+					},
+					set:function(){
+
+					},
+				},
 
         foods: function () {
             if (this.energe.foods) {
@@ -263,8 +261,35 @@ export default {
         },
     },
 
+		watch:{
+			// 监听vuex store中information变化，如果变化，需要更新store和数据中的energe
+			"$store.state.information":async function(information){
+				this.$store.commit("update",["energe",{
+					Z:this.Z,
+					nutrientsEnerge:this.nutrientsEnerge
+				}]);
+
+				await this.$db.collection("energe").add({
+					uid:this.$store.state.user.uid,
+					username:this.$store.state.user.username,
+					...this.$store.state.energe
+					})
+					.catch((async (e)=>{
+						await this.$db.collection("energe").where({
+							uid:this.$store.state.user.uid
+						}).update({
+							...this.$store.state.energe
+						})
+					}).bind(this))
+			},
+		},
+
     methods: {
 			async init(){
+				this.loading=true;
+				uni.showLoading({
+					title:"加载中"
+				})
 				if(!this.$store.state.isLogin){
 					this.$dRouter.redirectTo({
 						route:this.$routesConfig.login,
@@ -302,7 +327,11 @@ export default {
 									Z:this.Z,
 									nutrientsEnerge:this.nutrientsEnerge
 								}])
-								await this.$db.collection("energe").add(this.$store.state.energe);
+								await this.$db.collection("energe").add({
+									uid:this.$store.state.user.uid,
+									username:this.$store.state.user.username,
+									...this.$store.state.energe
+									});
 							}
 						}
 					}else{
@@ -314,7 +343,8 @@ export default {
 						}]);
 					}
 				}
-
+				uni.hideLoading();
+				this.loading=false;
 			},
     },
 };

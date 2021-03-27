@@ -18,6 +18,7 @@
 			</u-form>
 			<u-select v-model="show" :list="sleepHourList" @confirm="sleepHourListCallback"></u-select>
 			<button type="primary" @tap="submit">提交</button>
+			<u-toast ref="uToast"></u-toast>
 		</view>
 	</view>
 </template>
@@ -66,24 +67,38 @@
 				Array.from(new Array(24 + 1).keys())
 					.forEach(((value)=>{
 						this.sleepHourList.push({
-							value:Number(value),
+							value:String(value),
 							label:String(value)
 						})
 					}).bind(this))
 			},
 			sleepHourListCallback(e){
-				this.form.sleepHour=e[0].label;
+				this.form.sleepHour=e[0].value;
 			},
 			submit(){
-				this.$refs["uForm"].validate((valid)=>{
+				this.$refs["uForm"].validate((async (valid)=>{
 					if(valid){
 						// 验证通过
-						
-						uni.navigateBack({
-							delta:1
-						})
+						await this.$db.collection("sleep").add({
+							uid:this.$store.state.user.uid,
+							username:this.$store.state.user.username,
+							month:this.date.getMonth()+1,
+							date:this.date.getDate(),
+							sleepHour:Number(this.form.sleepHour)
+						}).then((()=>{
+							this.$refs.uToast.show({
+								title:"提交成功",
+								type:"success",
+								back:true,
+							})
+						}).bind(this)).catch(((err)=>{
+							this.$refs.uToast.show({
+								title:err,
+								type:"error"
+							})
+						}).bind(this))
 					}
-				})
+				}).bind(this))
 			},
 		}
 	}

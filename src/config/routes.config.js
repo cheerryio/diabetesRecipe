@@ -23,22 +23,40 @@ export default {
 		path:'/pages/order/order',
 		requiresAuth:true
 	},
+	sleep:{
+		name:"睡眠",
+		path:'/pages/support/sleep/sleep',
+		requiresAuth:true
+	},
+	exercise:{
+		name:"运动",
+		path:'/pages/support/exercise/exercise',
+		requiresAuth:true
+	},
+	bloodsugar:{
+		name:"血糖",
+		path:'/pages/support/bloodsugar/bloodsugar',
+		requiresAuth:true
+	},
+	mood:{
+		name:"心情",
+		path:'/pages/support/mood/mood',
+		requiresAuth:true
+	},
+	drug:{
+		name:"药物",
+		path:'/pages/support/drug/drug',
+		requiresAuth:true
+	},
 	// 非权限路由
 	energe: {
 		name: '能量',
 		path: '/pages/energe/energe',
 	},
-	
+
 	login: {
 		name: '登录',
 		path: '/pages/login/login'
 	},
-	index: {
-		name: '注册',
-		path: '/pages/public/register'
-	},
-	loginType: {
-		name: '登录类型',
-		path: '/pages/public/logintype'
-	}
+
 };

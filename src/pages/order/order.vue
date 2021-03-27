@@ -347,6 +347,9 @@ export default {
     },
     data() {
         return {
+					  categoryType: 1,	// 1:熟食，2：生食
+						cookedGoods:[],
+						rawGoods:[],
             goods: [], //所有商品
             rawFoodGoods: [],
             cookedFoodGoods: [],
@@ -354,16 +357,15 @@ export default {
             currentCateId: 7, //默认分类
             cateScrollTop: 0,
             menuScrollIntoView: "",
-            cart: [], //购物车
+            cart: [], // 购物车
+						cookedFoodCart:[],	// 熟食购物车
+						rawFoodCart:[],	// 生食购物车
             goodDetailModalVisible: false, //是否饮品详情模态框
             good: {}, //当前饮品
             category: {}, //当前饮品所在分类
             cartPopupVisible: false,
             sizeCalcState: false,
-            orderType: "takein",
-            isLogin: true,
             store,
-            categoryType: 1,
 
             recipeLimit: {
                 energe: 1234,
@@ -415,7 +417,7 @@ export default {
     },
     computed: {
         // ...mapState(['orderType', 'address', 'store']),
-        // ...mapGetters(['isLogin']),
+        ...mapState(['isLogin']),
         // ...mapState(["recipeLimit"]),
         goodCartNum() {
             //计算单个饮品添加到购物车的数量
@@ -454,15 +456,17 @@ export default {
         async init() {
             //页面初始化
             this.loading = true;
+						uni.showLoading({
+						    title: "加载中",
+						});
+
             await this.loadFoodData();
             this.cart = uni.getStorageSync("cart") || [];
+
+						uni.hideLoading();
             this.loading = false;
         },
         async loadFoodData() {
-            uni.showLoading({
-                title: "加载中",
-            });
-
             // 获取商品信息
             if (this.categoryType == 1) {
                 if (!this.cookedFoodGoods.length) {
@@ -476,6 +480,7 @@ export default {
                     this.cookedFoodGoods = res.result.data;
                 }
                 this.goods = this.cookedFoodGoods;
+								this.cart=this.cookedFoodCart;
             } else if (this.categoryType == 2) {
                 if (!this.rawFoodGoods.length) {
                     const res = await this.$db
@@ -489,11 +494,10 @@ export default {
                     this.rawFoodGoods = res.result.data;
                 }
                 this.goods = this.rawFoodGoods;
+								this.cart=this.rawFoodCart;
             } else {
             }
             this.currentCateId = this.goods[0].categoryID;
-
-            uni.hideLoading();
         },
         handleMenuTap(id) {
             //点击菜单项事件
@@ -532,6 +536,7 @@ export default {
             let total = this.menuCartNum(cate.categoryID);
 
             if (this.categoryType == 1) {
+
             } else if (this.categoryType == 2) {
                 if (
                     total + num >
@@ -637,7 +642,7 @@ export default {
             const that = this;
 
             uni.showLoading({ title: "加载中" });
-            uni.setStorageSync("cart", JSON.parse(JSON.stringify(this.cart)));
+            uni.setStorageSync("rawFoodCart", JSON.parse(JSON.stringify(this.cart)));
             this.$db
                 .collection("recipe")
                 .add({
@@ -662,9 +667,6 @@ export default {
                         });
                     uni.hideLoading();
                 });
-            // uni.navigateTo({
-            //     url: "/pages/pay/pay",
-            // });
         },
         async categoryTypeChange(e) {
             this.categoryType = e;

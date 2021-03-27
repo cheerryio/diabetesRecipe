@@ -1,0 +1,42 @@
+// 文档教程: https://uniapp.dcloud.net.cn/uniCloud/schema
+{
+	"bsonType": "object",
+	"required": [],
+	"permission": {
+		"read": false,
+		"create": false,
+		"update": false,
+		"delete": false
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"uid":{
+			"title":"用户唯一ID",
+			"bsonType":"string",
+			"trim":"both"
+		},
+		"username":{
+			"title":"用户名",
+			"bsonType":"string",
+			"trim":"both"
+		},
+		"create_date":{
+			"bsonType":"timestamp",
+			"description":"创建时间",
+			"forceDefaultValue":{
+				"$env":"now"
+			}
+		},
+		"answers":{
+			"bsonType":"array",
+			"description":"morisky量表中四个问题的答案 1:是 2:否"
+		},
+		"score":{
+			"title":"分数",
+			"bsonType":"int",
+			"description":"morisky量表分数"
+		}
+	}
+}
