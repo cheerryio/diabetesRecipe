@@ -21,7 +21,6 @@
 						:class="{
 							'active':sItem.value === mealType
 						}"
-						size="mini"
 						:text="sItem.label"
 						mode="plain"
 						>
@@ -237,20 +236,21 @@
 					this.categoryTypeOptions[this.categoryType-1].active=false;
 					this.categoryType=this.categoryTypeOptions[index].value;
 					this.categoryTypeTitle=this.categoryTypeOptions[index].label;
-					this.$emit("categoryTypeChange",this.categoryType);
+					this.$emit("category-type-change",this.categoryType);
 				}
 			},
 			mealTypeTagClick(e){
 				this.mealType=e.value;
+				this.$emit("meal-type-change",this.mealType);
 			},
 			dateSelectConfirm(e){
 				this.selectYear=e[0].value;
 				this.selectMonth=e[1].value;
 				this.selectDate=e[2].value;
-				this.$emit("selectDateChange",{
+				this.$emit("select-date-change",{
 					year:this.selectYear,
 					month:this.selectMonth,
-					date:this.selectDate
+					day:this.selectDate
 				})
 			},
 		},

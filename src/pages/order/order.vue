@@ -5,7 +5,10 @@
     <view class="container" v-if="!loading">
         <u-toast ref="uToast" />
         <navbar></navbar>
-        <tools @categoryTypeChange="categoryTypeChange"></tools>
+        <tools
+					@category-type-change="categoryTypeChange"
+					@meal-type-change="mealType=$event"
+				></tools>
         <view class="main" v-if="goods.length">
             <view class="content">
                 <!-- 左侧食品大类目录 -->
@@ -138,7 +141,8 @@
                                                             handleAddToCart(
                                                                 item,
                                                                 good,
-                                                                0.5
+                                                                0.5,
+																																mealType
                                                             )
                                                         "
                                                     >
@@ -170,9 +174,9 @@
                     ></image>
                     <view class="tag">{{ getCartGoodsNumber }}</view>
                 </view>
-                <view class="price">{{ getCartGoodsPrice }}g</view>
-                <button type="primary" class="pay-btn" @tap="toPay">
-                    {{ "去分餐" }}
+                <view class="price">{{ getCartGoodsKilo }}g</view>
+                <button type="primary" class="pay-btn" @tap="toDetail">
+                    {{ "分餐详情" }}
                 </button>
             </view>
             <!-- 购物车栏 end -->
@@ -288,7 +292,8 @@
                             :key="index"
                         >
                             <view class="left">
-                                <view class="name">{{ item.name }}</view>
+                                <view class="name">{{ item.name }}-
+																( {{["早餐","早加餐","中餐","中加餐","晚餐","晚加餐"][item.mealType-1]}} )</view>
                             </view>
                             <view class="center">
                                 <text>{{
@@ -327,6 +332,7 @@
             </template>
         </popup-layer>
         <!-- 购物车详情popup -->
+
     </view>
 </template>
 
@@ -353,6 +359,7 @@ export default {
             goods: [], //所有商品
             rawFoodGoods: [],
             cookedFoodGoods: [],
+						mealType:0,	// supposed to range from 1-6
             loading: true,
             currentCateId: 7, //默认分类
             cateScrollTop: 0,
@@ -442,7 +449,7 @@ export default {
             //计算购物车总数
             return this.cart.reduce((acc, cur) => acc + cur.number, 0);
         },
-        getCartGoodsPrice() {
+        getCartGoodsKilo() {
             //计算购物车总价
             return this.cart.reduce(
                 (acc, cur) => acc + cur.number * cur.price,
@@ -456,17 +463,14 @@ export default {
         async init() {
             //页面初始化
             this.loading = true;
-						uni.showLoading({
-						    title: "加载中",
-						});
-
             await this.loadFoodData();
             this.cart = uni.getStorageSync("cart") || [];
-
-						uni.hideLoading();
             this.loading = false;
         },
         async loadFoodData() {
+					uni.showLoading({
+					    title: "加载中",
+					});
             // 获取商品信息
             if (this.categoryType == 1) {
                 if (!this.cookedFoodGoods.length) {
@@ -498,6 +502,7 @@ export default {
             } else {
             }
             this.currentCateId = this.goods[0].categoryID;
+						uni.hideLoading();
         },
         handleMenuTap(id) {
             //点击菜单项事件
@@ -528,10 +533,22 @@ export default {
             });
             this.sizeCalcState = true;
         },
-        handleAddToCart(cate, good, num) {
+				/**
+				 * @param {Object} cate {categoryID,name}
+				 * @param {Object} good	{foodID}
+				 * @param {Object} num	=== kilo
+				 */
+        handleAddToCart(cate, good, num, mealType) {
             if (num == 0) {
                 return;
             }
+						if(this.mealType<1 || this.mealType>6){
+							this.$refs.uToast.show({
+								title:"未选择餐点",
+								type:"warning"
+							})
+							return;
+						}
             //添加到购物车
             let total = this.menuCartNum(cate.categoryID);
 
@@ -552,12 +569,13 @@ export default {
             }
 
             const index = this.cart.findIndex((item) => {
-                return item.foodID === good.foodID;
+                return item.foodID === good.foodID && item.mealType === mealType;
             });
             if (index > -1) {
                 this.cart[index].number += num;
             } else {
                 this.cart.push({
+										mealType:mealType,
                     foodID: good.foodID,
                     categoryID: cate.categoryID,
                     name: good.name,
@@ -600,7 +618,7 @@ export default {
         },
         handleAddToCartInModal() {
             const product = Object.assign({}, this.good, {});
-            this.handleAddToCart(this.category, product, this.good.number);
+            this.handleAddToCart(this.category, product, this.good.number,this.mealType);
             this.closeGoodDetailModal();
         },
         openCartPopup() {
@@ -624,7 +642,8 @@ export default {
             this.handleAddToCart(
                 { categoryID: item.categoryID, name: item.categoryName },
                 item,
-                0.5
+                0.5,
+								item.mealType
             );
         },
         handleCartItemReduce(item) {
@@ -634,11 +653,7 @@ export default {
                 0.5
             );
         },
-        toPay() {
-            if (!this.isLogin) {
-                this.$dRouter.navigateTo({ url: "/pages/login/login" });
-                return;
-            }
+        toDetail() {
             const that = this;
 
             uni.showLoading({ title: "加载中" });
