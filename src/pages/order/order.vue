@@ -464,7 +464,6 @@ export default {
             //页面初始化
             this.loading = true;
             await this.loadFoodData();
-            this.cart = uni.getStorageSync("cart") || [];
             this.loading = false;
         },
         async loadFoodData() {
@@ -657,35 +656,28 @@ export default {
             const that = this;
 
             uni.showLoading({ title: "加载中" });
-            uni.setStorageSync("rawFoodCart", JSON.parse(JSON.stringify(this.cart)));
             this.$db
                 .collection("recipe")
                 .add({
                     uid: this.$store.state.user.uid,
                     username: this.$store.state.user.username,
-                    recipe: this.cart,
-                    ...this.$store.state.recipeLimit,
+										cookedFood: this.cookedFoodCart,
+										rawFood:this.rawFoodCart,
+										valid:true
                 })
-                .then(() => {
-                    uni.hideLoading();
-                })
-                .catch((err) => {
-                    that.$db
-                        .collection("recipe")
-                        .where({
-                            uid: that.$store.state.uid,
-                        })
-                        .update({
-                            username: that.$store.state.user.username,
-                            recipe: that.cart,
-                            ...that.$store.state.recipeLimit,
-                        });
-                    uni.hideLoading();
-                });
+						uni.hideLoading();
+						this.$dRouter.navigateTo({
+							route:this.$routesConfig.order_detail,
+							query:{
+								cookedFood:JSON.stringify(this.cookedFoodCart || []),
+								rawFood:JSON.stringify(this.rawFoodCart || [])
+							}
+						})
         },
         async categoryTypeChange(e) {
             this.categoryType = e;
             await this.loadFoodData();
+						console.log(this.cart)
         },
     },
 };

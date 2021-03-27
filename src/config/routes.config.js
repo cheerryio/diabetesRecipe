@@ -53,6 +53,10 @@ export default {
 		name: '能量',
 		path: '/pages/energe/energe',
 	},
+	order_detail:{
+		name:"点餐详情",
+		path:'/pages/order-detail/order-detail'
+	},
 
 	login: {
 		name: '登录',

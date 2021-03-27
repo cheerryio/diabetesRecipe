@@ -1,5 +1,5 @@
 <template>
-	<view style="display: flex;flex-direction: column;">
+	<view style="display: flex;flex-direction: column;" v-if="!loading && mealTypeOptions.length != 0">
 		<view style="display: flex;flex-direction: row;">
 			<!-- 选择日期tag begin -->
 			<view class="navbar-left">
@@ -11,23 +11,23 @@
 				<text v-if="mealType <=6 && mealType>=1">正在选择{{mealTypeOptions[mealType-1].label}}</text>
 				<text v-else>请选择餐点</text>
 			</view>
-			<view style="display: flex;flex-direction: row;justify-self: end;white-space: nowrap;">
-				<view
-					class="meal-type-tag-box"
-					v-for="(sItem,sIndex) in mealTypeOptions.filter(item=>item.active === true)"
-					:key="sIndex"
-					@tap.stop="mealTypeTagClick(sItem)">
-					<u-tag
-						:class="{
-							'active':sItem.value === mealType
-						}"
-						:text="sItem.label"
-						mode="plain"
-						>
-					</u-tag>
-				</view>
-			</view>
 			<!-- 当前正在选择哪一餐 start -->
+		</view>
+		<view style="display: flex;flex-direction: row;justify-self: end;white-space: nowrap;">
+			<view
+				class="meal-type-tag-box"
+				v-for="(sItem,sIndex) in mealTypeOptions.filter(item=>item.active === true)"
+				:key="sIndex"
+				@tap.stop="mealTypeTagClick(sItem)">
+				<u-tag
+					:class="{
+						'active':sItem.value === mealType
+					}"
+					:text="sItem.label"
+					mode="plain"
+					>
+				</u-tag>
+			</view>
 		</view>
 		<!-- 添加餐选和生食熟食切换选择的dropbox -->
 		<u-dropdown>
@@ -73,14 +73,14 @@
 		},
 		data(){
 			return {
-				isMounted:false,
+				loading:false,
 				dateSelectShow: false,
 				selectYear:0,
 				selectMonth:0,
 				selectDate:0,
 				defaultDate:0,
 				dateList:[],
-				mealType:0,
+				mealType:1,
 				mealTypeOptions:[],
 				mealTypeChosen:[1,3,5],
 				mealTypeTitle:"添加餐选",
@@ -92,12 +92,11 @@
 
 		mounted(){
 			this.init();
-			this.isMounted=true;
 		},
 
 		computed:{
 			mealChosen:function(){
-				if(!this.isMounted) return [];
+				if(this.loading) return [];
 				return this.mealTypeChosen.map(((v)=>{
 					return this.mealTypeOptions.find(item=>{
 						return item.value === v;
@@ -108,6 +107,7 @@
 
 		methods:{
 			init(){
+				this.loading=true;
 				let d=new Date();
 				this.selectYear=d.getFullYear();
 				this.selectMonth=d.getMonth()+1;
@@ -186,7 +186,7 @@
 					value:1,
 					label:"早餐",
 					time:"7:00-8:00",
-					active:false
+					active:true
 				},{
 					value:2,
 					label:"早加餐",
@@ -196,7 +196,7 @@
 					value:3,
 					label:"中餐",
 					time:"7:00-8:00",
-					active:false
+					active:true
 				},{
 					value:4,
 					label:"中加餐",
@@ -206,7 +206,7 @@
 					value:5,
 					label:"晚餐",
 					time:"7:00-8:00",
-					active:false
+					active:true
 				},{
 					value:6,
 					label:"晚加餐",
@@ -225,6 +225,7 @@
 				}]
 
 				this.categoryTypeTitle=this.categoryTypeOptions[this.categoryType-1].label;
+				this.loading=false;
 			},
 			mealChooseTagClick(index){
 				this.mealTypeOptions[index].active=!this.mealTypeOptions[index].active;

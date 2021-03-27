@@ -24,34 +24,24 @@
 			"description": "用户名，不允许重复",
 			"trim": "both"
 		},
-		"submitDate":{
+		"create_date":{
 			"bsonType":"timestamp",
 			"description":"表单数据提交时间",
 			"forceDefaultValue":{
 				"$env":"now"
 			}
 		},
-		"energe": {
-			"bsonType":"double",
-			"title":"能量",
-			"description":"一天需要的总能量Z"
+		"valid":{
+			"bsonType":"bool",
+			"description":"该记录是否有效"
 		},
-		"nutrients": {
+		"cookedFood":{
 			"bsonType":"array",
-			"title":"三大营养物质比例",
-			"description":""
+			"description":"熟食"
 		},
-		"foods": {
+		"rawFood":{
 			"bsonType":"array",
-			"arrayType":"object",
-			"title":"六大食物比例",
-			"description":""
-		},
-		"recipe":{
-			"bsonType":"array",
-			"arrayType":"object",
-			"title":"当天食谱",
-			"description":"当天吃的食物"
+			"description":"生食"
 		}
 	}
 }

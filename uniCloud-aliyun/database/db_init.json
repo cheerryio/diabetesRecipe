@@ -428,7 +428,7 @@
 							"Direction": "1"
 						}
 					],
-					"MgoIsUnique": true
+					"MgoIsUnique": false
 				}
 			}
 		]
